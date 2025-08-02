@@ -5,7 +5,9 @@ Security utilities for credential management and least-privilege enforcement.
 import os
 import hashlib
 import secrets
+import json
 from typing import Optional, Dict, Any
+from datetime import datetime
 import structlog
 from cryptography.fernet import Fernet
 from cryptography.hazmat.primitives import hashes
