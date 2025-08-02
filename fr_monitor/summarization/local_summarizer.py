@@ -161,7 +161,7 @@ Summary:"""
             response = self.session.post(
                 f"{self.host}/api/generate",
                 json=payload,
-                timeout=60  # Longer timeout for summarization
+                timeout=120  # Increased timeout for summarization
             )
             response.raise_for_status()
             
@@ -214,7 +214,7 @@ Summary:"""
             response = self.session.post(
                 f"{self.host}/api/generate",
                 json=test_payload,
-                timeout=10
+                timeout=30  # Increased timeout for health check
             )
             response.raise_for_status()
             
