@@ -12,7 +12,12 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
     
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", protected_namespaces=())
+    model_config = SettingsConfigDict(
+        env_file=".env", 
+        env_file_encoding="utf-8",
+        protected_namespaces=(),
+        extra='ignore'  # Ignore extra environment variables
+    )
     
     # Federal Register API
     federal_register_api_key: Optional[str] = Field(None, alias="FEDERAL_REGISTER_API_KEY")
