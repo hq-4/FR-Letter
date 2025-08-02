@@ -13,22 +13,6 @@ services:
       - REDIS_ARGS=--save 60 1000
     restart: unless-stopped
 
-  ollama:
-    image: ollama/ollama:latest
-    container_name: fr-monitor-ollama
-    ports:
-      - "11434:11434"
-    volumes:
-      - ollama_data:/root/.ollama
-    environment:
-      - OLLAMA_HOST=0.0.0.0
-    restart: unless-stopped
-    # Note: You'll need to pull models after starting:
-    # docker exec -it fr-monitor-ollama ollama pull qwen2:1.5b
-    # docker exec -it fr-monitor-ollama ollama pull mistral:latest
-
 volumes:
   redis_data:
-    driver: local
-  ollama_data:
     driver: local
