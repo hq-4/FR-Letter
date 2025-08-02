@@ -9,49 +9,9 @@ from typing import List, Optional, Dict, Any, Tuple
 import structlog
 from datetime import datetime
 
-logger = structlog.get_logger(__name__)
-
-try:
-    # Try new import structure (redis-py 4.0+)
-    from redis.commands.search.field import VectorField, TextField, NumericField
-    from redis.commands.search.indexDefinition import IndexDefinition, IndexType
-    from redis.commands.search.query import Query
-    REDISEARCH_AVAILABLE = True
-except ImportError:
-    try:
-        # Fallback for different redis-py versions
-        from redis.search.field import VectorField, TextField, NumericField
-        from redis.search.indexDefinition import IndexDefinition, IndexType
-        from redis.search.query import Query
-        REDISEARCH_AVAILABLE = True
-    except ImportError:
-        # RediSearch not available - we'll use basic Redis operations
-        REDISEARCH_AVAILABLE = False
-        logger.warning("RediSearch not available, using basic Redis operations")
-        
-        # Define dummy classes for compatibility
-        class VectorField:
-            def __init__(self, name, algorithm, attributes):
-                pass
-        
-        class TextField:
-            def __init__(self, name):
-                pass
-        
-        class NumericField:
-            def __init__(self, name):
-                pass
-        
-        class IndexDefinition:
-            def __init__(self, index_type=None, prefix=None):
-                pass
-        
-        class IndexType:
-            HASH = "HASH"
-        
-        class Query:
-            def __init__(self, query_string):
-                pass
+from redis.commands.search.field import VectorField, TextField, NumericField
+from redis.commands.search.indexDefinition import IndexDefinition, IndexType
+from redis.commands.search.query import Query
 
 from ..core.models import DocumentEmbedding, FederalRegisterDocument
 from ..core.config import settings
@@ -84,21 +44,11 @@ class RedisVectorStore:
         self.index_name = "document_embeddings"
         self.key_prefix = "doc:"
         
-        # Check if RediSearch is available
-        self.search_available = REDISEARCH_AVAILABLE
-        
-        if self.search_available:
-            # Initialize search index if RediSearch is available
-            self._create_search_index()
-        else:
-            logger.warning("RediSearch not available, using basic Redis operations")
+        # Initialize search index
+        self._create_search_index()
     
-    def _create_search_index(self) -> None:
+    def _create_search_index(self):
         """Create RediSearch index for document embeddings."""
-        if not self.search_available:
-            logger.warning("RediSearch not available, skipping index creation")
-            return
-            
         try:
             # Check if index already exists
             self.redis_client.ft(self.index_name).info()
