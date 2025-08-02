@@ -3,9 +3,47 @@ Redis-based vector storage with RediSearch integration.
 """
 
 import redis
-from redis.commands.search.field import VectorField, TextField, NumericField
-from redis.commands.search.indexDefinition import IndexDefinition, IndexType
-from redis.commands.search.query import Query
+try:
+    # Try new import structure (redis-py 4.0+)
+    from redis.commands.search.field import VectorField, TextField, NumericField
+    from redis.commands.search.indexDefinition import IndexDefinition, IndexType
+    from redis.commands.search.query import Query
+    REDISEARCH_AVAILABLE = True
+except ImportError:
+    try:
+        # Fallback for different redis-py versions
+        from redis.search.field import VectorField, TextField, NumericField
+        from redis.search.indexDefinition import IndexDefinition, IndexType
+        from redis.search.query import Query
+        REDISEARCH_AVAILABLE = True
+    except ImportError:
+        # RediSearch not available - we'll use basic Redis operations
+        REDISEARCH_AVAILABLE = False
+        logger.warning("RediSearch not available, using basic Redis operations")
+        
+        # Define dummy classes for compatibility
+        class VectorField:
+            def __init__(self, name, algorithm, attributes):
+                pass
+        
+        class TextField:
+            def __init__(self, name):
+                pass
+        
+        class NumericField:
+            def __init__(self, name):
+                pass
+        
+        class IndexDefinition:
+            def __init__(self, index_type=None, prefix=None):
+                pass
+        
+        class IndexType:
+            HASH = "HASH"
+        
+        class Query:
+            def __init__(self, query_string):
+                pass
 import json
 import numpy as np
 from typing import List, Optional, Dict, Any, Tuple
@@ -43,46 +81,51 @@ class RedisVectorStore:
         self.index_name = "document_embeddings"
         self.key_prefix = "doc:"
         
-        # Initialize search index
-        self._create_search_index()
+        # Check if RediSearch is available
+        self.search_available = REDISEARCH_AVAILABLE
+        
+        if self.search_available:
+            # Initialize search index if RediSearch is available
+            self._create_search_index()
+        else:
+            logger.warning("RediSearch not available, using basic Redis operations")
     
     def _create_search_index(self) -> None:
         """Create RediSearch index for document embeddings."""
+        if not self.search_available:
+            logger.warning("RediSearch not available, skipping index creation")
+            return
+            
         try:
             # Check if index already exists
-            try:
-                self.redis_client.ft(self.index_name).info()
-                logger.info("Search index already exists", index=self.index_name)
-                return
-            except redis.ResponseError:
-                # Index doesn't exist, create it
-                pass
-            
-            # Define schema for the search index
-            schema = [
-                TextField("document_id"),
-                TextField("title"),
-                TextField("abstract"),
-                TextField("agency"),
-                NumericField("publication_date"),
-                NumericField("impact_score"),
-                VectorField("embedding",
-                           "FLAT",
-                           {
-                               "TYPE": "FLOAT32",
-                               "DIM": 1536,  # Adjust based on your embedding model
-                               "DISTANCE_METRIC": "COSINE"
-                           })
-            ]
-            
-            # Create index
-            definition = IndexDefinition(
-                prefix=[self.key_prefix],
-                index_type=IndexType.HASH
-            )
-            
+            self.redis_client.ft(self.index_name).info()
+            logger.info(f"Index {self.index_name} already exists")
+            return
+        except redis.ResponseError:
+            # Index doesn't exist, create it
+            pass
+        
+        # Define schema for document embeddings
+        schema = (
+            VectorField("embedding", "FLAT", {
+                "TYPE": "FLOAT32",
+                "DIM": 384,  # Dimension of qwen2:1.5b embeddings
+                "DISTANCE_METRIC": "COSINE"
+            }),
+            TextField("document_id"),
+            TextField("title"),
+            TextField("summary"),
+            TextField("agency"),
+            NumericField("impact_score"),
+            NumericField("published_date"),
+            TextField("document_type")
+        )
+        
+        definition = IndexDefinition(index_type=IndexType.HASH, prefix=[self.key_prefix])
+        
+        try:
             self.redis_client.ft(self.index_name).create_index(
-                schema, 
+                fields=schema,
                 definition=definition
             )
             
