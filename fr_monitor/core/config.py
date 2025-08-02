@@ -5,8 +5,8 @@ Configuration management for the Federal Register monitoring system.
 import os
 from pathlib import Path
 from typing import Dict, Any, Optional
-from pydantic import BaseSettings, Field
-from pydantic_settings import SettingsConfigDict
+from pydantic import Field
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
@@ -64,37 +64,56 @@ class Settings(BaseSettings):
         return self.project_root / "logs"
 
 
-class ScoringConfig:
+class ScoringConfig(BaseSettings):
     """Configuration for impact scoring weights."""
     
-    def __init__(self, config_path: Optional[Path] = None):
-        self.config_path = config_path or Path("config/scoring.yaml")
-        self._weights = self._load_default_weights()
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
     
-    def _load_default_weights(self) -> Dict[str, float]:
-        """Load default scoring weights."""
-        return {
-            "agency_importance": {
-                "EPA": 0.9,
-                "FDA": 0.8,
-                "SEC": 0.8,
-                "FTC": 0.7,
-                "DOT": 0.7,
-                "HHS": 0.6,
-                "default": 0.5
-            },
-            "document_length_weight": 0.3,
-            "final_rule_bonus": 0.4,
-            "executive_order_bonus": 0.8,
-            "major_rule_bonus": 0.6
-        }
+    # Agency importance (higher = more important)
+    agency_epa: float = 1.5
+    agency_dot: float = 1.4
+    agency_hhs: float = 1.4
+    agency_dol: float = 1.3
+    agency_treasury: float = 1.3
+    agency_other: float = 1.0
+    
+    # Document characteristics
+    document_length: float = 0.01  # Per 1000 characters
+    is_final_rule: float = 0.5
+    has_economic_impact: float = 0.7
+    has_public_comments: float = 0.3
+    
+    # Document type modifiers
+    rule: float = 1.0
+    notice: float = 0.7
+    proposed_rule: float = 0.8
+    presidential_document: float = 1.5
     
     @property
-    def weights(self) -> Dict[str, Any]:
-        """Get scoring weights."""
-        return self._weights
+    def weights(self) -> Dict[str, float]:
+        """Get all weights as a dictionary."""
+        return {
+            'agency_epa': self.agency_epa,
+            'agency_dot': self.agency_dot,
+            'agency_hhs': self.agency_hhs,
+            'agency_dol': self.agency_dol,
+            'agency_treasury': self.agency_treasury,
+            'agency_other': self.agency_other,
+            'document_length': self.document_length,
+            'is_final_rule': self.is_final_rule,
+            'has_economic_impact': self.has_economic_impact,
+            'has_public_comments': self.has_public_comments,
+            'rule': self.rule,
+            'notice': self.notice,
+            'proposed_rule': self.proposed_rule,
+            'presidential_document': self.presidential_document
+        }
 
 
 # Global settings instance
 settings = Settings()
 scoring_config = ScoringConfig()
+
+# Ensure required directories exist
+os.makedirs(settings.logs_dir, exist_ok=True)
+os.makedirs(settings.config_dir, exist_ok=True)
