@@ -33,10 +33,7 @@ class Settings(BaseSettings):
     summary_model: str = Field("mistral:latest", alias="SUMMARY_MODEL")
     
     # Publishing APIs
-    substack_api_key: Optional[str] = Field(None, alias="SUBSTACK_API_KEY")
-    substack_publication_id: Optional[str] = Field(None, alias="SUBSTACK_PUBLICATION_ID")
-    telegram_bot_token: Optional[str] = Field(None, alias="TELEGRAM_BOT_TOKEN")
-    telegram_channel_id: Optional[str] = Field(None, alias="TELEGRAM_CHANNEL_ID")
+    # Publishing configuration removed - using markdown file output
     
     # Pipeline Configuration
     max_daily_openrouter_calls: int = Field(5, alias="MAX_DAILY_OPENROUTER_CALLS")

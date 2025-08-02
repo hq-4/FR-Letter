@@ -1,6 +1,6 @@
 # Core dependencies
 requests==2.31.0
-redis==6.2.0
+redis==4.6.0
 python-dotenv==1.0.0
 pydantic==2.5.0
 pydantic-settings==2.1.0
@@ -20,9 +20,7 @@ lxml==4.9.3
 prefect==2.14.0
 schedule==1.2.0
 
-# Publishing
-substack-api==0.1.0
-python-telegram-bot==20.7
+# Publishing - using markdown file output (no external dependencies needed)
 
 # Monitoring and logging
 structlog==23.2.0

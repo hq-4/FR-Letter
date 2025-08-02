@@ -1,8 +1,7 @@
 """
-Publishing module for external channels (Substack, Telegram).
+Publishing module for markdown file output.
 """
 
-from .substack_publisher import SubstackPublisher
-from .telegram_publisher import TelegramPublisher
+from .markdown_publisher import MarkdownPublisher
 
-__all__ = ["SubstackPublisher", "TelegramPublisher"]
+__all__ = ["MarkdownPublisher"]

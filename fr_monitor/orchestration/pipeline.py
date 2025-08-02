@@ -20,7 +20,7 @@ from ..ingestion import FederalRegisterClient
 from ..scoring import ImpactScorer
 from ..embedding import OllamaEmbedder, RedisVectorStore
 from ..summarization import DocumentChunker, LocalSummarizer, OpenRouterSummarizer
-from ..publishing import SubstackPublisher, TelegramPublisher
+from ..publishing import MarkdownPublisher
 
 logger = structlog.get_logger(__name__)
 
@@ -37,8 +37,7 @@ class FederalRegisterPipeline:
         self.chunker = DocumentChunker()
         self.local_summarizer = LocalSummarizer()
         self.openrouter_summarizer = OpenRouterSummarizer()
-        self.substack_publisher = SubstackPublisher()
-        self.telegram_publisher = TelegramPublisher()
+        self.markdown_publisher = MarkdownPublisher()
         
         # Initialize caching and security
         self.cache = DocumentCache(self.vector_store.redis_client)
@@ -222,33 +221,40 @@ class FederalRegisterPipeline:
         return final_summaries
     
     def _publish_summaries(self, summaries: List[FinalSummary]) -> List[PublishingResult]:
-        """Publish summaries to configured channels."""
+        """Publish summaries as markdown files."""
         results = []
         
-        # Publish to Substack
-        if settings.substack_api_key and settings.substack_publication_id:
+        # Convert summaries to ProcessedArticle format for markdown publisher
+        for summary in summaries:
             try:
-                substack_result = self.substack_publisher.publish(summaries)
-                results.append(substack_result)
-                logger.info("Published to Substack", result=substack_result)
-            except Exception as e:
-                logger.error("Failed to publish to Substack", error=str(e))
+                # Create a ProcessedArticle from the FinalSummary
+                from ..core.models import ProcessedArticle
+                article = ProcessedArticle(
+                    title=f"Federal Register Daily Summary - {summary.date}",
+                    content=summary.content,
+                    summary=summary.content[:200] + "..." if len(summary.content) > 200 else summary.content,
+                    date=summary.date,
+                    source_url="https://www.federalregister.gov"
+                )
+                
+                # Publish to markdown file
+                success = self.markdown_publisher.publish(article)
+                
                 results.append(PublishingResult(
-                    platform="substack",
-                    success=False,
-                    error=str(e)
+                    platform="markdown",
+                    success=success,
+                    error=None if success else "Failed to write markdown file"
                 ))
-        
-        # Publish to Telegram
-        if settings.telegram_bot_token and settings.telegram_channel_id:
-            try:
-                telegram_result = self.telegram_publisher.publish(summaries)
-                results.append(telegram_result)
-                logger.info("Published to Telegram", result=telegram_result)
+                
+                if success:
+                    logger.info("Published to markdown file", date=summary.date)
+                else:
+                    logger.error("Failed to publish to markdown file", date=summary.date)
+                    
             except Exception as e:
-                logger.error("Failed to publish to Telegram", error=str(e))
+                logger.error("Failed to publish summary to markdown", error=str(e))
                 results.append(PublishingResult(
-                    platform="telegram",
+                    platform="markdown",
                     success=False,
                     error=str(e)
                 ))
@@ -289,8 +295,7 @@ class FederalRegisterPipeline:
             "ollama_summarization": self.local_summarizer.health_check(),
             "redis_vector_store": self.vector_store.health_check(),
             "openrouter_api": self.openrouter_summarizer.health_check(),
-            "substack_api": self.substack_publisher.health_check() if settings.substack_api_key else None,
-            "telegram_api": self.telegram_publisher.health_check() if settings.telegram_bot_token else None
+            "markdown_publisher": self.markdown_publisher.health_check()
         }
         
         # Remove None values
