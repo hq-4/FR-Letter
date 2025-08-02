@@ -12,7 +12,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
     
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", protected_namespaces=())
     
     # Federal Register API
     federal_register_api_key: Optional[str] = Field(None, alias="FEDERAL_REGISTER_API_KEY")
@@ -29,7 +29,7 @@ class Settings(BaseSettings):
     
     # Ollama Configuration
     ollama_host: str = Field("http://localhost:11434", alias="OLLAMA_HOST")
-    embedding_model: str = Field("qwen2:1.5b", alias="EMBEDDING_MODEL")
+    embedding_model: str = Field("qwen3:1.7b", alias="EMBEDDING_MODEL")
     summary_model: str = Field("mistral:latest", alias="SUMMARY_MODEL")
     
     # Publishing APIs

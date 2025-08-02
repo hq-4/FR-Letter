@@ -14,6 +14,8 @@ from ..core.models import (
     PipelineRun, PublishingResult
 )
 from ..core.config import settings
+from ..core.cache import DocumentCache, DeltaProcessor
+from ..core.security import CredentialManager, SecureEnvironment
 from ..ingestion import FederalRegisterClient
 from ..scoring import ImpactScorer
 from ..embedding import OllamaEmbedder, RedisVectorStore
@@ -38,6 +40,12 @@ class FederalRegisterPipeline:
         self.substack_publisher = SubstackPublisher()
         self.telegram_publisher = TelegramPublisher()
         
+        # Initialize caching and security
+        self.cache = DocumentCache(self.vector_store.redis_client)
+        self.delta_processor = DeltaProcessor(self.cache)
+        self.credential_manager = CredentialManager()
+        self.secure_env = SecureEnvironment()
+        
         # Pipeline configuration
         self.top_documents_count = 20
         self.final_summary_count = 5
@@ -45,58 +53,75 @@ class FederalRegisterPipeline:
     
     def run_daily_pipeline(self, target_date: Optional[date] = None) -> PipelineRun:
         """
-        Execute the complete daily pipeline.
+        Execute the complete daily pipeline with caching and delta processing.
         
         Args:
-            target_date: Date to process (defaults to yesterday)
+            target_date: Date to process documents for. Defaults to today.
             
         Returns:
-            PipelineRun object with execution details
+            PipelineRun: Results of the pipeline execution.
         """
-        run_id = str(uuid.uuid4())
-        pipeline_run = PipelineRun(
-            run_id=run_id,
-            start_time=datetime.utcnow()
-        )
+        if target_date is None:
+            target_date = date.today()
         
-        logger.info("Starting daily pipeline", 
-                   run_id=run_id,
-                   target_date=target_date)
+        run_id = str(uuid.uuid4())
+        start_time = datetime.now()
+        
+        # Validate environment and credentials
+        security_check = self.secure_env.validate_environment()
+        if not security_check['environment_valid']:
+            logger.error("Security validation failed", issues=security_check)
+            
+        logger.info("Starting daily pipeline", run_id=run_id, target_date=target_date)
         
         try:
-            # Step 1: Data Ingestion (FR-1)
-            logger.info("Step 1: Data ingestion")
-            documents = self._ingest_documents(target_date, pipeline_run)
+            # Step 1: Get last processed date for delta processing
+            last_processed = self.cache.get_last_processed_date()
+            if last_processed:
+                logger.info(f"Last processed date: {last_processed}")
+            
+            # Step 2: Fetch documents from Federal Register
+            all_documents = self._ingest_documents(target_date)
+            
+            # Step 3: Apply delta processing to filter new/changed documents
+            documents = self.delta_processor.get_new_documents(all_documents)
+            
             if not documents:
-                raise Exception("No documents retrieved from Federal Register")
+                logger.info("No new documents to process")
+                return PipelineRun(
+                    run_id=run_id,
+                    target_date=target_date,
+                    documents_processed=0,
+                    documents_selected=0,
+                    start_time=start_time,
+                    end_time=datetime.now(),
+                    status="success",
+                    publishing_results=[]
+                )
             
-            # Step 2: Impact Pre-Scoring (FR-2, FR-3)
-            logger.info("Step 2: Impact scoring")
-            top_documents = self._score_and_rank_documents(documents, pipeline_run)
+            logger.info(f"Processing {len(documents)} new/changed documents")
             
-            # Step 3: Embedding & Vector Storage (FR-4, FR-5)
-            logger.info("Step 3: Embedding generation")
-            embeddings = self._generate_and_store_embeddings(top_documents, pipeline_run)
+            # Step 4: Score documents for impact
+            scored_documents = self._score_and_rank_documents(documents)
             
-            # Step 4: Impact-based Re-ranking (FR-6)
-            logger.info("Step 4: Similarity-based re-ranking")
-            final_documents = self._rerank_by_similarity(top_documents, embeddings, pipeline_run)
+            # Step 5: Select top documents
+            top_documents = scored_documents[:self.top_documents_count]
             
-            # Step 5: Document Chunking (FR-7)
-            logger.info("Step 5: Document chunking")
-            chunks = self._chunk_documents(final_documents, pipeline_run)
+            # Step 6: Process embeddings and summaries
+            embeddings = self._generate_and_store_embeddings(top_documents)
+            final_documents = self._rerank_by_similarity(top_documents, embeddings)
+            chunks = self._chunk_documents(final_documents)
+            consolidated_summaries = self._local_summarization(chunks)
+            final_summaries = self._generate_final_summaries(consolidated_summaries)
             
-            # Step 6: Local Summarization (FR-8, FR-9)
-            logger.info("Step 6: Local summarization")
-            consolidated_summaries = self._local_summarization(chunks, pipeline_run)
+            # Step 7: Generate final summary
+            final_summary = final_summaries[0]
             
-            # Step 7: Final LLM Summaries (FR-10, FR-11, FR-12)
-            logger.info("Step 7: Final LLM summarization")
-            final_summaries = self._generate_final_summaries(consolidated_summaries, pipeline_run)
+            # Step 8: Publish results
+            publishing_results = self._publish_summaries(final_summaries)
             
-            # Step 8: Publishing (FR-16, FR-17)
-            logger.info("Step 8: Publishing")
-            self._publish_summaries(final_summaries, pipeline_run)
+            # Step 9: Update cache and processing state
+            self._update_processing_state(documents, publishing_results)
             
             # Mark pipeline as completed
             pipeline_run.end_time = datetime.utcnow()
@@ -196,31 +221,65 @@ class FederalRegisterPipeline:
         
         return final_summaries
     
-    def _publish_summaries(self, summaries: List[FinalSummary], run: PipelineRun) -> None:
-        """Step 8: Publish summaries to external channels."""
-        if not summaries:
-            run.logs.append("No summaries to publish")
-            return
+    def _publish_summaries(self, summaries: List[FinalSummary]) -> List[PublishingResult]:
+        """Publish summaries to configured channels."""
+        results = []
         
         # Publish to Substack
-        if settings.substack_api_key:
+        if settings.substack_api_key and settings.substack_publication_id:
             try:
-                substack_result = self.substack_publisher.publish_daily_digest(summaries)
-                if substack_result.success:
-                    run.logs.append("Successfully published to Substack")
-                else:
-                    run.logs.append(f"Substack publishing failed: {substack_result.error_message}")
+                substack_result = self.substack_publisher.publish(summaries)
+                results.append(substack_result)
+                logger.info("Published to Substack", result=substack_result)
             except Exception as e:
-                run.logs.append(f"Substack publishing error: {str(e)}")
+                logger.error("Failed to publish to Substack", error=str(e))
+                results.append(PublishingResult(
+                    platform="substack",
+                    success=False,
+                    error=str(e)
+                ))
         
         # Publish to Telegram
-        if settings.telegram_bot_token:
+        if settings.telegram_bot_token and settings.telegram_channel_id:
             try:
-                telegram_results = self.telegram_publisher.publish_daily_digest(summaries)
-                successful_telegram = sum(1 for r in telegram_results if r.success)
-                run.logs.append(f"Telegram: {successful_telegram}/{len(telegram_results)} messages sent")
+                telegram_result = self.telegram_publisher.publish(summaries)
+                results.append(telegram_result)
+                logger.info("Published to Telegram", result=telegram_result)
             except Exception as e:
-                run.logs.append(f"Telegram publishing error: {str(e)}")
+                logger.error("Failed to publish to Telegram", error=str(e))
+                results.append(PublishingResult(
+                    platform="telegram",
+                    success=False,
+                    error=str(e)
+                ))
+        
+        return results
+    
+    def _update_processing_state(self, documents: List[FederalRegisterDocument], 
+                               publishing_results: List[PublishingResult]) -> None:
+        """Update cache and processing state after successful pipeline run."""
+        try:
+            # Cache processed documents
+            for doc in documents:
+                self.cache.cache_document(doc.document_number, doc.dict())
+                
+                # Cache processing state
+                self.cache.cache_processing_state(doc.document_number, {
+                    "status": "completed",
+                    "processed_at": datetime.utcnow().isoformat(),
+                    "publishing_results": [r.dict() for r in publishing_results]
+                })
+                
+                # Cache content hash for deduplication
+                content_hash = self.cache.generate_content_hash(
+                    json.dumps(doc.dict(), sort_keys=True)
+                )
+                self.cache.cache_content_hash(content_hash, doc.document_number)
+            
+            logger.info("Updated processing state for all documents")
+            
+        except Exception as e:
+            logger.error("Failed to update processing state", error=str(e))
     
     def health_check(self) -> Dict[str, bool]:
         """Check health of all pipeline components."""
