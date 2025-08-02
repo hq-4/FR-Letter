@@ -83,6 +83,10 @@ class ChunkSummary(BaseModel):
     model_used: str
     created_at: datetime = Field(default_factory=datetime.utcnow)
 
+    model_config = {
+        "protected_namespaces": (),
+    }
+
 
 class ConsolidatedSummary(BaseModel):
     """Consolidated summary from all chunks."""
