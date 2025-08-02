@@ -64,30 +64,29 @@ class Settings(BaseSettings):
         return self.project_root / "logs"
 
 
-class ScoringConfig(BaseSettings):
+class ScoringConfig:
     """Configuration for impact scoring weights."""
     
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
-    
-    # Agency importance (higher = more important)
-    agency_epa: float = 1.5
-    agency_dot: float = 1.4
-    agency_hhs: float = 1.4
-    agency_dol: float = 1.3
-    agency_treasury: float = 1.3
-    agency_other: float = 1.0
-    
-    # Document characteristics
-    document_length: float = 0.01  # Per 1000 characters
-    is_final_rule: float = 0.5
-    has_economic_impact: float = 0.7
-    has_public_comments: float = 0.3
-    
-    # Document type modifiers
-    rule: float = 1.0
-    notice: float = 0.7
-    proposed_rule: float = 0.8
-    presidential_document: float = 1.5
+    def __init__(self):
+        # Load from environment variables with defaults
+        self.agency_epa = float(os.getenv('SCORING_AGENCY_EPA', 1.5))
+        self.agency_dot = float(os.getenv('SCORING_AGENCY_DOT', 1.4))
+        self.agency_hhs = float(os.getenv('SCORING_AGENCY_HHS', 1.4))
+        self.agency_dol = float(os.getenv('SCORING_AGENCY_DOL', 1.3))
+        self.agency_treasury = float(os.getenv('SCORING_AGENCY_TREASURY', 1.3))
+        self.agency_other = float(os.getenv('SCORING_AGENCY_OTHER', 1.0))
+        
+        # Document characteristics
+        self.document_length = float(os.getenv('SCORING_DOCUMENT_LENGTH', 0.01))
+        self.is_final_rule = float(os.getenv('SCORING_IS_FINAL_RULE', 0.5))
+        self.has_economic_impact = float(os.getenv('SCORING_HAS_ECONOMIC_IMPACT', 0.7))
+        self.has_public_comments = float(os.getenv('SCORING_HAS_PUBLIC_COMMENTS', 0.3))
+        
+        # Document type modifiers
+        self.rule = float(os.getenv('SCORING_RULE', 1.0))
+        self.notice = float(os.getenv('SCORING_NOTICE', 0.7))
+        self.proposed_rule = float(os.getenv('SCORING_PROPOSED_RULE', 0.8))
+        self.presidential_document = float(os.getenv('SCORING_PRESIDENTIAL_DOCUMENT', 1.5))
     
     @property
     def weights(self) -> Dict[str, float]:
