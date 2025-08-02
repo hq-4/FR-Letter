@@ -98,8 +98,15 @@ class FinalSummary(BaseModel):
     document_id: str
     headline: str
     bullets: List[str]
-    model_used: str
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+
+
+class ProcessedArticle(BaseModel):
+    """A processed article ready for publishing."""
+    title: str
+    content: str
+    summary: str
+    date: datetime
+    source_url: str
 
 
 class PipelineRun(BaseModel):
@@ -119,9 +126,9 @@ class PipelineRun(BaseModel):
 
 class PublishingResult(BaseModel):
     """Result of publishing to external channels."""
-    document_id: str
-    channel: str  # "substack", "telegram"
+    platform: str
     success: bool
+    document_id: Optional[str] = None
     published_at: Optional[datetime] = None
     error_message: Optional[str] = None
     external_id: Optional[str] = None  # ID from external service

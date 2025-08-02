@@ -221,44 +221,55 @@ class FederalRegisterPipeline:
         return final_summaries
     
     def _publish_summaries(self, summaries: List[FinalSummary]) -> List[PublishingResult]:
-        """Publish summaries as markdown files."""
+        """Publish summaries as a single markdown file for the day."""
+        if not summaries:
+            return []
+
+        article_date = datetime.now()
         results = []
-        
-        # Convert summaries to ProcessedArticle format for markdown publisher
-        for summary in summaries:
-            try:
-                # Create a ProcessedArticle from the FinalSummary
-                from ..core.models import ProcessedArticle
-                article = ProcessedArticle(
-                    title=f"Federal Register Daily Summary - {summary.date}",
-                    content=summary.content,
-                    summary=summary.content[:200] + "..." if len(summary.content) > 200 else summary.content,
-                    date=summary.date,
-                    source_url="https://www.federalregister.gov"
-                )
-                
-                # Publish to markdown file
-                success = self.markdown_publisher.publish(article)
-                
-                results.append(PublishingResult(
-                    platform="markdown",
-                    success=success,
-                    error=None if success else "Failed to write markdown file"
-                ))
-                
-                if success:
-                    logger.info("Published to markdown file", date=summary.date)
-                else:
-                    logger.error("Failed to publish to markdown file", date=summary.date)
-                    
-            except Exception as e:
-                logger.error("Failed to publish summary to markdown", error=str(e))
-                results.append(PublishingResult(
-                    platform="markdown",
-                    success=False,
-                    error=str(e)
-                ))
-        
+
+        try:
+            # Combine content from all summaries into a single string
+            full_content = []
+            for summary in summaries:
+                full_content.append(f"### {summary.headline}")
+                full_content.extend([f"- {bullet}" for bullet in summary.bullets])
+                full_content.append("\n")
+            
+            article_content = "\n".join(full_content)
+
+            # Create a single article for the day's summaries
+            article = ProcessedArticle(
+                title=f"Federal Register Summary for {article_date.strftime('%Y-%m-%d')}",
+                content=article_content,
+                summary=f"A summary of {len(summaries)} significant documents published in the Federal Register.",
+                date=article_date,
+                source_url="https://www.federalregister.gov"
+            )
+
+            # Publish the combined article
+            success = self.markdown_publisher.publish(article)
+            
+            results.append(PublishingResult(
+                platform="markdown",
+                success=success,
+                published_at=datetime.now() if success else None,
+                error_message=None if success else "Failed to write markdown file."
+            ))
+
+            if success:
+                logger.info("Successfully published daily summary to markdown.")
+            else:
+                logger.error("Failed to publish daily summary to markdown.")
+
+        except Exception as e:
+            logger.error("An exception occurred during markdown publishing", error=str(e))
+            results.append(PublishingResult(
+                platform="markdown",
+                success=False,
+                error_message=str(e)
+            ))
+
         return results
     
     def _update_processing_state(self, documents: List[FederalRegisterDocument], 
