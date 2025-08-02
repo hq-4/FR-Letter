@@ -23,7 +23,7 @@ class Settings(BaseSettings):
     
     # Redis Configuration
     redis_host: str = Field("localhost", alias="REDIS_HOST")
-    redis_port: int = Field(6379, alias="REDIS_PORT")
+    redis_port: int = Field(6380, alias="REDIS_PORT")  # Redis Stack container port
     redis_password: Optional[str] = Field(None, alias="REDIS_PASSWORD")
     redis_db: int = Field(0, alias="REDIS_DB")
     

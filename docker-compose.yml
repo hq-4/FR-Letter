@@ -1,7 +1,22 @@
 version: '3.8'
 
-
+services:
+  redis-stack:
+    image: redis/redis-stack:latest
+    container_name: redis-stack
+    ports:
+      - "6380:6380"  # Custom port mapping
+    command: redis-stack-server --port 6380
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+    networks:
+      - redis-network
 
 volumes:
-  redis_data:
+  redis-data:
     driver: local
+
+networks:
+  redis-network:
+    driver: bridge
