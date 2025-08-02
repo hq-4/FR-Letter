@@ -3,6 +3,14 @@ Redis-based vector storage with RediSearch integration.
 """
 
 import redis
+import json
+import numpy as np
+from typing import List, Optional, Dict, Any, Tuple
+import structlog
+from datetime import datetime
+
+logger = structlog.get_logger(__name__)
+
 try:
     # Try new import structure (redis-py 4.0+)
     from redis.commands.search.field import VectorField, TextField, NumericField
@@ -44,11 +52,6 @@ except ImportError:
         class Query:
             def __init__(self, query_string):
                 pass
-import json
-import numpy as np
-from typing import List, Optional, Dict, Any, Tuple
-import structlog
-from datetime import datetime
 
 from ..core.models import DocumentEmbedding, FederalRegisterDocument
 from ..core.config import settings
