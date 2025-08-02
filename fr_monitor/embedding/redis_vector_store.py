@@ -112,7 +112,7 @@ class RedisVectorStore:
         schema = (
             VectorField("embedding", "FLAT", {
                 "TYPE": "FLOAT32",
-                "DIM": 384,  # Dimension of qwen2:1.5b embeddings
+                "DIM": 1536,  # Dimension of qwen3:1.7b embeddings
                 "DISTANCE_METRIC": "COSINE"
             }),
             TextField("document_id"),
