@@ -73,6 +73,11 @@ class FederalRegisterPipeline:
             
         logger.info("Starting daily pipeline", run_id=run_id, target_date=target_date)
         
+        pipeline_run = PipelineRun(
+            run_id=run_id,
+            start_time=start_time
+        )
+        
         try:
             # Step 1: Get last processed date for delta processing
             last_processed = self.cache.get_last_processed_date()
@@ -87,44 +92,46 @@ class FederalRegisterPipeline:
             
             if not documents:
                 logger.info("No new documents to process")
-                return PipelineRun(
-                    run_id=run_id,
-                    target_date=target_date,
-                    documents_processed=0,
-                    documents_selected=0,
-                    start_time=start_time,
-                    end_time=datetime.now(),
-                    status="success",
-                    publishing_results=[]
-                )
+                pipeline_run.end_time = datetime.utcnow()
+                pipeline_run.status = "completed"
+                pipeline_run.documents_processed = 0
+                pipeline_run.documents_summarized = 0
+                return pipeline_run
             
             logger.info(f"Processing {len(documents)} new/changed documents")
             
-            # Step 4: Score documents for impact
-            scored_documents = self._score_and_rank_documents(documents)
+            # Step 4: Score and rank documents by impact
+            top_documents = self._score_and_rank_documents(documents)
             
-            # Step 5: Select top documents
-            top_documents = scored_documents[:self.top_documents_count]
-            
-            # Step 6: Process embeddings and summaries
+            # Step 5: Generate embeddings and store in Redis
             embeddings = self._generate_and_store_embeddings(top_documents)
-            final_documents = self._rerank_by_similarity(top_documents, embeddings)
-            chunks = self._chunk_documents(final_documents)
-            consolidated_summaries = self._local_summarization(chunks)
+            
+            # Step 6: Re-rank by similarity to recent impact centroid
+            reranked_documents = self._rerank_by_similarity(top_documents, embeddings)
+            
+            # Step 7: Chunk documents for summarization
+            chunks = self._chunk_documents(reranked_documents)
+            
+            # Step 8: Local summarization of chunks
+            chunk_summaries = self._local_summarization(chunks)
+            
+            # Step 9: Consolidate summaries by document
+            consolidated_summaries = self.local_summarizer.consolidate_summaries(chunk_summaries)
+            
+            # Step 10: Generate final summaries using OpenRouter
             final_summaries = self._generate_final_summaries(consolidated_summaries)
             
-            # Step 7: Generate final summary
-            final_summary = final_summaries[0]
-            
-            # Step 8: Publish results
+            # Step 11: Publish summaries
             publishing_results = self._publish_summaries(final_summaries)
             
-            # Step 9: Update cache and processing state
+            # Update processing state
             self._update_processing_state(documents, publishing_results)
             
-            # Mark pipeline as completed
+            # Mark pipeline as successful
             pipeline_run.end_time = datetime.utcnow()
             pipeline_run.status = "completed"
+            pipeline_run.documents_processed = len(documents)
+            pipeline_run.documents_summarized = len(final_summaries)
             
             duration = (pipeline_run.end_time - pipeline_run.start_time).total_seconds()
             logger.info("Pipeline completed successfully", 
@@ -144,20 +151,17 @@ class FederalRegisterPipeline:
         
         return pipeline_run
     
-    def _ingest_documents(self, target_date: Optional[date], run: PipelineRun) -> List[FederalRegisterDocument]:
+    def _ingest_documents(self, target_date: datetime) -> List[FederalRegisterDocument]:
         """Step 1: Ingest documents from Federal Register API."""
         documents = self.fr_client.get_daily_documents(target_date)
-        run.documents_processed = len(documents)
-        run.logs.append(f"Ingested {len(documents)} documents")
         return documents
     
-    def _score_and_rank_documents(self, documents: List[FederalRegisterDocument], run: PipelineRun) -> List[FederalRegisterDocument]:
+    def _score_and_rank_documents(self, documents: List[FederalRegisterDocument]) -> List[FederalRegisterDocument]:
         """Step 2: Score and rank documents by impact."""
         top_documents = self.impact_scorer.get_top_documents(documents, self.top_documents_count)
-        run.logs.append(f"Selected top {len(top_documents)} documents by impact score")
         return top_documents
     
-    def _generate_and_store_embeddings(self, documents: List[FederalRegisterDocument], run: PipelineRun) -> List[DocumentEmbedding]:
+    def _generate_and_store_embeddings(self, documents: List[FederalRegisterDocument]) -> List[DocumentEmbedding]:
         """Step 3: Generate embeddings and store in Redis."""
         # Generate embeddings
         embeddings = self.embedder.generate_embeddings(documents, text_source="abstract")
@@ -170,11 +174,9 @@ class FederalRegisterPipeline:
         score_dict = {score.document_id: score.total_score for score in scores}
         self.vector_store.update_impact_scores(score_dict)
         
-        run.logs.append(f"Generated and stored {len(embeddings)} embeddings")
         return embeddings
     
-    def _rerank_by_similarity(self, documents: List[FederalRegisterDocument], 
-                             embeddings: List[DocumentEmbedding], run: PipelineRun) -> List[FederalRegisterDocument]:
+    def _rerank_by_similarity(self, documents: List[FederalRegisterDocument], embeddings: List[DocumentEmbedding]) -> List[FederalRegisterDocument]:
         """Step 4: Re-rank by similarity to recent impact centroid."""
         # Calculate recent impact centroid
         centroid = self.vector_store.calculate_recent_impact_centroid()
@@ -184,21 +186,18 @@ class FederalRegisterPipeline:
             final_documents = self.embedder.rank_by_similarity(
                 documents, embeddings, centroid, self.final_summary_count
             )
-            run.logs.append(f"Re-ranked to top {len(final_documents)} by similarity")
         else:
             # Fall back to top N by impact score if no centroid available
             final_documents = documents[:self.final_summary_count]
-            run.logs.append(f"Used top {len(final_documents)} by impact score (no centroid)")
         
         return final_documents
     
-    def _chunk_documents(self, documents: List[FederalRegisterDocument], run: PipelineRun) -> List[DocumentChunk]:
+    def _chunk_documents(self, documents: List[FederalRegisterDocument]) -> List[DocumentChunk]:
         """Step 5: Chunk documents for summarization."""
         chunks = self.chunker.chunk_documents(documents)
-        run.logs.append(f"Created {len(chunks)} document chunks")
         return chunks
     
-    def _local_summarization(self, chunks: List[DocumentChunk], run: PipelineRun) -> List[ConsolidatedSummary]:
+    def _local_summarization(self, chunks: List[DocumentChunk]) -> List[ConsolidatedSummary]:
         """Step 6: Local summarization of chunks."""
         # Summarize individual chunks
         chunk_summaries = self.local_summarizer.summarize_chunks(chunks)
@@ -206,17 +205,12 @@ class FederalRegisterPipeline:
         # Consolidate summaries by document
         consolidated_summaries = self.local_summarizer.consolidate_summaries(chunk_summaries)
         
-        run.logs.append(f"Generated {len(consolidated_summaries)} consolidated summaries")
         return consolidated_summaries
     
-    def _generate_final_summaries(self, consolidated_summaries: List[ConsolidatedSummary], 
-                                 run: PipelineRun) -> List[FinalSummary]:
+    def _generate_final_summaries(self, consolidated_summaries: List[ConsolidatedSummary]) -> List[FinalSummary]:
         """Step 7: Generate final summaries using OpenRouter."""
         final_summaries = self.openrouter_summarizer.generate_final_summaries(consolidated_summaries)
         
-        run.documents_summarized = len(final_summaries)
-        run.openrouter_calls_made = self.openrouter_summarizer.daily_calls_made
-        run.logs.append(f"Generated {len(final_summaries)} final summaries")
         
         return final_summaries
     
