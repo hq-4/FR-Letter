@@ -7,6 +7,8 @@ from datetime import datetime, date, timedelta
 from typing import List, Optional, Dict, Any
 import structlog
 import uuid
+import os
+from pathlib import Path
 
 from ..core.models import (
     FederalRegisterDocument, ImpactScore, DocumentEmbedding,
@@ -49,6 +51,10 @@ class FederalRegisterPipeline:
         self.top_documents_count = 20
         self.final_summary_count = 5
         self.pipeline_timeout = settings.pipeline_timeout_minutes * 60
+        
+        # Log current working directory and .env location
+        logger.info(f"Current working directory: {os.getcwd()}")
+        logger.info(f"Loading .env file from: {Path('.env').absolute()}")
     
     def run_daily_pipeline(self, target_date: Optional[date] = None) -> PipelineRun:
         """
