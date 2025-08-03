@@ -76,10 +76,11 @@ def debug_rss_items():
             pub_date_elem = item.find('pubDate')
             dc_creator = item.find('.//{http://purl.org/dc/elements/1.1/}creator')
             
-            title = title_elem.text.strip() if title_elem and title_elem.text else ""
-            rss_link = link_elem.text.strip() if link_elem and link_elem.text else ""
-            pub_date = pub_date_elem.text.strip() if pub_date_elem and pub_date_elem.text else ""
-            agency = dc_creator.text.strip() if dc_creator and dc_creator.text else ""
+            # Use more robust text extraction
+            title = ''.join(title_elem.itertext()).strip() if title_elem is not None else ""
+            rss_link = ''.join(link_elem.itertext()).strip() if link_elem is not None else ""
+            pub_date = ''.join(pub_date_elem.itertext()).strip() if pub_date_elem is not None else ""
+            agency = ''.join(dc_creator.itertext()).strip() if dc_creator is not None else ""
             
             # Debug: show raw element info
             print(f"Raw title_elem: {title_elem}, text: '{title_elem.text if title_elem else None}'")
