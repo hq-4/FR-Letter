@@ -25,7 +25,7 @@ from fr_monitor.core.cache import DocumentCache, DeltaProcessor
 from fr_monitor.core.security import CredentialManager, SecureEnvironment
 from fr_monitor.ingestion.rss_wrapper import FederalRegisterClient
 from fr_monitor.scoring import ImpactScorer
-from fr_monitor.embeddings.bge_embeddings import BgeEmbeddingGenerator
+from fr_monitor.embeddings.bge_embeddings import BGEEmbeddingClient
 from fr_monitor.embeddings.redis_vector_store import RedisVectorStore
 from fr_monitor.summarization import DocumentChunker, LocalSummarizer, OpenRouterSummarizer
 from fr_monitor.publishing import MarkdownPublisher
@@ -40,7 +40,7 @@ class FederalRegisterPipeline:
         # Initialize all components
         self.fr_client = FederalRegisterClient()
         self.impact_scorer = ImpactScorer()
-        self.embedder = BgeEmbeddingGenerator()
+        self.embedder = BGEEmbeddingClient()
         self.vector_store = RedisVectorStore()
         self.chunker = DocumentChunker()
         self.local_summarizer = LocalSummarizer()
