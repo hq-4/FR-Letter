@@ -205,7 +205,7 @@ class FederalRegisterClient:
         
         # Get document type with fallback to NOTICE
         doc_type = doc_data.get("type", "NOTICE")
-        document_type = type_mapping.get(doc_type, DocumentType.NOTICE)
+        document_type = type_mapping.get(doc_type, DocumentType.OTHER)
         
         # Parse agencies
         agencies = []
