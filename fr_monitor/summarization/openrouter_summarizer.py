@@ -115,7 +115,8 @@ class OpenRouterSummarizer:
                 "top_p": 0.9
             }
             
-            # Make API call
+            user_prompt = "\n".join([m["content"] for m in messages])
+            logger.info(f"Sending prompt of length {len(user_prompt)} to OpenRouter")
             response = self.session.post(
                 f"{self.base_url}/chat/completions",
                 json=payload,
@@ -123,13 +124,20 @@ class OpenRouterSummarizer:
             )
             response.raise_for_status()
             
-            data = response.json()
+            if response.status_code == 200:
+                data = response.json()
+                actual_model = data.get('model', 'unknown')
+                logger.info(f"OpenRouter summary generated with model: {actual_model}")
+                content = data['choices'][0]['message']['content']
+            else:
+                logger.error("Invalid response status code from OpenRouter", 
+                           status_code=response.status_code,
+                           response=response.text[:200])
+                return None
             
             if "choices" not in data or not data["choices"]:
                 logger.error("Invalid response format from OpenRouter", response_data=data)
                 return None
-            
-            content = data["choices"][0]["message"]["content"]
             
             # Parse the structured response
             headline, bullets = self._parse_response(content)
