@@ -2,22 +2,22 @@
 BGE-large embedding integration with RedisSearch for Federal Register documents.
 """
 import json
-import logging
-import numpy as np
-from typing import List, Dict, Any, Optional, Tuple
 import redis
+import numpy as np
+from typing import List, Dict, Any, Optional
+import logging
 import requests
+from ..storage.database import FederalRegisterDB
 
-# Try to import RedisSearch components, fallback if not available
+# RedisSearch imports
 try:
+    from redis.commands.search import Search
     from redis.commands.search.field import VectorField, TextField, NumericField
-    from redis.commands.search.indexdefinition import IndexDefinition, IndexType
+    from redis.commands.search.indexDefinition import IndexDefinition, IndexType
     from redis.commands.search.query import Query
-    REDISEARCH_AVAILABLE = True
+    REDISEARCH_IMPORTS_AVAILABLE = True
 except ImportError:
-    REDISEARCH_AVAILABLE = False
-    logger = logging.getLogger(__name__)
-    logger.warning("RedisSearch not available - falling back to basic Redis operations")
+    REDISEARCH_IMPORTS_AVAILABLE = False
 
 from ..storage.database import FederalRegisterDB
 
@@ -93,17 +93,19 @@ class RedisVectorStore:
         
         # Check if RedisSearch is available
         try:
-            from redis.commands.search import Search
-            # Test RedisSearch by checking module list
+            # Test RedisSearch by checking module list and imports
             modules = self.redis_client.execute_command("MODULE", "LIST")
             search_available = any(module[1] == b'search' or module[1] == 'search' for module in modules)
             
-            if search_available:
+            if search_available and REDISEARCH_IMPORTS_AVAILABLE:
                 self.redisearch_available = True
                 logger.info("RedisSearch module is available and loaded")
             else:
                 self.redisearch_available = False
-                logger.warning("RedisSearch module not found")
+                if not search_available:
+                    logger.warning("RedisSearch module not found in Redis")
+                if not REDISEARCH_IMPORTS_AVAILABLE:
+                    logger.warning("RedisSearch Python imports not available")
         except Exception as e:
             self.redisearch_available = False
             logger.warning(f"RedisSearch not available: {e}")
