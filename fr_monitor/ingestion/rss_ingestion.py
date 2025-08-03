@@ -75,8 +75,9 @@ class RSSIngestionClient:
             if not title_elem or not link_elem:
                 return None
                 
-            title = title_elem.text.strip() if title_elem and title_elem.text else ""
-            rss_link = link_elem.text.strip() if link_elem and link_elem.text else ""
+            # Use robust text extraction (itertext handles child elements)
+            title = ''.join(title_elem.itertext()).strip() if title_elem is not None else ""
+            rss_link = ''.join(link_elem.itertext()).strip() if link_elem is not None else ""
             
             # Skip if we don't have the essential data
             if not title or not rss_link:
@@ -147,11 +148,12 @@ class RSSIngestionClient:
         """Extract agency name from RSS item."""
         # First try dc:creator (most reliable)
         dc_creator = item.find('.//{http://purl.org/dc/elements/1.1/}creator')
-        if dc_creator is not None and dc_creator.text:
-            agency = dc_creator.text.strip()
-            # Clean up common agency name formats
-            agency = self._normalize_agency_name(agency)
-            return agency
+        if dc_creator is not None:
+            agency = ''.join(dc_creator.itertext()).strip()
+            if agency:
+                # Clean up common agency name formats
+                agency = self._normalize_agency_name(agency)
+                return agency
         
         # Try description
         desc_elem = item.find('description')
