@@ -249,20 +249,18 @@ class SecureEnvironment:
         
         # Check for required environment variables
         for var in self.required_vars:
-            found = False
-            if os.getenv(var):
-                found = True
-            else:
+            value = os.getenv(var)
+            if value is None:
                 # Check aliases
                 aliases = self.var_aliases.get(var, [])
                 for alias in aliases:
-                    if os.getenv(alias):
-                        # Use the alias value for the required variable
-                        os.environ[var] = os.getenv(alias)
-                        found = True
+                    alias_value = os.getenv(alias)
+                    if alias_value is not None:
+                        os.environ[var] = alias_value
+                        value = alias_value
                         break
             
-            if not found:
+            if value is None:
                 validation['missing_vars'].append(var)
                 validation['environment_valid'] = False
         
