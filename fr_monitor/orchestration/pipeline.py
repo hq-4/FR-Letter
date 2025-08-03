@@ -150,8 +150,8 @@ class FederalRegisterPipeline:
             
             # Log summary content lengths for debugging
             for i, summary in enumerate(consolidated_summaries):
-                content_length = len(summary.consolidated_summary) if summary.consolidated_summary else 0
-                logger.info(f"Summary {i+1}: title='{summary.document_title}', content_length={content_length}")
+                content_length = len(summary.summary) if summary.summary else 0
+                logger.info(f"Summary {i+1}: document_id='{summary.document_id}', content_length={content_length}")
             
             # Step 10: Generate final summaries using OpenRouter
             final_summaries = self._generate_final_summaries(consolidated_summaries)

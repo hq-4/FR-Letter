@@ -96,26 +96,27 @@ def test_pipeline_steps():
         print(f"✅ Consolidated into {len(consolidated)} document summaries")
         
         for i, summary in enumerate(consolidated):
-            content_length = len(summary.consolidated_summary) if summary.consolidated_summary else 0
-            print(f"   Consolidated {i+1}: '{summary.document_title[:50]}...' ({content_length} chars)")
+            content_length = len(summary.summary) if summary.summary else 0
+            print(f"   Consolidated {i+1}: '{summary.document_id[:50]}...' ({content_length} chars)")
             if content_length > 0:
-                print(f"      Preview: {summary.consolidated_summary[:100]}...")
+                print(f"      Preview: {summary.summary[:100]}...")
             else:
                 print(f"      ⚠️  EMPTY CONSOLIDATED SUMMARY!")
         
+        # Step 5: Check if we have valid content for OpenRouter
+        print("\n5️⃣ Checking content for OpenRouter...")
+        valid_summaries = [s for s in consolidated if s.summary and len(s.summary.strip()) > 10]
+        print(f"📊 Valid summaries for OpenRouter: {len(valid_summaries)}/{len(consolidated)}")
+        
+        if not valid_summaries:
+            print("❌ No valid summaries found - this explains the short OpenRouter calls!")
+            print("   The consolidated summaries are empty or too short.")
+            return False
+    
     except Exception as e:
         print(f"❌ Local summarization failed: {e}")
         return False
     
-    # Step 5: Check if we have valid content for OpenRouter
-    print("\n5️⃣ Checking content for OpenRouter...")
-    valid_summaries = [s for s in consolidated if s.consolidated_summary and len(s.consolidated_summary.strip()) > 10]
-    print(f"📊 Valid summaries for OpenRouter: {len(valid_summaries)}/{len(consolidated)}")
-    
-    if not valid_summaries:
-        print("❌ No valid summaries found - this explains the short OpenRouter calls!")
-        print("   The consolidated summaries are empty or too short.")
-        return False
     
     print("\n✅ Pipeline test completed successfully!")
     print(f"📈 Summary: {len(documents)} docs → {len(top_documents)} scored → {len(chunks)} chunks → {len(consolidated)} summaries → {len(valid_summaries)} valid")
