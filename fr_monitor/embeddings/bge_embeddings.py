@@ -374,8 +374,8 @@ class DocumentEmbeddingProcessor:
     
     def process_unembedded_documents(self, limit: Optional[int] = None) -> int:
         """Process documents that haven't been embedded yet."""
-        # Get processed documents (chunked but not embedded)
-        processed_docs = self.db.get_unprocessed_documents(limit)
+        # Get documents that have been chunked but not embedded yet
+        processed_docs = self._get_documents_needing_embedding(limit)
         
         if not processed_docs:
             logger.info("No documents need embedding processing")
@@ -413,6 +413,37 @@ class DocumentEmbeddingProcessor:
         
         logger.info(f"Successfully processed embeddings for {processed_count}/{len(processed_docs)} documents")
         return processed_count
+    
+    def _get_documents_needing_embedding(self, limit: Optional[int] = None) -> List[Dict[str, Any]]:
+        """Get documents that have chunks but haven't been embedded yet."""
+        # Simple approach: get all documents that have chunks
+        # We'll check Redis keys to see if they've been embedded
+        query = """
+            SELECT DISTINCT d.id, d.document_number, d.title, d.agency, d.publication_date,
+                   d.rss_link, d.xml_url, d.xml_content, d.xml_size
+            FROM documents d
+            INNER JOIN document_chunks dc ON d.id = dc.document_id
+            ORDER BY d.publication_date DESC
+        """
+        
+        if limit:
+            query += f" LIMIT {limit}"
+        
+        with self.db.get_connection() as conn:
+            cursor = conn.execute(query)
+            all_docs = [dict(row) for row in cursor.fetchall()]
+        
+        # Filter out documents that already have embeddings in Redis
+        docs_needing_embedding = []
+        for doc in all_docs:
+            # Check if this document has any embeddings in Redis
+            pattern = f"{self.vector_store.index_name}:{doc['document_number']}:*"
+            existing_keys = self.vector_store.redis_client.keys(pattern)
+            
+            if not existing_keys:
+                docs_needing_embedding.append(doc)
+        
+        return docs_needing_embedding
     
     def search_documents(self, query: str, limit: int = 10, 
                         filters: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
