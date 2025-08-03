@@ -79,6 +79,7 @@ class RSSIngestionClient:
             
             # Only require title and link - pubDate can be missing
             if not title_elem or not link_elem:
+                logger.debug(f"Missing required elements: title={title_elem is not None}, link={link_elem is not None}")
                 return None
                 
             # Use robust text extraction (itertext handles child elements)
@@ -87,12 +88,13 @@ class RSSIngestionClient:
             
             # Skip if we don't have the essential data
             if not title or not rss_link:
+                logger.debug(f"Empty essential data: title='{title}', link='{rss_link}'")
                 return None
             
             # Extract document number from link
             document_number = self._extract_document_number(rss_link)
             if not document_number:
-                logger.warning(f"Could not extract document number from {rss_link}")
+                logger.debug(f"Could not extract document number from {rss_link}")
                 return None
             
             # Parse publication date
