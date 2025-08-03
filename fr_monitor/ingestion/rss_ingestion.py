@@ -71,12 +71,16 @@ class RSSIngestionClient:
             link_elem = item.find('link')
             pub_date_elem = item.find('pubDate')
             
-            if not all([title_elem, link_elem]):
-                logger.warning("RSS item missing required fields")
+            # Only require title and link - pubDate can be missing
+            if not title_elem or not link_elem:
                 return None
+                
+            title = title_elem.text.strip() if title_elem and title_elem.text else ""
+            rss_link = link_elem.text.strip() if link_elem and link_elem.text else ""
             
-            title = title_elem.text.strip() if title_elem.text else ""
-            rss_link = link_elem.text.strip() if link_elem.text else ""
+            # Skip if we don't have the essential data
+            if not title or not rss_link:
+                return None
             
             # Extract document number from link
             document_number = self._extract_document_number(rss_link)
@@ -88,13 +92,18 @@ class RSSIngestionClient:
             publication_date = None
             if pub_date_elem and pub_date_elem.text:
                 try:
-                    # RSS pubDate format: "Wed, 02 Aug 2025 04:00:00 +0000"
-                    pub_date = datetime.strptime(pub_date_elem.text, "%a, %d %b %Y %H:%M:%S %z")
+                    # RSS pubDate format: "Mon, 04 Aug 2025 04:00:00 GMT"
+                    pub_date_text = pub_date_elem.text.strip()
+                    # Handle both GMT and +0000 formats
+                    if pub_date_text.endswith('GMT'):
+                        pub_date = datetime.strptime(pub_date_text, "%a, %d %b %Y %H:%M:%S %Z")
+                    else:
+                        pub_date = datetime.strptime(pub_date_text, "%a, %d %b %Y %H:%M:%S %z")
                     publication_date = pub_date.date().isoformat()
                 except ValueError as e:
-                    logger.warning(f"Could not parse publication date: {e}")
+                    logger.warning(f"Could not parse publication date '{pub_date_elem.text}': {e}")
             
-            # Extract agency from description or title
+            # Extract agency from dc:creator or fallback methods
             agency = self._extract_agency(item)
             
             # Convert RSS link to XML URL
@@ -136,7 +145,15 @@ class RSSIngestionClient:
     
     def _extract_agency(self, item: ET.Element) -> str:
         """Extract agency name from RSS item."""
-        # Try description first
+        # First try dc:creator (most reliable)
+        dc_creator = item.find('.//{http://purl.org/dc/elements/1.1/}creator')
+        if dc_creator is not None and dc_creator.text:
+            agency = dc_creator.text.strip()
+            # Clean up common agency name formats
+            agency = self._normalize_agency_name(agency)
+            return agency
+        
+        # Try description
         desc_elem = item.find('description')
         if desc_elem and desc_elem.text:
             # Look for agency patterns in description
@@ -164,6 +181,33 @@ class RSSIngestionClient:
                 return agency_match.group(1)
         
         return "Unknown"
+    
+    def _normalize_agency_name(self, agency: str) -> str:
+        """Normalize agency name to a consistent format."""
+        # Common agency name mappings
+        agency_mappings = {
+            "Executive Office of the President": "Executive Office",
+            "Department of Homeland Security": "DHS",
+            "Department of Transportation": "DOT",
+            "Department of Health and Human Services": "HHS",
+            "Department of Energy": "DOE",
+            "Department of Agriculture": "USDA",
+            "Department of the Treasury": "Treasury",
+            "Department of Commerce": "Commerce",
+            "Department of Labor": "Labor",
+            "Department of the Interior": "Interior",
+            "Department of Justice": "Justice",
+            "Department of Defense": "Defense",
+            "Department of State": "State",
+            "Department of Veterans Affairs": "VA",
+            "Department of Education": "Education",
+            "Department of Housing and Urban Development": "HUD",
+            "Environmental Protection Agency": "EPA",
+            "Food and Drug Administration": "FDA"
+        }
+        
+        # Return mapped name if found, otherwise return original
+        return agency_mappings.get(agency, agency)
     
     def _convert_to_xml_url(self, rss_link: str) -> str:
         """Convert RSS link to XML full-text URL."""
