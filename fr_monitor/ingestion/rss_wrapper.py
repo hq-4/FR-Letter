@@ -39,32 +39,30 @@ class FederalRegisterClient(OriginalClient):
         self,
         max_documents: int = 100
     ) -> List[FederalRegisterDocument]:
-        """Get recent documents from RSS feed."""
+        """Get recent documents using a hybrid RSS+API approach."""
         try:
             logger.info("Fetching Federal Register RSS feed")
             response = self.session.get(self.RSS_URL, timeout=30)
             response.raise_for_status()
             
-            # Parse RSS XML
-            root = ET.fromstring(response.content)
+            # 1. Get document IDs from RSS feed
+            document_ids = self._get_document_ids_from_rss(response.content, max_documents)
+            if not document_ids:
+                logger.warning("No document IDs found in RSS feed.")
+                return []
+
+            # 2. Fetch full document details using the API for each ID
+            logger.info(f"Fetching details for {len(document_ids)} documents from the API...")
             documents = []
-            items = root.findall('.//item')
-            
-            logger.info(f"Found {len(items)} items in RSS feed")
-            
-            for item in items[:max_documents]:
+            for doc_id in document_ids:
                 try:
-                    document = self._parse_rss_item(item)
-                    if document:
-                        documents.append(document)
+                    doc = self.get_document_by_id(doc_id)
+                    if doc:
+                        documents.append(doc)
                 except Exception as e:
-                    title = item.find('title')
-                    title_text = title.text if title is not None else "Unknown"
-                    logger.warning("Failed to parse RSS item", 
-                                 title=title_text[:100],
-                                 error=str(e))
+                    logger.error("Failed to fetch or parse document from API", doc_id=doc_id, error=str(e))
             
-            logger.info(f"Successfully parsed {len(documents)} documents from RSS")
+            logger.info(f"Successfully fetched and parsed {len(documents)} documents.")
             return documents
             
         except Exception as e:
@@ -141,6 +139,37 @@ class FederalRegisterClient(OriginalClient):
                 'rss_creator': creator_elem.text if creator_elem is not None else None
             }
         )
+
+    def get_document_by_id(self, document_id: str) -> Optional[FederalRegisterDocument]:
+        """Fetch a single document by its ID using the JSON API."""
+        api_url = f"{self.BASE_URL}documents/{document_id}.json"
+        try:
+            response = self.session.get(api_url, timeout=15)
+            response.raise_for_status()
+            # Use the parent's _parse_document method, which handles API JSON
+            return self._parse_document(response.json())
+        except requests.RequestException as e:
+            logger.error("API request failed for document ID", doc_id=document_id, error=str(e))
+            return None
+        except Exception as e:
+            logger.error("Failed to parse API response for document ID", doc_id=document_id, error=str(e))
+            return None
+
+    def _get_document_ids_from_rss(self, rss_content: bytes, max_ids: int) -> List[str]:
+        """Parse RSS content to extract a list of document IDs."""
+        ids = []
+        try:
+            root = ET.fromstring(rss_content)
+            items = root.findall('.//item')
+            for item in items[:max_ids]:
+                link_elem = item.find('link')
+                if link_elem is not None and link_elem.text:
+                    doc_id = self._extract_document_id_from_url(link_elem.text)
+                    if doc_id:
+                        ids.append(doc_id)
+        except ET.ParseError as e:
+            logger.error("Failed to parse RSS XML for document IDs", error=str(e))
+        return ids
     
     def _extract_document_id_from_url(self, url: str) -> Optional[str]:
         """Extract document ID from Federal Register URL."""
