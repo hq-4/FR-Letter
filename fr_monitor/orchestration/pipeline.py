@@ -3,13 +3,17 @@ Main pipeline orchestrator for Federal Register monitoring system.
 """
 
 import asyncio
+import sys
+from pathlib import Path
 from datetime import datetime, date, timedelta
 from typing import List, Optional, Dict, Any
 import structlog
 import uuid
 import os
-from pathlib import Path
 from datetime import datetime, date
+
+# Add project root to Python path
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from ..core.models import (
     FederalRegisterDocument, ImpactScore, DocumentEmbedding,
