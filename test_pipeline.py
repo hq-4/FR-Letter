@@ -23,24 +23,35 @@ def test_pipeline_steps():
     # Step 1: Test Federal Register ingestion
     print("\n1️⃣ Testing Federal Register API ingestion...")
     client = FederalRegisterClient()
-    target_date = date.today() - timedelta(days=1)
     
-    try:
-        documents = client.get_daily_documents(target_date=target_date)
-        print(f"✅ Fetched {len(documents)} documents for {target_date}")
-        
-        if not documents:
-            print("❌ No documents found - pipeline will exit early")
-            return False
+    # Federal Register doesn't publish on weekends, so try the last few days
+    documents = None
+    for days_back in range(1, 8):  # Try up to a week back
+        target_date = date.today() - timedelta(days=days_back)
+        # Skip weekends (Saturday=5, Sunday=6)
+        if target_date.weekday() >= 5:
+            continue
             
-        # Show sample document
-        sample_doc = documents[0]
-        print(f"📄 Sample document: {sample_doc.title[:100]}...")
-        print(f"   Abstract length: {len(sample_doc.abstract) if sample_doc.abstract else 0} chars")
-        
-    except Exception as e:
-        print(f"❌ Federal Register ingestion failed: {e}")
+        try:
+            print(f"   Trying {target_date} ({target_date.strftime('%A')})...")
+            documents = client.get_daily_documents(target_date=target_date)
+            if documents:
+                print(f"✅ Fetched {len(documents)} documents for {target_date}")
+                break
+            else:
+                print(f"   No documents found for {target_date}")
+        except Exception as e:
+            print(f"   Error for {target_date}: {e}")
+    
+    if not documents:
+        print("❌ No documents found in the last week - this might be a holiday period")
+        print("   Try checking https://www.federalregister.gov/ manually")
         return False
+        
+    # Show sample document
+    sample_doc = documents[0]
+    print(f"📄 Sample document: {sample_doc.title[:100]}...")
+    print(f"   Abstract length: {len(sample_doc.abstract) if sample_doc.abstract else 0} chars")
     
     # Step 2: Test impact scoring
     print("\n2️⃣ Testing impact scoring...")
