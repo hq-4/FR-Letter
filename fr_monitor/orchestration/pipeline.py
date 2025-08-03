@@ -15,19 +15,19 @@ from datetime import datetime, date
 # Add project root to Python path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from ..core.models import (
+from fr_monitor.core.models import (
     FederalRegisterDocument, ImpactScore, DocumentEmbedding,
     DocumentChunk, ChunkSummary, ConsolidatedSummary, FinalSummary,
     PipelineRun, PublishingResult, ProcessedArticle
 )
-from ..core.config import settings
-from ..core.cache import DocumentCache, DeltaProcessor
-from ..core.security import CredentialManager, SecureEnvironment
-from ..ingestion.rss_wrapper import FederalRegisterClient
-from ..scoring import ImpactScorer
-from ..embedding import OllamaEmbedder, RedisVectorStore
-from ..summarization import DocumentChunker, LocalSummarizer, OpenRouterSummarizer
-from ..publishing import MarkdownPublisher
+from fr_monitor.core.config import settings
+from fr_monitor.core.cache import DocumentCache, DeltaProcessor
+from fr_monitor.core.security import CredentialManager, SecureEnvironment
+from fr_monitor.ingestion.rss_wrapper import FederalRegisterClient
+from fr_monitor.scoring import ImpactScorer
+from fr_monitor.embeddings import OllamaEmbedder, RedisVectorStore
+from fr_monitor.summarization import DocumentChunker, LocalSummarizer, OpenRouterSummarizer
+from fr_monitor.publishing import MarkdownPublisher
 
 logger = structlog.get_logger(__name__)
 
