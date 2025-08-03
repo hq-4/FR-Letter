@@ -46,14 +46,20 @@ class RSSIngestionClient:
             
             # Parse and store individual documents
             stored_count = 0
-            for item in items:
+            for i, item in enumerate(items):
                 try:
                     doc_data = self._parse_rss_item(item)
                     if doc_data:
                         self.db.store_document(**doc_data)
                         stored_count += 1
+                        if stored_count <= 3:  # Log first few successful parses
+                            logger.info(f"Successfully parsed item {i+1}: {doc_data['document_number']} - {doc_data['title'][:50]}...")
+                    else:
+                        if i < 5:  # Log first few failures for debugging
+                            logger.warning(f"Failed to parse RSS item {i+1} - returned None")
                 except Exception as e:
-                    logger.warning(f"Failed to parse RSS item: {e}")
+                    if i < 5:  # Log first few exceptions for debugging
+                        logger.error(f"Exception parsing RSS item {i+1}: {e}")
                     continue
             
             logger.info(f"Stored {stored_count}/{document_count} documents from RSS feed")
