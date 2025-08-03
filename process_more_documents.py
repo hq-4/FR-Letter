@@ -23,8 +23,15 @@ print('\n🔧 Running processing to chunk and embed documents...')
 processing_results = pipeline.run_processing_only(chunk_limit=25, embed_limit=25)
 
 print(f'✅ Processing completed:')
-print(f'  Documents chunked: {processing_results["steps"]["chunking"]["documents_chunked"]}')
-print(f'  Documents embedded: {processing_results["steps"]["embedding"]["documents_embedded"]}')
+if 'xml_chunking' in processing_results["steps"]:
+    print(f'  Documents chunked: {processing_results["steps"]["xml_chunking"]["documents_chunked"]}')
+else:
+    print(f'  Documents chunked: No chunking step found')
+    
+if 'embedding_generation' in processing_results["steps"]:
+    print(f'  Documents embedded: {processing_results["steps"]["embedding_generation"]["documents_embedded"]}')
+else:
+    print(f'  Documents embedded: No embedding step found')
 
 # Show final status
 print('\n📊 Final Status:')
