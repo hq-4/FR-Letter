@@ -38,11 +38,14 @@ class BGEEmbeddingClient:
         
         for text in texts:
             try:
+                # Truncate text if too long (BGE models have token limits)
+                truncated_text = text[:8000] if len(text) > 8000 else text
+                
                 response = requests.post(
                     f"{self.ollama_url}/api/embeddings",
                     json={
                         "model": self.model_name,
-                        "prompt": text
+                        "prompt": truncated_text
                     },
                     timeout=60
                 )
@@ -51,8 +54,18 @@ class BGEEmbeddingClient:
                 result = response.json()
                 embedding = result.get("embedding", [])
                 
+                if not embedding:
+                    logger.error(f"Empty embedding returned for text: {truncated_text[:100]}...")
+                    embeddings.append([0.0] * self.embedding_dim)
+                    continue
+                
                 if len(embedding) != self.embedding_dim:
-                    logger.warning(f"Unexpected embedding dimension: {len(embedding)}")
+                    logger.warning(f"Unexpected embedding dimension: {len(embedding)}, expected {self.embedding_dim}")
+                    # Pad or truncate to expected dimension
+                    if len(embedding) < self.embedding_dim:
+                        embedding.extend([0.0] * (self.embedding_dim - len(embedding)))
+                    else:
+                        embedding = embedding[:self.embedding_dim]
                 
                 embeddings.append(embedding)
                 
@@ -294,10 +307,26 @@ class RedisVectorStore:
                     if not doc:
                         continue
                     
-                    # Convert bytes to strings
-                    doc_str = {k.decode() if isinstance(k, bytes) else k: 
-                              v.decode() if isinstance(v, bytes) else v 
-                              for k, v in doc.items()}
+                    # Convert bytes to strings, skip binary fields like embeddings
+                    doc_str = {}
+                    for k, v in doc.items():
+                        key = k.decode() if isinstance(k, bytes) else k
+                        
+                        # Skip binary embedding field
+                        if key == 'embedding':
+                            continue
+                            
+                        # Safely decode values
+                        if isinstance(v, bytes):
+                            try:
+                                value = v.decode('utf-8')
+                            except UnicodeDecodeError:
+                                # Skip fields that can't be decoded (likely binary data)
+                                continue
+                        else:
+                            value = v
+                        
+                        doc_str[key] = value
                     
                     # Simple text matching
                     content = doc_str.get('content', '').lower()
