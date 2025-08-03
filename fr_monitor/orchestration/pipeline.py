@@ -25,7 +25,8 @@ from fr_monitor.core.cache import DocumentCache, DeltaProcessor
 from fr_monitor.core.security import CredentialManager, SecureEnvironment
 from fr_monitor.ingestion.rss_wrapper import FederalRegisterClient
 from fr_monitor.scoring import ImpactScorer
-from fr_monitor.embeddings import OllamaEmbedder, RedisVectorStore
+from fr_monitor.embeddings.bge_embeddings import OllamaEmbedder
+from fr_monitor.embeddings.redis_vector_store import RedisVectorStore
 from fr_monitor.summarization import DocumentChunker, LocalSummarizer, OpenRouterSummarizer
 from fr_monitor.publishing import MarkdownPublisher
 
