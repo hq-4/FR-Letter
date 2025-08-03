@@ -235,7 +235,7 @@ class RedisVectorStore:
             key = f"{self.index_name}:{doc_id}"
             pipeline.hset(key, mapping={"impact_score": impact})
         pipeline.execute()
-        logger.info("Updated impact scores", count=len(scores))
+        logger.info(f"Updated impact scores for {len(scores)} documents")
         return len(scores)
 
     def store_chunk_embeddings(self, document_data: Dict[str, Any], 
