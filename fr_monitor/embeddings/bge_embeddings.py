@@ -90,7 +90,23 @@ class RedisVectorStore:
         self.redis_client = redis.Redis(host=redis_host, port=redis_port, db=redis_db)
         self.index_name = index_name
         self.embedding_dim = 1024  # BGE-large dimension
-        self.use_search = REDISEARCH_AVAILABLE
+        
+        # Check if RedisSearch is available
+        try:
+            from redis.commands.search import Search
+            # Test RedisSearch by checking module list
+            modules = self.redis_client.execute_command("MODULE", "LIST")
+            search_available = any(module[1] == b'search' or module[1] == 'search' for module in modules)
+            
+            if search_available:
+                self.redisearch_available = True
+                logger.info("RedisSearch module is available and loaded")
+            else:
+                self.redisearch_available = False
+                logger.warning("RedisSearch module not found")
+        except Exception as e:
+            self.redisearch_available = False
+            logger.warning(f"RedisSearch not available: {e}")
         
         # Test connection
         try:
@@ -100,14 +116,14 @@ class RedisVectorStore:
             logger.error(f"Failed to connect to Redis: {e}")
             raise
         
-        if self.use_search:
+        if self.redisearch_available:
             self._create_index()
         else:
             logger.warning("RedisSearch not available - using basic Redis storage without vector search")
     
     def _create_index(self):
         """Create RedisSearch index for vector similarity search."""
-        if not REDISEARCH_AVAILABLE:
+        if not self.redisearch_available:
             logger.warning("Cannot create search index - RedisSearch not available")
             return
             
@@ -199,7 +215,7 @@ class RedisVectorStore:
                              limit: int = 10, 
                              filters: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
         """Search for similar chunks using vector similarity."""
-        if not self.use_search:
+        if not self.redisearch_available:
             logger.warning("Vector search not available - RedisSearch required")
             return self._fallback_text_search("environmental regulation", limit)
             
@@ -260,7 +276,7 @@ class RedisVectorStore:
     
     def search_by_text(self, query_text: str, limit: int = 10) -> List[Dict[str, Any]]:
         """Search chunks by text content."""
-        if not self.use_search:
+        if not self.redisearch_available:
             return self._fallback_text_search(query_text, limit)
             
         try:
@@ -361,7 +377,7 @@ class RedisVectorStore:
     
     def get_index_stats(self) -> Dict[str, Any]:
         """Get statistics about the vector index."""
-        if not self.use_search:
+        if not self.redisearch_available:
             # Fallback stats for basic Redis
             try:
                 pattern = f"{self.index_name}:*"
