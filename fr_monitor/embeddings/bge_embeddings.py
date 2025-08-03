@@ -76,9 +76,32 @@ class BGEEmbeddingClient:
         
         return embeddings
     
-    def generate_embeddings(self, texts: List[str], **kwargs) -> List[List[float]]:
-        """Backward-compatibility alias for get_embeddings."""
-        return self.get_embeddings(texts)
+    def generate_embeddings(self, texts: List[Any], **kwargs) -> List[List[float]]:
+        """Backward-compatibility alias for get_embeddings.
+        Accepts a list of strings **or** arbitrary objects (e.g., Pydantic models).
+        If objects are provided, extract text using the `text_source` kwarg (default 'content').
+        """
+        text_field = kwargs.get("text_source", "content")
+        string_texts: List[str] = []
+        for item in texts:
+            if isinstance(item, str):
+                string_texts.append(item)
+                continue
+            # If it's a mapping / dict
+            if isinstance(item, dict):
+                string_texts.append(str(item.get(text_field, "")) or str(item))
+                continue
+            # For objects, attempt attribute lookup
+            if hasattr(item, text_field):
+                string_texts.append(str(getattr(item, text_field)))
+            elif hasattr(item, "content"):
+                string_texts.append(str(getattr(item, "content")))
+            elif hasattr(item, "text"):
+                string_texts.append(str(getattr(item, "text")))
+            else:
+                # Fallback to str()
+                string_texts.append(str(item))
+        return self.get_embeddings(string_texts)
 
     def get_single_embedding(self, text: str) -> List[float]:
         """Get embedding for a single text."""
@@ -177,6 +200,32 @@ class RedisVectorStore:
             logger.error(f"Failed to create RedisSearch index: {e}")
             raise
     
+    def store_embeddings(self, embeddings: List[List[float]], documents: List[Any]) -> int:
+        """Backward-compatibility wrapper used by older pipeline code.
+        Expects 1-to-1 correspondence between `documents` and `embeddings`. Each document must be
+        either a mapping or have `.document_id` / `.title` attributes.
+        Stores a single vector per document (e.g., title embedding).
+        """
+        if len(embeddings) != len(documents):
+            raise ValueError("Number of embeddings must equal number of documents")
+        stored = 0
+        for doc, emb in zip(documents, embeddings):
+            if hasattr(doc, "dict"):
+                doc_dict = doc.dict()
+            else:
+                doc_dict = doc if isinstance(doc, dict) else {}
+            key = f"{self.index_name}:{doc_dict.get('document_id') or doc_dict.get('document_number')}"
+            try:
+                self.redis_client.hset(key, mapping={
+                    "embedding": np.array(emb, dtype=np.float32).tobytes(),
+                    "title": doc_dict.get("title", ""),
+                    "content": (doc_dict.get("abstract") or "")[:1000]
+                })
+                stored += 1
+            except Exception as e:
+                logger.error(f"Failed to store embedding for {key}: {e}")
+        return stored
+
     def store_chunk_embeddings(self, document_data: Dict[str, Any], 
                               chunks: List[Dict[str, Any]], 
                               embeddings: List[List[float]]) -> int:
