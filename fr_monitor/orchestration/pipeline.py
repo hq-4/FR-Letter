@@ -19,7 +19,7 @@ from ..core.models import (
 from ..core.config import settings
 from ..core.cache import DocumentCache, DeltaProcessor
 from ..core.security import CredentialManager, SecureEnvironment
-from ..ingestion import FederalRegisterClient
+from ..ingestion.rss_wrapper import FederalRegisterClient
 from ..scoring import ImpactScorer
 from ..embedding import OllamaEmbedder, RedisVectorStore
 from ..summarization import DocumentChunker, LocalSummarizer, OpenRouterSummarizer

@@ -10,7 +10,7 @@ from datetime import date, timedelta
 # Add the project root to Python path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from fr_monitor.ingestion.federal_register import FederalRegisterClient
+from fr_monitor.ingestion.rss_wrapper import FederalRegisterClient
 from fr_monitor.scoring.impact_scorer import ImpactScorer
 from fr_monitor.summarization.document_chunker import DocumentChunker
 from fr_monitor.summarization.local_summarizer import LocalSummarizer
@@ -20,32 +20,23 @@ def test_pipeline_steps():
     print("🔍 Testing Federal Register Pipeline Step by Step")
     print("=" * 60)
     
-    # Step 1: Test Federal Register ingestion
-    print("\n1️⃣ Testing Federal Register API ingestion...")
+    # Step 1: Test Federal Register RSS ingestion
+    print("\n1️⃣ Testing Federal Register RSS ingestion...")
     client = FederalRegisterClient()
     
-    # Federal Register doesn't publish on weekends, so try the last few days
-    documents = None
-    for days_back in range(1, 8):  # Try up to a week back
-        target_date = date.today() - timedelta(days=days_back)
-        # Skip weekends (Saturday=5, Sunday=6)
-        if target_date.weekday() >= 5:
-            continue
+    try:
+        # Use RSS feed approach (no date needed - gets recent documents)
+        print("   Fetching recent documents from RSS feed...")
+        documents = client.get_daily_documents()  # Uses RSS by default now
+        
+        if documents:
+            print(f"✅ Fetched {len(documents)} recent documents from RSS feed")
+        else:
+            print("❌ No documents found in RSS feed")
+            return False
             
-        try:
-            print(f"   Trying {target_date} ({target_date.strftime('%A')})...")
-            documents = client.get_daily_documents(target_date=target_date)
-            if documents:
-                print(f"✅ Fetched {len(documents)} documents for {target_date}")
-                break
-            else:
-                print(f"   No documents found for {target_date}")
-        except Exception as e:
-            print(f"   Error for {target_date}: {e}")
-    
-    if not documents:
-        print("❌ No documents found in the last week - this might be a holiday period")
-        print("   Try checking https://www.federalregister.gov/ manually")
+    except Exception as e:
+        print(f"❌ RSS ingestion failed: {e}")
         return False
         
     # Show sample document
