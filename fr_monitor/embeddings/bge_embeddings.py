@@ -277,37 +277,27 @@ class RedisVectorStore:
             return []
     
     def search_by_text(self, query_text: str, limit: int = 10) -> List[Dict[str, Any]]:
-        """Search chunks by text content."""
+        """Search chunks by text content using semantic similarity."""
         if not self.redisearch_available:
             return self._fallback_text_search(query_text, limit)
             
         try:
-            # Simple text search
-            query = Query(query_text).return_fields(
-                "document_number", "title", "agency", "chunk_type",
-                "content", "document_id", "chunk_id"
-            ).paging(0, limit)
+            # Convert text to embedding for semantic search
+            from ..embeddings.bge_embeddings import BGEEmbeddingClient
+            embedding_client = BGEEmbeddingClient()
+            query_embeddings = embedding_client.get_embeddings([query_text])
             
-            results = self.redis_client.ft(self.index_name).search(query)
+            if not query_embeddings or not query_embeddings[0]:
+                logger.error(f"Failed to get embedding for query: {query_text}")
+                return self._fallback_text_search(query_text, limit)
             
-            chunks = []
-            for doc in results.docs:
-                chunk = {
-                    "document_number": doc.document_number,
-                    "title": doc.title,
-                    "agency": doc.agency,
-                    "chunk_type": doc.chunk_type,
-                    "content": doc.content,
-                    "document_id": int(doc.document_id),
-                    "chunk_id": int(doc.chunk_id)
-                }
-                chunks.append(chunk)
-            
-            return chunks
+            # Use vector search
+            return self.search_similar_chunks(query_embeddings[0], limit)
             
         except Exception as e:
-            logger.error(f"Text search failed: {e}")
-            return []
+            logger.error(f"Semantic search failed: {e}")
+            # Fallback to simple text search
+            return self._fallback_text_search(query_text, limit)
     
     def _fallback_text_search(self, query_text: str, limit: int) -> List[Dict[str, Any]]:
         """Fallback text search when RedisSearch is not available."""
