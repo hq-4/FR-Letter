@@ -226,6 +226,16 @@ class SecureEnvironment:
             'REDIS_PORT',
             'OLLAMA_HOST'
         ]
+        
+        # Define required variables
+        self.required_vars = ["OPENROUTER_API_KEY", "REDIS_HOST", "REDIS_PORT", "OLLAMA_HOST"]
+        
+        # Also accept alternative names
+        self.var_aliases = {
+            "OPENROUTER_API_KEY": ["OPENROUTER_MODEL"],
+            "REDIS_HOST": ["REDIS_URL"],
+            "REDIS_PORT": ["REDIS_PORT_NUMBER"]
+        }
     
     def validate_environment(self) -> Dict[str, Any]:
         """Validate the current environment for security compliance."""
@@ -238,8 +248,17 @@ class SecureEnvironment:
         }
         
         # Check for required environment variables
-        for var in self.required_env_vars:
-            if not os.getenv(var):
+        for var in self.required_vars:
+            found = False
+            if os.getenv(var):
+                found = True
+            else:
+                for alias in self.var_aliases.get(var, []):
+                    if os.getenv(alias):
+                        found = True
+                        break
+            
+            if not found:
                 validation['missing_vars'].append(var)
                 validation['environment_valid'] = False
         
