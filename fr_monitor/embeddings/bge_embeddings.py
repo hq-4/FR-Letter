@@ -238,6 +238,61 @@ class RedisVectorStore:
         logger.info(f"Updated impact scores for {len(scores)} documents")
         return len(scores)
 
+    def calculate_recent_impact_centroid(self, days_back: int = 30, min_impact_score: float = 0.7) -> Optional[List[float]]:
+        """Calculate centroid of recent high-impact document embeddings.
+        Args:
+            days_back: Number of days to look back
+            min_impact_score: Minimum impact score threshold
+        Returns:
+            Centroid embedding vector or None if no documents found
+        """
+        try:
+            from datetime import datetime, timedelta
+            # Calculate timestamp threshold
+            threshold_date = datetime.now() - timedelta(days=days_back)
+            threshold_timestamp = int(threshold_date.timestamp())
+            
+            # Build query for recent high-impact documents
+            query_str = f"@impact_score:[{min_impact_score} +inf] @document_id:[0 +inf]"
+            query = Query(query_str).return_fields("embedding").paging(0, 1000)
+            
+            # Execute search
+            results = self.redis_client.ft(self.index_name).search(query)
+            
+            if not results.docs:
+                logger.warning("No recent high-impact documents found for centroid calculation")
+                return None
+            
+            # Collect embeddings
+            embeddings = []
+            for doc in results.docs:
+                try:
+                    # Convert bytes back to embedding vector
+                    embedding_bytes = doc.embedding
+                    if embedding_bytes:
+                        embedding_vector = np.frombuffer(
+                            embedding_bytes, 
+                            dtype=np.float32
+                        ).tolist()
+                        embeddings.append(embedding_vector)
+                except Exception as e:
+                    logger.warning(f"Failed to decode embedding for document: {e}")
+                    continue
+            
+            if not embeddings:
+                return None
+            
+            # Calculate centroid
+            embedding_matrix = np.array(embeddings)
+            centroid = np.mean(embedding_matrix, axis=0)
+            
+            logger.info(f"Calculated recent impact centroid from {len(embeddings)} documents")
+            return centroid.tolist()
+            
+        except Exception as e:
+            logger.error(f"Failed to calculate recent impact centroid: {e}")
+            return None
+
     def store_chunk_embeddings(self, document_data: Dict[str, Any], 
                               chunks: List[Dict[str, Any]], 
                               embeddings: List[List[float]]) -> int:
