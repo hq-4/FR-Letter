@@ -106,7 +106,9 @@ Summary:"""
         for document_id, doc_chunk_summaries in doc_summaries.items():
             try:
                 # Sort summaries by chunk order (if available)
-                doc_chunk_summaries.sort(key=lambda x: x.chunk_id)
+                # Note: ChunkSummary has chunk_id, but ConsolidatedSummary doesn't
+                # We're working with ChunkSummary objects here, not ConsolidatedSummary
+                doc_chunk_summaries.sort(key=lambda x: getattr(x, 'chunk_id', 0))
                 
                 # Combine all chunk summaries
                 combined_text = "\n\n".join([s.summary for s in doc_chunk_summaries])
@@ -121,15 +123,10 @@ Summary:"""
                 
                 consolidated.append(consolidated_summary)
                 
-                logger.info("Consolidated document summaries", 
-                           document_id=document_id,
-                           chunk_count=len(doc_chunk_summaries),
-                           total_length=len(combined_text))
+                logger.info(f"Consolidated document summaries for {document_id} with {len(doc_chunk_summaries)} chunks, total length {len(combined_text)}")
                 
             except Exception as e:
-                logger.error("Failed to consolidate summaries", 
-                           document_id=document_id,
-                           error=str(e))
+                logger.error(f"Failed to consolidate summaries for {document_id}: {e}")
         
         logger.info("Completed summary consolidation", 
                    documents=len(consolidated))

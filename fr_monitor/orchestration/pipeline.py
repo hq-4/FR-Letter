@@ -321,7 +321,7 @@ class FederalRegisterPipeline:
             logger.info("Updated processing state for all documents")
             
         except Exception as e:
-            logger.error("Failed to update processing state", error=str(e))
+            logger.error(f"Failed to update processing state: {e}")
     
     def health_check(self) -> Dict[str, bool]:
         """Check health of all pipeline components."""
