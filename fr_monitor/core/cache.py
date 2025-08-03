@@ -170,25 +170,30 @@ class DeltaProcessor:
         self.cache = cache
         self.redis = cache.redis
         
-    def get_new_documents(self, all_documents: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    def get_new_documents(self, all_documents: List[Any]) -> List[Any]:
         """Filter out already processed documents."""
         new_docs = []
         
         for doc in all_documents:
-            doc_id = doc.get('document_number') or doc.get('id')
+            # Support both Pydantic models and dicts
+            if hasattr(doc, "dict"):
+                doc_dict = doc.dict()
+                doc_id = getattr(doc, "document_id", None) or doc_dict.get("document_number")
+            else:
+                doc_dict = doc
+                doc_id = doc_dict.get("document_number") or doc_dict.get("id")
             if not doc_id:
                 continue
-                
-            # Check if document is already cached
+
+            # If we have not processed this doc before, include it
             if not self.cache.is_document_cached(doc_id):
                 new_docs.append(doc)
                 continue
-            
-            # Check if content has changed
+
+            # Check if the content has changed since last time
             content_hash = self.cache.generate_content_hash(
-                json.dumps(doc, sort_keys=True)
+                json.dumps(doc_dict, sort_keys=True)
             )
-            
             if not self.cache.is_content_cached(content_hash):
                 new_docs.append(doc)
         

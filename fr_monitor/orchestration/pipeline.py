@@ -171,20 +171,14 @@ class FederalRegisterPipeline:
             pipeline_run.documents_summarized = len(final_summaries)
             
             duration = (pipeline_run.end_time - pipeline_run.start_time).total_seconds()
-            logger.info("Pipeline completed successfully", 
-                       run_id=run_id,
-                       duration_seconds=duration,
-                       documents_processed=pipeline_run.documents_processed,
-                       summaries_generated=pipeline_run.documents_summarized)
+            logger.info("Pipeline completed successfully run_id=%s duration_seconds=%.2f documents_processed=%d summaries_generated=%d", run_id, duration, pipeline_run.documents_processed, pipeline_run.documents_summarized)
             
         except Exception as e:
             pipeline_run.end_time = datetime.utcnow()
             pipeline_run.status = "failed"
             pipeline_run.error_message = str(e)
             
-            logger.error("Pipeline failed", 
-                        run_id=run_id,
-                        error=str(e))
+            logger.error("Pipeline failed run_id=%s error=%s", run_id, str(e))
         
         return pipeline_run
     
