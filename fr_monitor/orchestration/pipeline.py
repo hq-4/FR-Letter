@@ -9,11 +9,12 @@ import structlog
 import uuid
 import os
 from pathlib import Path
+from datetime import datetime, date
 
 from ..core.models import (
     FederalRegisterDocument, ImpactScore, DocumentEmbedding,
     DocumentChunk, ChunkSummary, ConsolidatedSummary, FinalSummary,
-    PipelineRun, PublishingResult
+    PipelineRun, PublishingResult, ProcessedArticle
 )
 from ..core.config import settings
 from ..core.cache import DocumentCache, DeltaProcessor
@@ -92,9 +93,11 @@ class FederalRegisterPipeline:
             
             # Step 2: Fetch documents from Federal Register
             all_documents = self._ingest_documents(target_date)
+            logger.info(f"Ingested {len(all_documents)} total documents")
             
             # Step 3: Apply delta processing to filter new/changed documents
             documents = self.delta_processor.get_new_documents(all_documents)
+            logger.info(f"After delta processing: {len(documents)} new/changed documents")
             
             if not documents:
                 logger.info("No new documents to process")
@@ -108,27 +111,40 @@ class FederalRegisterPipeline:
             
             # Step 4: Score and rank documents by impact
             top_documents = self._score_and_rank_documents(documents)
+            logger.info(f"Top documents after scoring: {len(top_documents)}")
             
             # Step 5: Generate embeddings and store in Redis
             embeddings = self._generate_and_store_embeddings(top_documents)
+            logger.info(f"Generated {len(embeddings)} embeddings")
             
             # Step 6: Re-rank by similarity to recent impact centroid
             reranked_documents = self._rerank_by_similarity(top_documents, embeddings)
+            logger.info(f"Final documents after re-ranking: {len(reranked_documents)}")
             
             # Step 7: Chunk documents for summarization
             chunks = self._chunk_documents(reranked_documents)
+            logger.info(f"Generated {len(chunks)} document chunks")
             
             # Step 8: Local summarization of chunks
             chunk_summaries = self._local_summarization(chunks)
+            logger.info(f"Generated {len(chunk_summaries)} chunk summaries")
             
             # Step 9: Consolidate summaries by document
             consolidated_summaries = self.local_summarizer.consolidate_summaries(chunk_summaries)
+            logger.info(f"Consolidated into {len(consolidated_summaries)} document summaries")
+            
+            # Log summary content lengths for debugging
+            for i, summary in enumerate(consolidated_summaries):
+                content_length = len(summary.consolidated_summary) if summary.consolidated_summary else 0
+                logger.info(f"Summary {i+1}: title='{summary.document_title}', content_length={content_length}")
             
             # Step 10: Generate final summaries using OpenRouter
             final_summaries = self._generate_final_summaries(consolidated_summaries)
+            logger.info(f"Generated {len(final_summaries)} final summaries")
             
             # Step 11: Publish summaries
             publishing_results = self._publish_summaries(final_summaries)
+            logger.info(f"Publishing results: {[r.success for r in publishing_results]}")
             
             # Update processing state
             self._update_processing_state(documents, publishing_results)
