@@ -36,11 +36,10 @@ else:
 # Show final status
 print('\n📊 Final Status:')
 status = pipeline.get_status_report()
-stats = status['pipeline_stats']
-print(f'  Total documents: {stats["total_documents"]}')
-print(f'  Documents with XML: {stats["xml_downloaded"]}')
-print(f'  Documents chunked: {stats["chunked_documents"]}')
-print(f'  Documents embedded: {stats["embedded_documents"]}')
-print(f'  Processing rate: {stats["processing_rate"]:.1f}%')
+health = status['pipeline_health']
+print(f'  Total documents: {health["total_documents"]}')
+print(f'  XML download rate: {health["xml_download_rate_percent"]}%')
+print(f'  Processing rate: {health["processing_rate_percent"]}%')
+print(f'  Documents ready for search: {health["documents_ready_for_search"]}')
 
 print('\n=== Processing Complete ===')
