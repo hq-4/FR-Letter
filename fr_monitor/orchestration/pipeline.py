@@ -88,7 +88,7 @@ class FederalRegisterPipeline:
         if not security_check['environment_valid']:
             logger.error(f"Security validation failed: {security_check}")
             
-        logger.info("Starting daily pipeline", run_id=run_id, target_date=target_date)
+        logger.info(f"Starting daily pipeline run_id={run_id} target_date={target_date}")
         
         pipeline_run = PipelineRun(
             run_id=run_id,
