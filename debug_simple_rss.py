@@ -81,6 +81,12 @@ def debug_rss_items():
             pub_date = pub_date_elem.text.strip() if pub_date_elem and pub_date_elem.text else ""
             agency = dc_creator.text.strip() if dc_creator and dc_creator.text else ""
             
+            # Debug: show raw element info
+            print(f"Raw title_elem: {title_elem}, text: '{title_elem.text if title_elem else None}'")
+            print(f"Raw link_elem: {link_elem}, text: '{link_elem.text if link_elem else None}'")
+            print(f"Raw pub_date_elem: {pub_date_elem}, text: '{pub_date_elem.text if pub_date_elem else None}'")
+            print(f"Raw dc_creator: {dc_creator}, text: '{dc_creator.text if dc_creator else None}'")
+            
             print(f"Title: {title[:80]}...")
             print(f"Link: {rss_link}")
             print(f"PubDate: {pub_date}")
