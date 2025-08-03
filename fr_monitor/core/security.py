@@ -253,8 +253,12 @@ class SecureEnvironment:
             if os.getenv(var):
                 found = True
             else:
-                for alias in self.var_aliases.get(var, []):
+                # Check aliases
+                aliases = self.var_aliases.get(var, [])
+                for alias in aliases:
                     if os.getenv(alias):
+                        # Use the alias value for the required variable
+                        os.environ[var] = os.getenv(alias)
                         found = True
                         break
             
