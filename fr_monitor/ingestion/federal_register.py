@@ -199,6 +199,7 @@ class FederalRegisterClient:
             "PRESDOCU": DocumentType.PRESIDENTIAL_DOCUMENT,
             "PRESNOTICE": DocumentType.PRESIDENTIAL_DOCUMENT,
             "CORRECT": DocumentType.CORRECTION,
+            "CORRECTION": DocumentType.CORRECTION,
             "UNKNOWN": DocumentType.OTHER
         }
         

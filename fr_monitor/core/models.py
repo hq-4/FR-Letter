@@ -15,6 +15,8 @@ class DocumentType(str, Enum):
     PROPOSED_RULE = "proposed_rule"
     NOTICE = "notice"
     PRESIDENTIAL_DOCUMENT = "presidential_document"
+    CORRECTION = "correction"
+    OTHER = "other"
 
 
 class Agency(BaseModel):
