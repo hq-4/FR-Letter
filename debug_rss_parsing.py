@@ -13,8 +13,6 @@ import re
 # Add the project root to Python path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from fr_monitor.core.models import DocumentType, Agency
-
 def debug_rss_parsing():
     """Debug RSS parsing to see where it's failing."""
     print("🔍 Debugging RSS Parsing")
