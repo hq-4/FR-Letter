@@ -216,8 +216,10 @@ class RedisVectorStore:
                 doc_dict = doc if isinstance(doc, dict) else {}
             key = f"{self.index_name}:{doc_dict.get('document_id') or doc_dict.get('document_number')}"
             try:
+                # Convert embedding to bytes for storage
+                embedding_bytes = np.array(emb, dtype=np.float32).tobytes()
                 self.redis_client.hset(key, mapping={
-                    "embedding": np.array(emb, dtype=np.float32).tobytes(),
+                    "embedding": embedding_bytes,
                     "title": doc_dict.get("title", ""),
                     "content": (doc_dict.get("abstract") or "")[:1000]
                 })
@@ -267,14 +269,24 @@ class RedisVectorStore:
             embeddings = []
             for doc in results.docs:
                 try:
+                    # Handle both bytes and string representations
+                    embedding_data = doc.embedding
+                    if isinstance(embedding_data, str):
+                        # If it's a string, it might be base64 encoded or hex
+                        import base64
+                        embedding_bytes = base64.b64decode(embedding_data)
+                    elif isinstance(embedding_data, bytes):
+                        embedding_bytes = embedding_data
+                    else:
+                        logger.warning(f"Unexpected embedding type: {type(embedding_data)}")
+                        continue
+                    
                     # Convert bytes back to embedding vector
-                    embedding_bytes = doc.embedding
-                    if embedding_bytes:
-                        embedding_vector = np.frombuffer(
-                            embedding_bytes, 
-                            dtype=np.float32
-                        ).tolist()
-                        embeddings.append(embedding_vector)
+                    embedding_vector = np.frombuffer(
+                        embedding_bytes, 
+                        dtype=np.float32
+                    ).tolist()
+                    embeddings.append(embedding_vector)
                 except Exception as e:
                     logger.warning(f"Failed to decode embedding for document: {e}")
                     continue
