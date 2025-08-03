@@ -16,24 +16,91 @@ from ..core.models import FederalRegisterDocument, DocumentType, Agency
 logger = structlog.get_logger(__name__)
 
 class FederalRegisterClient:
-    """Client for interacting with the Federal Register API.
+    """Client for interacting with the Federal Register RSS feed.
     
-    The Federal Register API is public and does not require an API key.
-    Rate limiting is applied per IP address (1000 requests per hour).
+    Uses RSS feed for reliable document retrieval, avoiding weekend/holiday issues.
+    Falls back to API for detailed document information when needed.
     """
     
+    RSS_URL = "https://www.federalregister.gov/api/v1/documents.rss"
     BASE_URL = "https://www.federalregister.gov/api/v1/"
     
     def __init__(self):
         self.session = requests.Session()
         self.session.headers.update({
             "User-Agent": "FederalRegisterMonitor/1.0",
-            "Accept": "application/json"
+            "Accept": "application/json, application/rss+xml, application/xml"
         })
+    
+    def get_recent_documents_from_rss(
+        self,
+        max_documents: int = 100
+    ) -> List[FederalRegisterDocument]:
+        """Get recent documents from RSS feed (recommended approach).
+        
+        Args:
+            max_documents: Maximum number of documents to return
+            
+        Returns:
+            List of FederalRegisterDocument objects
+        """
+        try:
+            import xml.etree.ElementTree as ET
+            import re
+            
+            logger.info("Fetching Federal Register RSS feed")
+            response = self.session.get(self.RSS_URL, timeout=30)
+            response.raise_for_status()
+            
+            # Parse RSS XML
+            root = ET.fromstring(response.content)
+            
+            documents = []
+            items = root.findall('.//item')
+            
+            logger.info(f"Found {len(items)} items in RSS feed")
+            
+            for item in items[:max_documents]:
+                try:
+                    document = self._parse_rss_item(item)
+                    if document:
+                        documents.append(document)
+                except Exception as e:
+                    title = item.find('title')
+                    title_text = title.text if title is not None else "Unknown"
+                    logger.error("Failed to parse RSS item", 
+                               title=title_text[:100],
+                               error=str(e))
+            
+            logger.info(f"Successfully parsed {len(documents)} documents from RSS")
+            return documents
+            
+        except Exception as e:
+            logger.error("Failed to fetch RSS feed", error=str(e))
+            return []
     
     def get_daily_documents(
         self,
         target_date: Optional[date] = None,
+        document_types: Optional[List[str]] = None,
+        agencies: Optional[List[str]] = None,
+        per_page: int = 1000
+    ) -> List[FederalRegisterDocument]:
+        """Get documents (now uses RSS feed by default for reliability).
+        
+        This method now uses the RSS feed approach by default since it's more
+        reliable than date-based queries, especially for weekends/holidays.
+        """
+        # Use RSS feed approach by default
+        if target_date is None:
+            return self.get_recent_documents_from_rss(max_documents=per_page)
+        
+        # For specific dates, still try the original API but with better error handling
+        return self._get_daily_documents_api(target_date, document_types, agencies, per_page)
+    
+    def _get_daily_documents_api(
+        self,
+        target_date: date,
         document_types: Optional[List[str]] = None,
         agencies: Optional[List[str]] = None,
         per_page: int = 1000
