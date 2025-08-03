@@ -10,6 +10,7 @@ from typing import List, Optional, Dict, Any
 import structlog
 import uuid
 import os
+import argparse
 from datetime import datetime, date
 import logging
 
@@ -30,9 +31,12 @@ from fr_monitor.embeddings.bge_embeddings import BGEEmbeddingClient, RedisVector
 from fr_monitor.summarization import DocumentChunker, LocalSummarizer, OpenRouterSummarizer
 from fr_monitor.publishing import MarkdownPublisher
 
-logging.basicConfig(level=logging.INFO)
+parser = argparse.ArgumentParser(description='Federal Register pipeline')
+parser.add_argument("--force", action="store_true", help="Force reprocessing of all documents")
+
+logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
-logger.info("Starting Federal Register pipeline")
+logger.debug("Debug logging enabled")
 
 class FederalRegisterPipeline:
     """Main pipeline orchestrator for the Federal Register monitoring system."""
@@ -351,3 +355,8 @@ class FederalRegisterPipeline:
         
         logger.info("Data cleanup completed", results=cleanup_results)
         return cleanup_results
+
+if __name__ == "__main__":
+    args = parser.parse_args()
+    pipeline = FederalRegisterPipeline()
+    pipeline.run_daily_pipeline()
