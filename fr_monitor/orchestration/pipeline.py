@@ -11,6 +11,7 @@ import structlog
 import uuid
 import os
 from datetime import datetime, date
+import logging
 
 # Add project root to Python path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
@@ -29,8 +30,9 @@ from fr_monitor.embeddings.bge_embeddings import BGEEmbeddingClient, RedisVector
 from fr_monitor.summarization import DocumentChunker, LocalSummarizer, OpenRouterSummarizer
 from fr_monitor.publishing import MarkdownPublisher
 
-logger = structlog.get_logger(__name__)
-
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+logger.info("Starting Federal Register pipeline")
 
 class FederalRegisterPipeline:
     """Main pipeline orchestrator for the Federal Register monitoring system."""
