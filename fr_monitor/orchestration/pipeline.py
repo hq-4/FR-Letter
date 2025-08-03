@@ -86,7 +86,7 @@ class FederalRegisterPipeline:
         # Validate environment and credentials
         security_check = self.secure_env.validate_environment()
         if not security_check['environment_valid']:
-            logger.error("Security validation failed", issues=security_check)
+            logger.error(f"Security validation failed: {security_check}")
             
         logger.info("Starting daily pipeline", run_id=run_id, target_date=target_date)
         
