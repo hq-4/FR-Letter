@@ -1,6 +1,7 @@
 # Core dependencies
 requests==2.31.0
-redis==4.6.0
+redis==5.0.1
+redis[hiredis]==5.0.1
 python-dotenv==1.0.0
 pydantic==2.5.0
 pydantic-settings==2.1.0

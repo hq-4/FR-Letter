@@ -6,10 +6,18 @@ import logging
 import numpy as np
 from typing import List, Dict, Any, Optional, Tuple
 import redis
-from redis.commands.search.field import VectorField, TextField, NumericField
-from redis.commands.search.indexdefinition import IndexDefinition, IndexType
-from redis.commands.search.query import Query
 import requests
+
+# Try to import RedisSearch components, fallback if not available
+try:
+    from redis.commands.search.field import VectorField, TextField, NumericField
+    from redis.commands.search.indexdefinition import IndexDefinition, IndexType
+    from redis.commands.search.query import Query
+    REDISEARCH_AVAILABLE = True
+except ImportError:
+    REDISEARCH_AVAILABLE = False
+    logger = logging.getLogger(__name__)
+    logger.warning("RedisSearch not available - falling back to basic Redis operations")
 
 from ..storage.database import FederalRegisterDB
 
@@ -69,6 +77,7 @@ class RedisVectorStore:
         self.redis_client = redis.Redis(host=redis_host, port=redis_port, db=redis_db)
         self.index_name = index_name
         self.embedding_dim = 1024  # BGE-large dimension
+        self.use_search = REDISEARCH_AVAILABLE
         
         # Test connection
         try:
@@ -78,10 +87,17 @@ class RedisVectorStore:
             logger.error(f"Failed to connect to Redis: {e}")
             raise
         
-        self._create_index()
+        if self.use_search:
+            self._create_index()
+        else:
+            logger.warning("RedisSearch not available - using basic Redis storage without vector search")
     
     def _create_index(self):
         """Create RedisSearch index for vector similarity search."""
+        if not REDISEARCH_AVAILABLE:
+            logger.warning("Cannot create search index - RedisSearch not available")
+            return
+            
         try:
             # Check if index already exists
             try:
@@ -170,6 +186,10 @@ class RedisVectorStore:
                              limit: int = 10, 
                              filters: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
         """Search for similar chunks using vector similarity."""
+        if not self.use_search:
+            logger.warning("Vector search not available - RedisSearch required")
+            return self._fallback_text_search("environmental regulation", limit)
+            
         try:
             # Convert query embedding to bytes
             query_vector = np.array(query_embedding, dtype=np.float32).tobytes()
@@ -227,6 +247,9 @@ class RedisVectorStore:
     
     def search_by_text(self, query_text: str, limit: int = 10) -> List[Dict[str, Any]]:
         """Search chunks by text content."""
+        if not self.use_search:
+            return self._fallback_text_search(query_text, limit)
+            
         try:
             # Simple text search
             query = Query(query_text).return_fields(
@@ -255,8 +278,74 @@ class RedisVectorStore:
             logger.error(f"Text search failed: {e}")
             return []
     
+    def _fallback_text_search(self, query_text: str, limit: int) -> List[Dict[str, Any]]:
+        """Fallback text search when RedisSearch is not available."""
+        try:
+            # Get all keys matching our pattern
+            pattern = f"{self.index_name}:*"
+            keys = self.redis_client.keys(pattern)
+            
+            chunks = []
+            query_lower = query_text.lower()
+            
+            for key in keys[:limit * 3]:  # Get more keys to filter
+                try:
+                    doc = self.redis_client.hgetall(key)
+                    if not doc:
+                        continue
+                    
+                    # Convert bytes to strings
+                    doc_str = {k.decode() if isinstance(k, bytes) else k: 
+                              v.decode() if isinstance(v, bytes) else v 
+                              for k, v in doc.items()}
+                    
+                    # Simple text matching
+                    content = doc_str.get('content', '').lower()
+                    title = doc_str.get('title', '').lower()
+                    
+                    if query_lower in content or query_lower in title:
+                        chunk = {
+                            "document_number": doc_str.get('document_number', ''),
+                            "title": doc_str.get('title', ''),
+                            "agency": doc_str.get('agency', ''),
+                            "chunk_type": doc_str.get('chunk_type', ''),
+                            "content": doc_str.get('content', ''),
+                            "document_id": int(doc_str.get('document_id', 0)),
+                            "chunk_id": int(doc_str.get('chunk_id', 0)),
+                            "similarity_score": 0.5  # Placeholder score
+                        }
+                        chunks.append(chunk)
+                        
+                        if len(chunks) >= limit:
+                            break
+                            
+                except Exception as e:
+                    logger.warning(f"Error processing key {key}: {e}")
+                    continue
+            
+            logger.info(f"Fallback search found {len(chunks)} chunks")
+            return chunks
+            
+        except Exception as e:
+            logger.error(f"Fallback search failed: {e}")
+            return []
+    
     def get_index_stats(self) -> Dict[str, Any]:
         """Get statistics about the vector index."""
+        if not self.use_search:
+            # Fallback stats for basic Redis
+            try:
+                pattern = f"{self.index_name}:*"
+                keys = self.redis_client.keys(pattern)
+                return {
+                    "total_documents": len(keys),
+                    "redisearch_available": False,
+                    "storage_type": "basic_redis"
+                }
+            except Exception as e:
+                logger.error(f"Failed to get basic stats: {e}")
+                return {"redisearch_available": False}
+        
         try:
             info = self.redis_client.ft(self.index_name).info()
             
@@ -264,14 +353,15 @@ class RedisVectorStore:
                 "total_documents": info.get("num_docs", 0),
                 "index_size_mb": info.get("inverted_sz_mb", 0),
                 "vector_index_size_mb": info.get("vector_index_sz_mb", 0),
-                "total_inverted_index_blocks": info.get("num_records", 0)
+                "total_inverted_index_blocks": info.get("num_records", 0),
+                "redisearch_available": True
             }
             
             return stats
             
         except Exception as e:
             logger.error(f"Failed to get index stats: {e}")
-            return {}
+            return {"redisearch_available": True, "error": str(e)}
 
 
 class DocumentEmbeddingProcessor:
