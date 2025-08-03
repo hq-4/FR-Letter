@@ -76,6 +76,10 @@ class BGEEmbeddingClient:
         
         return embeddings
     
+    def generate_embeddings(self, texts: List[str]) -> List[List[float]]:
+        """Backward-compatibility alias for get_embeddings."""
+        return self.get_embeddings(texts)
+
     def get_single_embedding(self, text: str) -> List[float]:
         """Get embedding for a single text."""
         embeddings = self.get_embeddings([text])

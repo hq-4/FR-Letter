@@ -114,7 +114,7 @@ class ImpactScorer:
         if not document.agencies:
             return 0.0
         
-        agency_weights = self.weights["agency_importance"]
+        agency_weights = self.weights.get("agency_importance", {"default": 0.5})
         max_score = 0.0
         
         for agency in document.agencies:
@@ -134,7 +134,7 @@ class ImpactScorer:
         
         # Normalize page length using logarithmic scale
         # Longer documents generally have higher impact
-        length_weight = self.weights["document_length_weight"]
+        length_weight = self.weights.get("document_length_weight", 0.7)
         
         # Use log scale to prevent very long documents from dominating
         # Assume 1-100 pages is typical range
@@ -159,13 +159,13 @@ class ImpactScorer:
         
         # Apply bonuses for special characteristics
         if document.is_final_rule:
-            base_score += self.weights["final_rule_bonus"]
+            base_score += self.weights.get("final_rule_bonus", 0.1)
         
         if document.is_major_rule:
-            base_score += self.weights["major_rule_bonus"]
+            base_score += self.weights.get("major_rule_bonus", 0.1)
         
         if document.document_type == DocumentType.EXECUTIVE_ORDER:
-            base_score += self.weights["executive_order_bonus"]
+            base_score += self.weights.get("executive_order_bonus", 0.1)
         
         return min(base_score, 1.0)
     
