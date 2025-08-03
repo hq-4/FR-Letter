@@ -13,9 +13,14 @@ import os
 import argparse
 from datetime import datetime, date
 import logging
+from dotenv import load_dotenv
 
 # Add project root to Python path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+
+# Load .env as early as possible so that SecureEnvironment sees the variables
+env_path = Path(__file__).parent.parent.parent / '.env'
+load_dotenv(dotenv_path=env_path, override=True)
 
 from fr_monitor.core.models import (
     FederalRegisterDocument, ImpactScore, DocumentEmbedding,
