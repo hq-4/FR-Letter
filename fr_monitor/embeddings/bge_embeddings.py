@@ -226,6 +226,18 @@ class RedisVectorStore:
                 logger.error(f"Failed to store embedding for {key}: {e}")
         return stored
 
+    def update_impact_scores(self, scores: Dict[str, float]) -> int:
+        """Update impact scores for a batch of documents stored in Redis."""
+        if not scores:
+            return 0
+        pipeline = self.redis_client.pipeline()
+        for doc_id, impact in scores.items():
+            key = f"{self.index_name}:{doc_id}"
+            pipeline.hset(key, mapping={"impact_score": impact})
+        pipeline.execute()
+        logger.info("Updated impact scores", count=len(scores))
+        return len(scores)
+
     def store_chunk_embeddings(self, document_data: Dict[str, Any], 
                               chunks: List[Dict[str, Any]], 
                               embeddings: List[List[float]]) -> int:
