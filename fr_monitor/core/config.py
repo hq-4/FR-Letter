@@ -38,6 +38,11 @@ class Settings(BaseSettings):
     impact_score_threshold: float = Field(0.7, alias="IMPACT_SCORE_THRESHOLD")
     similarity_threshold: float = Field(0.8, alias="SIMILARITY_THRESHOLD")
     
+    # Directory paths
+    data_dir: str = Field("data", alias="DATA_DIR")
+    logs_dir: str = Field("logs", alias="LOGS_DIR")
+    prompt_dir: str = Field("prompts", alias="PROMPT_DIR")
+    
     # Monitoring
     sentry_dsn: Optional[str] = Field(None, alias="SENTRY_DSN")
     log_level: str = Field("INFO", alias="LOG_LEVEL")
