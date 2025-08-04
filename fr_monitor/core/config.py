@@ -22,9 +22,10 @@ class Settings(BaseSettings):
     # Federal Register API
     federal_register_api_key: Optional[str] = Field(None, alias="FEDERAL_REGISTER_API_KEY")
     
-    # OpenRouter API
-    openrouter_api_key: str = Field(..., alias="OPENROUTER_API_KEY")
-    openrouter_model: str = Field("anthropic/claude-3-haiku", alias="OPENROUTER_MODEL")
+    # Ollama Configuration
+    ollama_host: str = Field("http://localhost:11434", alias="OLLAMA_HOST")
+    embedding_model: str = Field("qwen3:1.7b", alias="EMBEDDING_MODEL")
+    summary_model: str = Field("mistral:latest", alias="SUMMARY_MODEL")
     
     # Redis Configuration
     redis_host: str = Field("localhost", alias="REDIS_HOST")
@@ -32,16 +33,7 @@ class Settings(BaseSettings):
     redis_password: Optional[str] = Field(None, alias="REDIS_PASSWORD")
     redis_db: int = Field(0, alias="REDIS_DB")
     
-    # Ollama Configuration
-    ollama_host: str = Field("http://localhost:11434", alias="OLLAMA_HOST")
-    embedding_model: str = Field("qwen3:1.7b", alias="EMBEDDING_MODEL")
-    summary_model: str = Field("mistral:latest", alias="SUMMARY_MODEL")
-    
-    # Publishing APIs
-    # Publishing configuration removed - using markdown file output
-    
     # Pipeline Configuration
-    max_daily_openrouter_calls: int = Field(5, alias="MAX_DAILY_OPENROUTER_CALLS")
     pipeline_timeout_minutes: int = Field(5, alias="PIPELINE_TIMEOUT_MINUTES")
     impact_score_threshold: float = Field(0.7, alias="IMPACT_SCORE_THRESHOLD")
     similarity_threshold: float = Field(0.8, alias="SIMILARITY_THRESHOLD")

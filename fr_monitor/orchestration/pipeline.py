@@ -33,7 +33,7 @@ from fr_monitor.core.security import CredentialManager, SecureEnvironment
 from fr_monitor.ingestion.rss_wrapper import FederalRegisterClient
 from fr_monitor.scoring import ImpactScorer
 from fr_monitor.embeddings.bge_embeddings import BGEEmbeddingClient, RedisVectorStore
-from fr_monitor.summarization import DocumentChunker, LocalSummarizer, OpenRouterSummarizer
+from fr_monitor.summarization import DocumentChunker, LocalSummarizer, OllamaSummarizer
 from fr_monitor.publishing import MarkdownPublisher
 
 parser = argparse.ArgumentParser(description='Federal Register pipeline')
@@ -54,7 +54,7 @@ class FederalRegisterPipeline:
         self.vector_store = RedisVectorStore()
         self.chunker = DocumentChunker()
         self.local_summarizer = LocalSummarizer()
-        self.openrouter_summarizer = OpenRouterSummarizer()
+        self.ollama_summarizer = OllamaSummarizer()
         self.markdown_publisher = MarkdownPublisher()
         
         # Initialize caching and security
@@ -153,7 +153,7 @@ class FederalRegisterPipeline:
                 content_length = len(summary.summary) if summary.summary else 0
                 logger.info(f"Summary {i+1}: document_id='{summary.document_id}', content_length={content_length}")
             
-            # Step 10: Generate final summaries using OpenRouter
+            # Step 10: Generate final summaries using Ollama
             final_summaries = self._generate_final_summaries(consolidated_summaries)
             logger.info(f"Generated {len(final_summaries)} final summaries")
             
@@ -239,9 +239,8 @@ class FederalRegisterPipeline:
         return consolidated_summaries
     
     def _generate_final_summaries(self, consolidated_summaries: List[ConsolidatedSummary]) -> List[FinalSummary]:
-        """Step 7: Generate final summaries using OpenRouter."""
-        final_summaries = self.openrouter_summarizer.generate_final_summaries(consolidated_summaries)
-        
+        """Step 7: Generate final summaries using Ollama."""
+        final_summaries = self.ollama_summarizer.generate_final_summaries(consolidated_summaries)
         
         return final_summaries
     
@@ -328,9 +327,8 @@ class FederalRegisterPipeline:
         health_status = {
             "federal_register_api": True,  # Basic HTTP connectivity
             "ollama_embeddings": self.embedder.health_check(),
-            "ollama_summarization": self.local_summarizer.health_check(),
+            "ollama_summarization": self.ollama_summarizer.health_check(),
             "redis_vector_store": self.vector_store.health_check(),
-            "openrouter_api": self.openrouter_summarizer.health_check(),
             "markdown_publisher": self.markdown_publisher.health_check()
         }
         
