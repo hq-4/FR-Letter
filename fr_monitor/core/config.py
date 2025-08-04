@@ -12,24 +12,16 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
     
-    model_config = SettingsConfigDict(
-        env_file=".env", 
-        env_file_encoding="utf-8",
-        protected_namespaces=(),
-        extra='ignore'  # Ignore extra environment variables
-    )
-    
-    # Federal Register API
+    # API and service configurations
     federal_register_api_key: Optional[str] = Field(None, alias="FEDERAL_REGISTER_API_KEY")
     
     # Ollama Configuration
     ollama_host: str = Field("http://localhost:11434", alias="OLLAMA_HOST")
-    embedding_model: str = Field("qwen3:1.7b", alias="EMBEDDING_MODEL")
+    embedding_model: str = Field("bge-large:latest", alias="EMBEDDING_MODEL")
     summary_model: str = Field("mistral:latest", alias="SUMMARY_MODEL")
     
     # Redis Configuration
     redis_host: str = Field("localhost", alias="REDIS_HOST")
-    redis_port: int = Field(6380, alias="REDIS_PORT")  # Redis Stack container port
     redis_password: Optional[str] = Field(None, alias="REDIS_PASSWORD")
     redis_db: int = Field(0, alias="REDIS_DB")
     
@@ -40,13 +32,16 @@ class Settings(BaseSettings):
     
     # Directory paths
     data_dir: str = Field("data", alias="DATA_DIR")
-    logs_dir: str = Field("logs", alias="LOGS_DIR")
+    log_dir: str = Field("logs", alias="LOG_DIR")
     prompt_dir: str = Field("prompts", alias="PROMPT_DIR")
     
-    # Monitoring
-    sentry_dsn: Optional[str] = Field(None, alias="SENTRY_DSN")
-    log_level: str = Field("INFO", alias="LOG_LEVEL")
+    # Security
+    require_api_key: bool = Field(True, alias="REQUIRE_API_KEY")
     
+    class Config:
+        env_file = ".env"
+        extra = "ignore"
+        
     @property
     def project_root(self) -> Path:
         """Get the project root directory."""
@@ -113,5 +108,5 @@ settings = Settings()
 scoring_config = ScoringConfig()
 
 # Ensure required directories exist
-os.makedirs(settings.logs_dir, exist_ok=True)
+os.makedirs(settings.log_dir, exist_ok=True)
 os.makedirs(settings.config_dir, exist_ok=True)
