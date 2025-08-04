@@ -1,67 +1,107 @@
-# Federal Register Monitoring & Summarization System
+# FR-Letter: Federal Register Daily Summarization Pipeline
 
-A sophisticated pipeline that monitors the Federal Register, analyzes regulatory documents using AI, and publishes summaries to multiple channels.
+Automate daily summarization of Federal Register entries, ranking by impact, and generate markdown summaries in Politico-style prose.
 
-## Features
+## System Overview
 
-- **Data Ingestion**: Retrieves daily entries from Federal Register API with filtering
-- **Impact Scoring**: Configurable weights for agency importance and document characteristics
-- **AI Processing**: Local Ollama embeddings and summarization + OpenRouter for final summaries
-- **Vector Storage**: Redis with RediSearch for similarity-based document ranking
-- **Multi-channel Publishing**: Substack and Telegram integration
-- **Orchestration**: Automated daily pipeline runs with monitoring
-
-## Architecture
-
-```
-Federal Register API → Impact Scoring → Embedding (Ollama) → Vector Storage (Redis)
-                                                                      ↓
-Substack + Telegram ← Final Summaries (OpenRouter) ← Local Summaries (Ollama)
-```
+- **Self-hosted:** All processing and storage on-premises
+- **Data sources:** 
+  - Fetch entries from https://www.federalregister.gov/api/v1/documents.rss
+  - Parse each entry; use unique slug to fetch full JSON
+  - Parse all entries for training, daily new entries for production
+- **Database:**
+  - Postgres for entry tracking and archival
+  - pgvector extension for embedding storage
+  - `.env` for all DB credentials and config
+- **Embeddings:**
+  - Ollama with bge-large for all text embeddings
+- **Ranking:**
+  - Impact criteria loaded from `criteria.md`
+  - Cosine similarity between entry and criteria embeddings
+  - Agency/document-type heuristics (e.g., EPA prioritized for environmental)
+- **Summarization:**
+  - DeepSeek 1.5B for summary generation
+  - System prompt loads `style.md` (Politico-style)
+- **Output:**
+  - Top 5 impactful entries per day
+  - Single daily markdown file: `summaries/YYYY-MM-DD.md`
 
 ## Setup
 
-1. **Install Dependencies**
+1. **PostgreSQL with pgvector:**
+   ```bash
+   # Install pgvector extension (if not already installed)
+   # Follow instructions at https://github.com/pgvector/pgvector#installation
+   ```
+
+2. **Ollama with bge-large:**
+   ```bash
+   # Install Ollama from https://ollama.com/download
+   ollama pull bge-large
+   ```
+
+3. **DeepSeek model:**
+   ```bash
+   # Pull DeepSeek 1.5B model
+   ollama pull deepseek-coder:1.5b
+   ```
+
+4. **Environment variables:**
+   ```bash
+   # Copy .env.example to .env and fill in your values
+   cp .env.example .env
+   ```
+
+5. **Python dependencies:**
    ```bash
    pip install -r requirements.txt
    ```
 
-2. **Start Local Services**
-   ```bash
-   # Start Redis with RediSearch
-   docker run -d --name redis-stack -p 6379:6379 redis/redis-stack:latest
-   
-   # Install and start Ollama
-   curl -fsSL https://ollama.ai/install.sh | sh
-   ollama pull qwen2:1.5b  # For embeddings
-   ollama pull mistral:latest  # For chunk summaries
-   ```
+## Usage
 
-3. **Configure Environment**
-   ```bash
-   cp .env.example .env
-   # Edit .env with your API keys
-   ```
+Run the pipeline:
+```bash
+python fr_pipeline.py
+```
 
-4. **Run Pipeline**
-   ```bash
-   python -m fr_monitor.main
-   ```
+## Project Structure
 
-## Configuration
+```
+.
+├── documents.rss              # Sample RSS feed
+├── 2025-14789.json            # Sample document JSON
+├── criteria.md                # Impact criteria keywords
+├── style.md                   # Politico-style summary guide
+├── setup_pgvector.sql         # Database setup script
+├── .env.example               # Environment variables template
+├── requirements.txt           # Python dependencies
+├── fr_pipeline.py             # Main pipeline script
+└── summaries/                 # Daily summary output directory
+    └── YYYY-MM-DD.md          # Daily top 5 summaries
+```
 
-- **Impact Scoring**: Adjust weights in `config/scoring.yaml`
-- **System Prompts**: Modify `config/prompts/politico_style.txt`
-- **Pipeline Schedule**: Configure in `config/pipeline.yaml`
+## Configuration Files
 
-## API Usage Limits
+### criteria.md
+Contains keywords, agencies, and document types that define "impactful" entries.
 
-- OpenRouter: Maximum 5 calls per day
-- Pipeline Runtime: Target <5 minutes end-to-end
-- Monthly Cost: <$5 for external APIs
+### style.md
+Defines the Politico-style writing guide for summaries.
 
-## Monitoring
+### .env
+Configure database connections and model endpoints.
 
-- Logs: `logs/pipeline.log`
-- Metrics: Available via Prefect dashboard
-- Alerts: Configured for pipeline failures and API errors
+## Pipeline Steps
+
+1. Parse Federal Register RSS feed
+2. Fetch full JSON documents for each entry
+3. Generate embeddings using Ollama bge-large
+4. Calculate impact scores using cosine similarity
+5. Apply agency/document-type heuristics
+6. Select top 5 entries
+7. Generate Politico-style summaries with DeepSeek
+8. Write to daily markdown file
+
+## Logging
+
+Detailed logs are written to `fr_pipeline.log` and stdout for debugging.

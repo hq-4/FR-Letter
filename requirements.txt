@@ -1,34 +1,8 @@
-# Core dependencies
-requests==2.31.0
-redis==5.0.1
-redis[hiredis]==5.0.1
-python-dotenv==1.0.0
-pydantic==2.5.0
-pydantic-settings==2.1.0
-
-# AI/ML dependencies
-ollama==0.1.7
-openai==1.3.0
-numpy==1.24.3
-scikit-learn==1.3.0
-
-# Data processing
-pandas==2.0.3
-beautifulsoup4==4.12.3
-lxml==4.9.3
-
-# Scheduling and orchestration
-prefect==2.14.0
-schedule==1.2.0
-
-# Publishing - using markdown file output (no external dependencies needed)
-
-# Monitoring and logging
-structlog==23.2.0
-sentry-sdk==1.38.0
-
-# Development
-pytest==7.4.3
-black==23.11.0
-flake8==6.1.0
-mypy==1.7.0
+# Python dependencies for FR-Letter pipeline
+psycopg2-binary==2.9.9
+requests==2.32.3
+ollama==0.3.1
+numpy==1.26.4
+scikit-learn==1.5.1
+python-dotenv==1.0.1
+feedparser==6.0.11
