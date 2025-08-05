@@ -38,8 +38,8 @@ logger = logging.getLogger(__name__)
 STYLE_FILE = "style.md"
 SUMMARIES_DIR = "summaries"
 OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://localhost:11434")
-CHAT_MODEL = os.getenv("OLLAMA_CHAT_MODEL", "deepseek-r1:1.5b")
-REQUEST_TIMEOUT = 60
+CHAT_MODEL = os.getenv("OLLAMA_CHAT_MODEL", "qwen3:latest")
+REQUEST_TIMEOUT = 60*10
 DEFAULT_TOP_N = 5
 
 class FederalRegisterSummarizer:
@@ -82,7 +82,7 @@ class FederalRegisterSummarizer:
     
     def generate_summary_with_llm(self, document: Dict) -> Optional[str]:
         """
-        [REH] Generate Politico-style summary using Ollama LLM
+        [REH] Generate Politico-style summary using Ollama LLM with system prompt
         
         Args:
             document: Document dictionary with metadata and content
@@ -103,16 +103,12 @@ Best Matching Content:
 {document['best_chunk_text'][:1000]}...
 """
             
-            # [CA] Create prompt with style guide and document context
-            prompt = f"""You are a seasoned policy reporter writing for Politico. Using the style guide below, create a punchy, insider-focused summary of this Federal Register document.
+            # [CA] Create system prompt with style guide (loaded once, not repeated)
+            system_prompt = f"""You are a seasoned policy reporter writing for Politico. You follow this style guide:
 
-STYLE GUIDE:
 {self.style_guide}
 
-DOCUMENT TO SUMMARIZE:
-{document_context}
-
-Generate a summary following the exact format specified in the style guide:
+Always generate summaries in this exact format:
 headline: "<your headline>"
 bullets:
   - <bullet point 1>
@@ -123,10 +119,24 @@ bullets:
 
 Focus on regulatory impact, political implications, and what this means for stakeholders. Use the insider tone and specific details as specified in the style guide."""
             
-            # [REH] Make request to Ollama with error handling
+            # [CA] Create user prompt with just the document context
+            user_prompt = f"""Create a punchy, insider-focused summary of this Federal Register document:
+
+{document_context}"""
+            
+            # [REH] Make request to Ollama with system/user prompt structure
             payload = {
                 "model": CHAT_MODEL,
-                "prompt": prompt,
+                "messages": [
+                    {
+                        "role": "system",
+                        "content": system_prompt
+                    },
+                    {
+                        "role": "user", 
+                        "content": user_prompt
+                    }
+                ],
                 "stream": False,
                 "options": {
                     "temperature": 0.7,
@@ -136,19 +146,19 @@ Focus on regulatory impact, political implications, and what this means for stak
             }
             
             response = requests.post(
-                f"{OLLAMA_HOST}/api/generate",
+                f"{OLLAMA_HOST}/api/chat",
                 json=payload,
                 timeout=REQUEST_TIMEOUT
             )
             response.raise_for_status()
             
-            # [IV] Parse response
+            # [IV] Parse response from chat API
             result = response.json()
-            if "response" not in result:
+            if "message" not in result or "content" not in result["message"]:
                 logger.error("Invalid LLM response format")
                 return None
             
-            summary = result["response"].strip()
+            summary = result["message"]["content"].strip()
             
             # [IV] Basic validation of summary format
             if "headline:" not in summary or "bullets:" not in summary:
