@@ -1,0 +1,2079 @@
+<html>
+<head>
+<title>Federal Register, Volume 90 Issue 146 (Friday, August 1, 2025)</title>
+</head>
+<body><pre>
+[Federal Register Volume 90, Number 146 (Friday, August 1, 2025)]
+[Notices]
+[Pages 36257-36269]
+From the Federal Register Online via the Government Publishing Office [<a href="http://www.gpo.gov">www.gpo.gov</a>]
+[FR Doc No: 2025-14564]
+
+
+-----------------------------------------------------------------------
+
+SECURITIES AND EXCHANGE COMMISSION
+
+[Release No. 34-103573; File No. SR-LCH SA-2025-007]
+
+
+Self-Regulatory Organizations; LCH SA; Notice of Filing of 
+Proposed Rule Change Relating to LCH SA's Risk Governance Framework and 
+Collateral, Financial, Credit, Operational and Third Party Risk 
+Policies
+
+July 29, 2025.
+    Pursuant to Section 19(b)(1) of the Securities Exchange Act of 1934 
+(``Act''),\1\ and Rule 19b-4,\2\ notice is hereby given that on July 
+15, 2025, Banque Centrale de Compensation, which conducts business 
+under the name LCH SA (``LCH SA''), filed with the Securities and 
+Exchange Commission (``Commission'') the proposed rule change, as 
+described in Items I, II and III below, which Items have been prepared 
+primarily by the clearing agency. The Commission is publishing this 
+notice to solicit comments on the proposed rule change from interested 
+persons.
+---------------------------------------------------------------------------
+
+    \1\ 15 U.S.C. 78s(b)(1).
+    \2\ 17 CFR 240.19b-4.
+---------------------------------------------------------------------------
+
+I. Clearing Agency's Statement of the Terms of Substance of the 
+Proposed Rule Change
+
+    LCH SA is submitting several risk policies (``Risk Policies'') 
+which LCH SA has adopted, including: (i) the Collateral Risk Policy; 
+(ii) the Financial Resource Adequacy Policy; (iii) the Counterparty 
+Credit Risk Policy; (iv) the Operational Risk Management Policy; (v) 
+the Third Party Risk Management Policy; and (vi) the Risk Governance 
+Framework. The Risk Policies have been issued by LCH Group Holdings 
+Limited (``LCH Group'') \3\ and adopted by the LCH SA Risk Committee 
+and LCH SA Board.\4\
+---------------------------------------------------------------------------
+
+    \3\ LCH Group Holdings Limited is an indirect wholly owned 
+subsidiary of the London Stock Exchange Group plc. In addition to 
+LCH SA, LCH Group also owns LCH Limited, a recognized central 
+counterparty supervised in the United Kingdom by the Bank of England 
+and a derivatives clearing organization (``DCO'') registered with 
+the Commodity Futures Trading Commission.
+    \4\ The Risk Policies have been elaborated in common with LCH 
+Ltd. in order to ensure risk management consistency within LCH 
+Group. Identical risk policies have been approved by LCH Ltd.'s 
+governance.
+---------------------------------------------------------------------------
+
+II. Clearing Agency's Statement of the Purpose of, and Statutory Basis 
+for, the Proposed Rule Change
+
+    In its filing with the Commission, LCH SA included statements 
+concerning the purpose of and basis for the Risk Policies and discussed 
+any comments it received on the Risk Policies. The text of these 
+statements may be examined at the places specified in Item IV below. 
+LCH SA has prepared summaries, set forth in sections A, B, and C below, 
+of the most significant aspects of such statements.
+
+A. Self-Regulatory Organization's Statement of the Purpose of, and 
+Statutory Basis for, the Proposed Rule Change
+
+1. Purpose
+    The Risk Policies have been adopted by LCH SA in order to set out 
+the specific risk management requirements that govern its operations as 
+a clearing agency. Moreover, the Risk Policies clarify the roles and 
+responsibilities within LCH SA for compliance with the Risk Policies. 
+Finally, the Risk Policies have been designed to ensure consistency 
+with all relevant laws and regulations, including the European Markets 
+Infrastructure Regulation (``EMIR'') and Section 17A of the Act \5\ and 
+the regulations thereunder.\6\
+---------------------------------------------------------------------------
+
+    \5\ 15 U.S.C. 78q-1.
+    \6\ The Risk Policies generally identify the relevant provisions 
+of law and regulation applicable to that policy.
+---------------------------------------------------------------------------
+
+a. Collateral Risk Policy
+    The Collateral Risk Policy (``CRP'') sets out the LCH Group 
+standards for the management of collateral risk at LCH SA, subject to 
+the risk appetite defined in the Risk Governance Framework. The goal of 
+the policy is to ensure that LCH SA has a robust mechanism in place to 
+process and control the collateral posted by its members.
+    The CRP applies to collateral accepted by LCH SA to cover margin 
+requirements and default fund contributions.\7\ The CRP also clarifies 
+the roles and responsibilities within LCH SA for compliance with the 
+CRP. The policy owner is the LCH SA Chief Risk Officer (``CRO''). In 
+addition:
+---------------------------------------------------------------------------
+
+    \7\ Collateral accepted by LCH SA to cover risks associated with 
+(i) securities accepted as part of the clearing services such as in 
+RepoClear and Equity Clear; and (ii) secured cash investments 
+(reverse repurchase agreements or outright purchases) conducted as 
+part of CaLM's investment activities, are outside the scope of the 
+CRP and are covered by the Financial Resource Adequacy Policy (see 
+paragraph below) and Investment Risk Policy, respectively.
+---------------------------------------------------------------------------
+
+    <bullet> LCH SA Collateral and Liquidity Management team (``CaLM'') 
+has a number of responsibilities under the CRP. CaLM's primary 
+responsibilities include: (i) daily monitoring of the pool of 
+collateral lodged by its members in accordance with the policy; \8\ 
+(ii) calibrating collateral haircuts and performing daily monitoring in 
+accordance with the CRP; (iii) supervising the delegated team LCH Ltd 
+First Line Risk RepoClear with the sourcing and assessment \9\ of 
+collateral prices based on guidelines by CaLM First Line Risk SA, 
+subject to the standards set out in the LCH Contract and Market 
+Acceptability Policy; (iv) implementing collateral concentration limits 
+on its members and monitoring against these on a daily basis; (v) 
+handling general enquiries from members regarding collateral risk 
+methodology; (vi) performing collateral stress testing in accordance 
+with the CRP; and (vii) realizing the cash value of the collateral 
+lodged by a defaulted
+
+[[Page 36258]]
+
+member during the Default Management Process (``DMP''); \10\
+---------------------------------------------------------------------------
+
+    \8\ Such monitoring encompasses working with external 
+stakeholders (e.g., International Central Securities Depositories 
+(``ICSDs''), Central Securities Depositaries (``CSDs'')) and 
+internal stakeholders (e.g., Collateral Operations, as defined 
+below) to update the list of eligible collateral in line with the 
+acceptance criteria set out in the CRP.
+    \9\ For example, this includes assessing the prices of 
+collateral lodged bilaterally and collateral lodged via tri-party 
+providers against published market prices. In addition, it assesses. 
+In addition, where a material change in the collateral market is 
+identified, CaLM will escalate the issue to CaLM Risk (as defined 
+herein) and LCH SA senior management.
+    \10\ The governance of the DMP is laid out in the LCH Default 
+Management Policy.
+---------------------------------------------------------------------------
+
+    <bullet> LCH SA Risk Collateral and Liquidity Risk Management team 
+(``CaLM Risk'') is responsible for daily monitoring and managing risks 
+associated with collateral activities and positions in line with the 
+requirements of the CRP. This includes, inter alia, conducting 
+independent assessments of the eligibility of collateral received and 
+validating collateral haircuts in accordance with the policy; \11\
+---------------------------------------------------------------------------
+
+    \11\ CaLM Risk is also responsible for: (i) the independent 
+assessment of the prices of collateral lodged bilaterally and the 
+collateral market value lodged via tri-party providers against the 
+published market prices, in line with second-line risk 
+responsibilities for pricing set out in the LCH Contract and Market 
+Acceptability Policy; (ii) validating and monitoring the collateral 
+concentration limits on members; and (iii) the production of regular 
+reports and management information for circulation with LCHA Risk 
+Department, CaLM, and senior management, including escalation if 
+there are material changes in the market value, credit quality or 
+liquidity of collateral lodged (bilaterally or via tri-party).
+---------------------------------------------------------------------------
+
+    <bullet> LCH SA Collateral Operations team (``Collateral 
+Operations'') is responsible for ensuring that member margin 
+liabilities are covered with eligible non-cash collateral and/or cash 
+and managing the corresponding margin and collateral flows and related 
+investment flows. Most notably, Collateral Operations: (i) monitors 
+securities settlement and interoperability account balances; (ii) 
+tracks member requests to lodge and substitute collateral (seeking LCH 
+SA Risk Department and CaLM Risk approval as necessary); (iii) oversees 
+the system handling valuation of collateral lodged by members including 
+the application of relevant haircuts; (iv) communicates to members 
+changes in the population of acceptable collateral and haircuts; (v) 
+handles general inquiries from members regarding member collateral 
+pledged to cover margin requirements; and (vi) is responsible for 
+static data, collateral pricing, and adding new ISINs approved as 
+eligible collateral; \12\ and
+---------------------------------------------------------------------------
+
+    \12\ In addition, the CaLM team in Ltd is responsible for static 
+data, collateral pricing, and adding of new ISINs approved as 
+eligible non-cash collateral.
+---------------------------------------------------------------------------
+
+    <bullet> LCH SA Compliance is responsible for notifying regulators 
+of changes to collateral eligibility, limits and/or haircuts, where 
+relevant.
+    The CRP also sets out requirements for the approval of eligible 
+cash and non-cash collateral. In particular, the CRP establishes that 
+margin requirements can be covered by a mixture of cash and eligible 
+non-cash collateral (i.e., traded securities and bank guarantees), 
+subject to the criteria set out in the policy.
+    In respect of `cash', LCH SA accepts EUR, GBP and USD \13\ as the 
+primary currencies for margin cover and default fund contributions. 
+Further, the policy requires default fund contributions to be met by 
+cash \14\ in the primary currencies designated by each Clearing 
+Service.\15\
+---------------------------------------------------------------------------
+
+    \13\ LCH SA also accepts other currencies, subject to the 
+minimum criteria set out in the CRP, including that the currency is 
+used for clearing in LCH SA, has been approved for use by LCH SA 
+Credit Risk, can be invested in accordance with the Investment Risk 
+Policy, and CaLM Risk can manage the exchange risk associated with 
+the currency.
+    \14\ Default fund contributions can also be met by collateral 
+equivalent to cash in the case of default such as Central Bank 
+Guarantees, where authorized by the LCH SA Rulebook.
+    \15\ LCH SA currently maintains three separate Clearing 
+Services: (i) CDSClear, which provides clearing services for credit 
+default swaps; (ii) RepoClear SA, which provides clearing services 
+in respect of repo and cash transactions on Euro-denominated 
+government and supra-national debts across 13 markets (France, 
+Italy, Spain, Germany, Belgium, Austria, Finland, Ireland, The 
+Netherlands, Portugal, Slovakia, Slovenia and Supranational), as 
+well as a basket collateral service through the Euro GC+ clearing 
+service; and (iii) DigitalAssetClear SA, which provides clearing 
+services for cash-settled Bitcoin index futures and options 
+contracts traded on GFO-X, an FCA-regulated, centrally-cleared 
+multilateral trading facility dedicated to digital asset futures and 
+options.
+---------------------------------------------------------------------------
+
+    With regards to non-cash collateral, the CRP limits the assets 
+accepted as collateral to those with low credit, liquidity and market 
+risks as required by SEC Rule 17ad-22(e)(5).\16\ Specifically, in 
+respect of `traded securities,' the policy requires that all traded 
+securities meet certain credit, liquidity and market risk requirements 
+to be eligible as collateral for margin cover. For example, (i) the 
+issuer must be reviewed and assigned an internal credit score (``ICS'') 
+by LCH SA Credit Risk; (ii) the value of the securities must be 
+established daily using observed prices obtained from published 
+sources; (iii) the security must be in a currency that meets the 
+minimum criteria set out in the CRP, and must be reviewed by LCH SA 
+Credit Risk if such currency is not denominated in the domestic 
+currency of the home country; (iv) the value of the shares can be 
+established daily using observed prices obtained from published 
+resources; (v) the CCP has the operational infrastructure in place to 
+process the securities, market the positions, and apply appropriate 
+haircuts; (vi) CaLM has the expertise and the operational capability to 
+realize the value of the security in the event of a default, either 
+directly or via contractual arrangements with a third party service 
+provider; (vii) the CCP can hold and liquidate the securities without 
+legal challenge; and (viii) there must be sufficient market liquidity 
+available.\17\ The full list of traded securities that qualify as 
+eligible non-cash collateral \18\ are set out in Appendix II of the 
+CRP. In addition, the CRP provides a list of traded securities that are 
+not eligible as collateral for margin cover, including perpetual 
+bonds.\19\
+---------------------------------------------------------------------------
+
+    \16\ 17 CFR 240.17ad-22(e)(5).
+    \17\ The policy provides that fixed income securities where the 
+issuance size of a security is less than the minimum specified in 
+Appendix III, CaLM will provide evidence of market liquidity to CaLM 
+Risk and approval for eligibility will be required from the CRO (or 
+the CRO's delegate). Examples of such an issuance size include 800 
+mln for AUD and 5.5 bln for NOK.
+    \18\ Such eligibility remains subject to the eligibility 
+criteria for traded securities summarized above as well as to the 
+margin collateral haircut schedules published on LCH SA's website.
+    \19\ Other traded securities not eligible include (i) zero 
+coupon bond types (excluding treasury bills); (ii) strips (including 
+principal and coupon strips); (iii) securities issued by credit and 
+financial institutions; and (iv) securities which are close to 
+maturity, subject to specific corporate events, or have optionality.
+---------------------------------------------------------------------------
+
+    In respect of `bank guarantees', the policy provides that central 
+bank guarantees are eligible as collateral for margin cover if they are 
+issued by central banks in countries that are approved for investments 
+by CaLM. Commercial bank guarantees are not eligible.\20\
+---------------------------------------------------------------------------
+
+    \20\ Such investments must comply with the Investment Risk 
+Policy.
+---------------------------------------------------------------------------
+
+    The CRP also addresses changes to collateral eligibility. It 
+provides that, for new currencies and new issuers within an approved 
+collateral type to be accepted as collateral, approval from the LCH SA 
+Executive Committee (``ERCo'') is required.\21\ The ERCo also has the 
+discretion to declare that eligible collateral is no longer 
+acceptable.\22\ New types of collateral that pose new or novel risk 
+features, or that require a change to existing risk controls, require 
+(i) CaLM to submit such request to the ERCo and the LCH SA Risk 
+Committee; \23\ (ii) the ERCo and the LCH SA Risk Committee to review 
+such request; and (iii) the LCH SA Board to approve such request.\24\ 
+If no changes are required to existing risk controls,\25\
+
+[[Page 36259]]
+
+CaLM Risk approval is sufficient. The CRP requires, where possible, 
+that LCH SA provide a notice period to its clearing members to allow 
+them sufficient time to adjust the portfolio of collateral lodged, 
+provided that this will not impair LCH SA's financial resources nor 
+liquidity position.
+---------------------------------------------------------------------------
+
+    \21\ In addition, the CRP requires appropriate regulatory 
+approval to be obtained prior to LCH SA accepting new currencies. 
+The ERCo may also request that new issuers be reviewed by the LCH SA 
+Risk Committee and approved by the LCH SA Board.
+    \22\ Such decisions are made upon the recommendation of CaLM and 
+CaLM Risk, following which the ERCo must notify the Risk Committee 
+of its decision.
+    \23\ The request must be accompanied by its rational and 
+supporting documentation.
+    \24\ Appropriate regulatory approval must also be obtained prior 
+to LCH SA's acceptance of new collateral types.
+    \25\ For example, adding new ISINs issued by sovereigns which 
+LCH SA already accepts, provided that the ISINs meet the minimum 
+eligibility requirements for non-cash collateral.
+---------------------------------------------------------------------------
+
+    The CRP also establishes a framework for monitoring market, credit, 
+concentration/liquidity, wrong way and FX risks (the ``Risks''). The 
+Risks are covered by baseline haircuts, haircut add-ons, limits and/or 
+price adjustments, detailed in the policy.\26\ The policy provides that 
+the ability of LCH SA to realize the value of a piece of collateral 
+lodged by its member within the assumed holding period is affected by 
+the collateral's market liquidity and the size of the position to be 
+liquidated. Details of and the rational for the holding period is 
+detailed in Appendix I. In line with SEC Rule 17ad-22(e)(5), the 
+framework aims to set and enforce appropriate conservative haircuts and 
+concentration limits.
+---------------------------------------------------------------------------
+
+    \26\ In addition, the CRP requires collateral haircuts to comply 
+with the FRAP.
+---------------------------------------------------------------------------
+
+    The policy provides that the ERCo may impose haircut add-ons and/or 
+impose new limits or price adjustments on certain types of non-cash 
+collateral based on their market liquidity, in particular, CaLM's 
+ability to realize the value of the securities in the event of a 
+default. In addition, the ERCo has the discretion to assess haircut 
+add-ons on clearing members, based on their exposures, domicile, or 
+portfolio of collateral posted, to protect LCH SA's financial resources 
+and liquidity position. Collateral haircuts are subject to daily stress 
+testing with any exceptions to be notified to the ERCo.\27\
+---------------------------------------------------------------------------
+
+    \27\ Under the CRP, the Stress Resting Regime must include the 
+following elements: (i) historical risk factor moves beyond the 
+99.7% level; (ii) theoretical scenarios which are extreme but 
+plausible are to be used to complement the historical scenarios and 
+provide better coverage of the tail losses of collateral portfolios. 
+To the extent that similar securities are cleared by LCH SA, the 
+same stress test scenarios applied on the clearing positions may be 
+used to stress test collateral haircuts.
+---------------------------------------------------------------------------
+
+    The CRO is responsible for ensuring the review of collateral 
+haircuts,\28\ and changes to published haircuts must be submitted to 
+the ERCo for approval.\29\ Material changes, as agreed by the ERCo, are 
+required under the CRP to be notified to the LCH SA Risk Committee. 
+Changes are required to be notified to the regulators, where 
+appropriate. In addition, the policy requires the appropriateness of 
+the CRP to be reviewed by the ERCo and the LCH SA Risk Committee on an 
+annual basis,\30\ and requires approval by the LCH SA Board.
+---------------------------------------------------------------------------
+
+    \28\ With quarterly reviews to be submitted to the ERCo for 
+approval; monthly reviews submitted to LCH SA CRO and/or the ERCo; 
+and more frequent reviews where appropriate.
+    \29\ Material changes (agreed by the ERCo) are to be notified to 
+the LCH SA Risk Committee. Changes are required to be notified to 
+the regulators where appropriate.
+    \30\ In line with SEC Rule 17ad-22(e)(5), the sufficiency of 
+collateral haircuts and concentration limits is performed no less 
+than annually.
+---------------------------------------------------------------------------
+
+b. Financial Resource Adequacy Policy
+    The Financial Resource Adequacy Policy (``FRAP'') sets out the 
+standards governing the assessment of financial resources (initial 
+margins, margin add-ons and default funds) against the Latent Market 
+Risks \31\ in clearing member portfolios at LCH SA. The FRAP also sets 
+out the standards for addressing procyclicality in the risk frameworks 
+and models used by the LCH CCPs. In particular, the FRAP (i) details 
+the standards by which financial resources should be assessed against 
+member exposures; \32\ (ii) details the holding periods to be used for 
+each product in the assessment of margins, providing the justification 
+for each; (iii) articulates the rules governing the use of economic 
+offsets between products; (iv) presents the limit framework to be used 
+in assessing clearing exposures to members for each Clearing Service 
+and across Clearing Services; (v) details the standards to be used for 
+reverse stress testing the financial resources held against member 
+portions; (vi) details the standards to be used for ensuring that 
+procyclicality concerns are appropriately addressed in the risk 
+frameworks and models used by the LCH CCPs; and (vii) describes the 
+requirements for services within LCH Ltd that offer tiered 
+participation arrangements in accordance with the Tiering Risks 
+described in the Risk Governance Framework. Finally, the FRAP states 
+that the Board's appetite for Latent Market Risk and Procyclicality 
+Risk is low. The policy requires LCH SA to impose, call, and collect 
+margins at least daily on each day when its Clearing Services are open 
+and operating in order to limit its credit exposures \33\ to its 
+clearing members and, where relevant, from Central Clearing 
+Counterparties (``CCPs'') with which it has interoperability 
+arrangements.\34\ In addition, the policy sets out the LCH SA standards 
+for initial margin, margin add-ons, intraday margins and variation 
+margin.\35\ For example:
+---------------------------------------------------------------------------
+
+    \31\ `Latent Market Risk' is defined in the Risk Governance 
+Framework as the `risk that the exposure to a member's portfolio 
+value increases due to the impact of changing market factors on the 
+valuation of the portfolio'. This risk is described as latent, in 
+that LCH SA is only exposed in the event of the member's default.
+    \32\ This includes variation margins, initial margins, margin 
+add-ons for liquidity risk, concentration risk, wrong way risk where 
+appropriate, as well as the sizing and re-sizing of default funds.
+    \33\ Such margins shall be sufficient to cover potential 
+exposures that LCH SA estimates will occur until the liquidation of 
+the relevant positions.
+    \34\ The FRAP also requires LCH SA to assess a number of risks 
+prior to entering into any interoperating arrangements. For example, 
+legal risk arising from the link, including each party's rights and 
+obligations, cross border legal issues, netting arrangements, 
+enforceability of the LCH SA Rulebook, default procedures, 
+collateral arrangements and dispute resolution.
+    \35\ The standards for the calculation of variation margin 
+depend on whether the price discovery takes place on a public venue/
+exchange or the price is determined via the ``OTC'' market. For 
+example: (i) for exchanges and venues where pricing is transparent, 
+each Clearing Service must have a well-documented routine for price 
+capture, price verification and data cleansing where required; (ii) 
+for OTC products, the model used to price instruments for variation 
+margin purposes must be subjected to an ``outputs'' review; (iii) 
+all inputs to the model must have a documented process for data 
+capture and data cleansing; and (iv) standards for adequate price 
+sources and controls should be equivalent to those described in the 
+Contract, Market and Acceptability Policy.
+---------------------------------------------------------------------------
+
+    <bullet> Initial margin levels for each of LCH SA's Clearing 
+Services must be calibrated to the 99.7% \36\ confidence level; \37\
+---------------------------------------------------------------------------
+
+    \36\ The rationale for the 99.7% confidence level is detailed in 
+Appendix 2 of the FRAP.
+    \37\ The policy explains that such levels ensure that enough 
+margins are held to cover the potential loss from any member 
+(including the clients of that member) to the defined service 
+confidence levels under normal market conditions, should LCH SA need 
+to close out that member's portfolio within the holding periods 
+prescribed by the policy. The FRAP also sets out a set of 
+expectations surrounding initial margin. For example, any 
+deterioration in backtesting results must be identified immediately 
+and flagged to the CRO and/or the ERCo to assess whether mitigation 
+actions are required.
+---------------------------------------------------------------------------
+
+    <bullet> Additional margins must be held (where appropriate) to 
+cover member specific portfolio risk arising from both house and client 
+activity of the following types: (i) concentration/liquidity risk; (ii) 
+sovereign risk; (iii) wrong way risk; and (iv) counterparty credit 
+risk; and
+    <bullet> Each Clearing Service is expected to monitor margin levels 
+intraday and to have the capacity to call for margin intraday should it 
+be necessary to address any issues with member exposures.
+    The FRAP also sets out the minimum governance standards applicable 
+to LCH SA's default fund arrangements, including the requirement for 
+all financial resources held by LCH SA (initial margins, additional 
+margins, and the default funds) to meet the so-called
+
+[[Page 36260]]
+
+``cover-2'' standard, i.e. the potential losses from a close-out in an 
+extreme event of the largest two (2) member portfolios and all clients 
+of both of these members. Moreover, the policy details: (i) the order 
+in which LCH SA must use its available resources to cover the losses 
+from a defaulting member; \38\ (ii) the predefined stress regime \39\ 
+to be used to identify `extreme but plausible' \40\ tail losses in each 
+member portfolio beyond the applicable initial margin confidence level; 
+and (iii) the Stress Test Loss Over Additional Margin (``STLOAM'') \41\ 
+to be imposed on members in order to limit exposure by LCH SA to a 
+single clearing member portfolio. The FRAP states that LCH SA applies a 
+daily Clearing Limit on member exposures such that the STLOAM may not 
+exceed 45% of the Default Fund for any member (the Daily Default Fund 
+Additional Margin, or ``DDFAM'' threshold), and that should a member 
+group breach the 45% limit, the excess amount must be called as DDFAM 
+from that member group and such margin must be held until the member 
+group's exposure falls back below the 45% limit.\42\
+---------------------------------------------------------------------------
+
+    \38\ The order is as follows: (i) defaulter's own financial 
+resources (initial margins, variation margins, additional margins, 
+default fund contributions); (ii) the Clearing House `skin in the 
+game'; (iii) the default fund contributions of the non-defaulting 
+members; (iv) second layer of skin in the game where required by 
+applicable regulation; (v) default fund assessments of the non-
+defaulting members; (vi) service continuity and loss allocation 
+mechanisms; and (vii) if the resources at this stage are still not 
+enough to cover the losses, then a decision is made to either close 
+or partially close (if applicable) the service and allocate the 
+remaining losses, or raise more funds from the membership to 
+continue the service.
+    \39\ This includes Stress Test Loss Over Initial Margin (STLOIM) 
+and default fund additional margin (DFAM) calculations, the 
+frequency at which each default fund must be resized, and the 
+prescribed Stress Testing Regime to be followed.
+    \40\ The FRAP determines that a scenario is `plausible' if it 
+has happened over the last 30 years.
+    \41\ This term and some other capitalized terms in the FRAP are 
+defined in the glossary found in Appendix 4 thereof.
+    \42\ The 45% DDFAM threshold may be increased to up to 50% for 
+members with certain ICS scores, when additional risk management 
+tools are in place subject to ERCo approval and Risk Committee 
+notification.
+---------------------------------------------------------------------------
+
+    The FRAP states that each service is expected to monitor intraday 
+margin levels and have the capability to call for margin intraday 
+should it be necessary to address any issues with member exposure. In 
+addition, each service must calculate daily variation margin and such 
+standards for calculation differ depending on whether the price 
+discovery takes place on a public venue/exchange or the price is 
+determined via the OTC market.
+    The FRAP provides, in addition, that offsets or reductions are 
+allowed in the required margin, subject to certain conditions being met 
+e.g., where the economic offset must be demonstrably resilient during 
+stressed market conditions and must be subject to the stress test 
+regime. The policy also sets the standards to be applied to sources of 
+procyclicality and requirements that were set out in the former 
+Procyclicality Policy.\43\ Specifically, the FRAP discusses how LCH SA 
+manages the trade-off between increasing clearing member margins 
+following a market stress event, with the potential resulting liquidity 
+drain, which may be disruptive to the market. To address procyclicality 
+risk, LCH SA will employ specific standards for each of its clearing 
+services to comply with. This includes producing margin levels which 
+avoid disruptive step changes in financial resources held, ensuring 
+margin increases are driven by market pricing and not anticipatory of 
+market movements and adequately estimating volatility to prevent the 
+erosion of margin levels during quiet periods. The FRAP has a 
+supplemental appendix that describes the key sources of procyclicality 
+risk in more detail and specific considerations LCH SA will factor in 
+to avoid procyclicality risk when assessing clearing members.
+---------------------------------------------------------------------------
+
+    \43\ As part of its annual review process, LCH SA moved the 
+contents of its Procyclicality Policy into the FRAP and 
+decommissioned the Procyclicality Policy. Section 9 of the FRAP 
+includes detail on how LCH SA manages procyclicality risk, including 
+by assessing changes in margin requirements, collateral haircuts, 
+Clearing Member credit scoring and how LCH SA may assess Clearing 
+Members for additional default fund contributions.
+---------------------------------------------------------------------------
+
+    The FRAP sets out the limit framework for clearing exposures at the 
+member and member group level, with the primary limit being that no one 
+member or member group can use more than 45% of the default fund.\44\ 
+For lower credit quality members (beginning at an ICS score of 5), 
+there is a limit of 25% usage of the Default Fund, progressively 
+decreasing to zero for a member with an ICS score of 8 or higher. 
+Finally, the FRAP provides that LCH SA will monitor these limits daily 
+for each member in each Default Fund.
+---------------------------------------------------------------------------
+
+    \44\ This may be increased up to 50% for members which have an 
+ICS of 1-4, for a given default fund, when additional risk 
+management tools are in place to mitigate a decrease in the 10% 
+buffer in financial resources held. This is subject to approval from 
+the ERCo followed by a notification to the Risk Committee, and the 
+approval from ERCo needs to be ratified annually. Any such increase 
+in the threshold to 50% is not automatic and each clearing service 
+will need to present and justify the request during the ERCo.
+---------------------------------------------------------------------------
+
+    To address the risk of clearing members that also have exposure as 
+CaLM counterparties, the FRAP establishes a concentration limit 
+framework at the counterparty level. That is, the FRAP defines a 
+Capital at Risk (``CAR'') amount for each member or member group which, 
+together with the aggregate risk exposure of that member or member 
+group, must not be greater than 30% of the entire LCH SA capital.
+    The FRAP, in addition, requires LCH SA to run liquidity stress 
+tests,\45\ collateral stress tests \46\ and exposure stress 
+testing.\47\ The policy also describes LCH SA's Reverse Stress Testing 
+Framework to ascertain the adequacy of financial resources held against 
+member positions.\48\ A supplemental appendix also describes LCH SA's 
+reverse stress testing and sensitivity analysis processes in accordance 
+with SEC regulations. Specifically, the appendix states that LCH SA 
+will conduct a comprehensive analysis of core stress testing scenarios, 
+models, and underlying parameters and assumptions more frequently than 
+the required monthly cadence when the products cleared or markets 
+served display high volatility or become less liquid, or when the size 
+or concentration of positions held by the participants increases 
+significantly. The results of which will go through LCH SA's internal 
+governance processes for the purposes of assessing the adequacy of and 
+adjusting, as necessary, its margin methodology, model parameters, 
+models used to generate clearing or guaranty fund requirements, and any 
+other relevant aspects of its margin framework. In addition to its 
+reverse stress testing processes, LCH SA will conduct a sensitivity 
+analysis of its margin models and a review of its parameters and 
+assumptions for back-testing on at least a monthly basis and consider 
+modifications to ensure its back-testing practices are appropriate for 
+determining the adequacy of margin resources. This may be performed 
+more frequently than monthly during periods of time when the products 
+cleared or markets served display high volatility or
+
+[[Page 36261]]
+
+become less liquid, or when the size or concentration of positions held 
+by the participants increases or decreases significantly. LCH SA will 
+bring the results of this analysis through internal governance in order 
+to evaluate the adequacy of its margin methodology, model parameters 
+and any other relevant aspects of its margin framework.
+---------------------------------------------------------------------------
+
+    \45\ These stresses are detailed in the Liquidity Risk Policy 
+and must be run daily and reviewed at least quarterly or when there 
+is a sudden change in liquidity conditions.
+    \46\ These stresses are described in the Collateral Risk Policy 
+and must be run daily. Collateral haircuts must be reviewed at least 
+quarterly.
+    \47\ This is the stress testing regime carried out in the 
+default fund sizing described above in the FRAP, which ensures that 
+the ``cover 2'' standard is being met relative to extreme but 
+plausible scenarios above the service initial margin confidence 
+level. These stress tests must be run daily.
+    \48\ The financial resources considered by the policy include 
+all margin coverage, default funds and liquidity resources.
+---------------------------------------------------------------------------
+
+c. Counterparty Credit Risk Policy
+    The Counterparty Credit Risk Policy (``CCRP'') describes the 
+standards by which LCH Group and its entities manage and assess 
+counterparty credit risk via an ICS and limit frameworks to manage the 
+risk. Moreover, the policy clarifies the roles and responsibilities 
+within LCH SA for compliance with the CCRP. LCH SA Credit Risk is 
+responsible for monitoring \49\ and managing counterparty credit risk. 
+This includes: (i) assigning and maintaining the ICS; (ii) assigning, 
+maintaining and monitoring the applicable limits under the policy; 
+(iii) reporting to the responsible risk team of any change in the ICS 
+which triggers actions under the CCRP and other LCH SA risk policies; 
+and (iv) regular and ad-hoc reporting to other risk areas and senior 
+management. The policy is owned by the CRO.
+---------------------------------------------------------------------------
+
+    \49\ LCH SA Credit Risk is also required to escalate to the ERCo 
+if any concerns are raised as a result of the factors listed in 
+Annex I, regardless of whether it directly impacts the Implied ICS. 
+For example, where a counterparty reports a change to its external 
+rating letter category from A to BBB and vice versa.
+---------------------------------------------------------------------------
+
+    The CCRP requires an ICS to be assigned to all clearing members and 
+the sovereign of their country of risk (and that of their parent, if 
+different); and all other counterparties, including intermediaries and 
+countries which are subject to a minimum ICS as covered in other risk 
+policies. The main scoring frameworks for each counterparty type are 
+detailed in the ICS Frameworks Methodology Document (the ``IFMD'') and 
+are subject to annual model validation.
+    The CCRP and IFMD set out the factors to be used by LCH SA to 
+assign an ICS \50\ and derive the Implied ICS \51\ for corporates 
+(including banks, non-bank financial institutions and supranational 
+entities), sovereigns (including ``Government Related Entities''), 
+interoperating CCPs, pension funds, regulated funds, and insurance 
+funds.
+---------------------------------------------------------------------------
+
+    \50\ The frameworks assign an ICS between one (1) and ten (10), 
+whereby one (1) represents low default probability in line with the 
+AAA public ratings and ten (10) is equivalent to a defaulting 
+counterparty.
+    \51\ The ICS is calculated using quantitative and qualitative 
+factors, which are also scored on a one (1) to ten (10) scale based 
+on one or more metrics. Each factor is weighted and the sum of the 
+weighted factors produces an ``Implied ICS''. The Implied ICS can be 
+adjusted up or down to arrive at the ``Final ICS'' based on specific 
+``Adjustment factors'' which capture: (i) third party guarantees or 
+support; (ii) country risk: a sovereign ceiling applies to all 
+corporates unless there is a demonstrated degree of diversification. 
+Due to the high regulatory oversight, the country ceiling does not 
+apply to interoperating CCPs; and (iii) specific reasons which make 
+one of the factors over/under stated or particularly significant to 
+dominate all other factors for the final score. The factors, metrics 
+and adjustments are reviewed by the ERCo on at least an annual basis 
+and independently validated in accordance with the Model Governance, 
+Validation and Review Policy.
+---------------------------------------------------------------------------
+
+    The CCRP also requires all applicable counterparties, including 
+``Dormant Sponsored Members,'' to be subject to a formal documented ICS 
+assessment before on-boarding, and then at least once a year. 
+Prospective clearing members and interoperating CCPs for all markets 
+must meet the minimum entry ICS detailed in the policy.\52\ For 
+example, Clearing Members, including Interoperating CCPs, must have at 
+least an ICS five (5) rating.
+---------------------------------------------------------------------------
+
+    \52\ All other counterparties must meet the minimum eligibility 
+criteria detailed in the relevant LCH risk policies and Rulebooks.
+---------------------------------------------------------------------------
+
+    The policy requires a Credit Assessment Review and ICS 
+recommendation to be performed for all new clearing member 
+applications, including the sovereign credit assessment and ICS 
+recommendation of the prospective clearing member and its parent 
+jurisdiction. The ERCo has the discretion to reject any member 
+application regardless of the ICS assigned.
+    The CCRP and Annex I thereof detail the exposure monitoring 
+thresholds, limits and tolerances applied to each clearing member. This 
+includes: (i) STLOAM plus Default Fund Contribution/Net Capital ratio; 
+(ii) T-ratio; and (iii) credit tolerances. All thresholds are monitored 
+daily, and LCH SA Credit Risk decide on any action to be taken when a 
+breach has occurred.
+    The CCRP also provides that the aim of additional margin is to 
+ensure that as a clearing member's credit quality deteriorates to below 
+its entry requirement, more resources are called progressively so that 
+the stress losses are fully covered by eligible resources. Moreover, it 
+ensures the relevant service confidence level, as detailed in the FRAP, 
+continues to be met. Additional margin will be applied to house 
+positions and, in general, additional margin will also be applied to 
+client accounts.
+    The CCRP provides that, where appropriate, LCH SA Credit Risk and 
+the business line may agree to separate procedures to apply additional 
+margin to client accounts on a discretionary basis. Such procedures may 
+include an assessment of the ability of a client to port and its 
+underlying credit quality. Such procedures need to be approved by the 
+ERCo upon LCH SA Credit Risk's recommendation. If such discretion is 
+applied, the LCH SA Risk Committee will be notified of the ERCo's 
+approval and the rationale for the decision.
+d. Operational Risk Management Policy
+    The Operational Risk Management Policy (``ORMP'') sets out (i) the 
+LCH Group Board's \53\ risk appetite and expectations for the 
+management of operational risk (defined as the risk of loss arising 
+from inadequate or failed internal processes, people and systems or 
+from external events); \54\ and (ii) the key features of the 
+operational risk management framework for identifying, assessing, 
+monitoring, mitigating and managing operational risk. The policy 
+applies to all operations within LCH SA, including all LCH SA 
+employees,\55\ regardless of the basis or term of their employment. The 
+standards of the OMRP must also be applied where business functions are 
+outsourced to third parties, including intra-Group.
+---------------------------------------------------------------------------
+
+    \53\ In accordance with the Risk Governance Framework and unless 
+otherwise stated, ``LCH Group Board'' refers to each respective 
+Group entity board, including that of LCH SA, LCH Ltd. and SwapAgent 
+Ltd.
+    \54\ The policy acknowledges that regulations applicable to 
+local entities may specify a more detailed definition of 
+`operational risk'.
+    \55\ An ``employee'' is defined as a permanent, temporary and 
+contract member of staff, consultant and secondee, intern and any 
+other such individual.
+---------------------------------------------------------------------------
+
+    The ORMP clarifies and expands upon the roles and responsibilities 
+within LCH SA for compliance with the ORMP. The LCH SA Board is 
+responsible for: (i) determining risk appetite; (ii) overall compliance 
+of the risk management framework; and (iii) ensuring that management 
+maintains an adequate system of internal controls appropriate to LCH 
+SA, and the risks to which it is exposed.\56\ Moreover, the ORMP 
+details the three lines of defence model, as defined in the Risk
+
+[[Page 36262]]
+
+Governance Framework, operated by LCH SA:
+---------------------------------------------------------------------------
+
+    \56\ The OMRP sets out the LCH SA Board's expectations, 
+including that (i) risks be identified, assessed, monitored and 
+managed in a proactive manner to minimize the impact to the LCH 
+Group; (ii) risk assessments be carried out using the risk severity 
+matrix contained in Annex A; and (iii) each operational risk be 
+identified as either `outside appetite', `near limit (within 
+appetite)' or `within appetite'. Where risks are assessed as near or 
+outside appetite, or where control weaknesses are identified, the 
+First Line of Defence must develop solutions and implementation 
+plans with clear interim milestones to address the weaknesses and 
+bring the risks back to within appetite. The policy requires issues 
+and actions to be raised at least for all risks assessed as near or 
+outside appetite.
+---------------------------------------------------------------------------
+
+    <bullet> All services and functions responsible for business as 
+usual and change activities are responsible for ensuring adherence to 
+the ORMP and being accountable for identifying, assessing, monitoring, 
+mitigating and managing operational risk \57\ (the ``First Line of 
+Defence'').
+---------------------------------------------------------------------------
+
+    \57\ This includes responsibility for the day-to-day management 
+of risk by designing, operating and maintaining an effective system 
+of internal controls and for promoting the development of a strong 
+risk culture. The ORMP provides that business and department heads 
+are responsible for ensuring all material risks, controls and 
+mitigating actions are up to date and reflect the current risk 
+assessment. In addition, all staff are responsible for the day-to-
+day management of risk by designing, operating and maintaining an 
+effective system of internal controls.
+---------------------------------------------------------------------------
+
+    <bullet> LCH SA Risk Department \58\ are responsible for (i) 
+providing oversight, support, and challenge to the First Line of 
+Defence; \59\ (ii) ensuring that the ORMP is aligned to the LCH SA 
+Board's risk appetite; (iii) defining the risk management process and 
+policy framework; (iv) assessing risks against policy standards; and 
+(v) reporting to the Board and sub-committees on risk exposure (the 
+``Second Line of Defence''). The Second Line of Defence is also 
+responsible for providing appropriate training \60\ on the risk 
+management framework at least annually to relevant staff.\61\
+---------------------------------------------------------------------------
+
+    \58\ The LCH SA Risk Department is also responsible for 
+approving all changes to appetite assessment, and reporting to the 
+LCH SA Board and sub-committees on risk exposure.
+    \59\ The Second Line of Defence must ensure that the First Line 
+of Defence provides evidence of compliance with the principles and 
+standards outlined in the ORMP in an appropriately frequent and 
+detailed manner, having regard to the importance of the business and 
+the services provided.
+    \60\ In line with Annex D of the ORMP, LCH SA Compliance 
+performs face-to-face training for new joiners on compliance topics, 
+and at least every 2 years with critical staff. The purpose of risk 
+management training is to (i) ensure the consistent application of 
+the Operational Risk Management framework, including the tools and 
+reporting processes; (ii) enhance the clarity of roles and 
+responsibilities for risk management and embed these across the 
+three lines of defense; and (iii) embed an effective risk culture 
+for the group which maintains high standards or risk awareness, 
+transparency and accountability.
+    \61\ Compliance is also included as a Second Line of Defence, 
+providing oversight, support and challenge to the First Line in 
+addition to ensuring that this policy is aligned to the Board risk 
+appetite and complies with all the applicable financial rules and 
+regulations.
+---------------------------------------------------------------------------
+
+    <bullet> LCH SA Internal Audit team (``Internal Audit'') is 
+responsible for developing and delivering a program of assurance aimed 
+at validating that the control environment is operating in alignment 
+with the LCH SA Board's risk appetite and the policies approved by the 
+LCH SA Board (``Third Line of Defence'').\62\
+---------------------------------------------------------------------------
+
+    \62\ In doing so, the Third Line of Defence provides independent 
+assurance to the LCH SA Board and other key stakeholders over the 
+effectiveness of the systems of internal controls and the Risk 
+Governance Framework.
+---------------------------------------------------------------------------
+
+    The ORMP requires the LCH Group to have a defined risk taxonomy for 
+operational risks, as set out in Appendices 3 and 7 of the Risk 
+Governance Framework (the ``Risk Taxonomy''). Specifically, (i) the 
+First Line of Defence must identify applicable operational risks and 
+define associated controls applicable to their business or function, in 
+line with the Risk Taxonomy; and (ii) any changes must be approved by 
+the Second Line of Defence, in accordance with Annex C of the ORMP.
+    The policy confirms that the LCH SA risk assessment tools and 
+processes must include the following minimum requirements:
+    <bullet> risk and control assessments \63\ (``RCAs'') to be 
+performed by the First Line of Defence \64\ on an annual basis, and 
+reviewed by the Second Line of Defence; \65\
+---------------------------------------------------------------------------
+
+    \63\ Such assessments must consider a number of factors such as 
+(i) critical and significant audit findings; (ii) policy breaches; 
+and (iii) external events that may give rise to increased 
+vulnerabilities. Change activities (including new products, 
+processes and system changes), which, if not deployed correctly 
+would have a material impact on LCH SA's business activities or risk 
+profile, must follow the defined change management process detailed 
+in the ORMP and Annex E thereof.
+    \64\ In carrying out its RCAs, the First Line of Defence must 
+refer to the Risk Taxonomy and Control Guidance set in a dedicated 
+Standard as set forth in the Risk Governance Framework in order to: 
+(i) identify risks and controls which are applicable to their 
+business or function; (ii) assess the inherent risk (i.e., before 
+considering mitigating controls); (iii) perform a control 
+environment assessment; and (iv) assess the residual impact and 
+likelihood of the risk after considering the control assessment.
+    \65\ The Second Line of Defence must have a process in place to 
+review and challenge First Line of Defence RCAs.
+---------------------------------------------------------------------------
+
+    <bullet> a control assurance process,\66\ covering key controls 
+\67\ in appropriate depth and frequency;
+---------------------------------------------------------------------------
+
+    \66\ Control assurance is an assessment of controls by a person 
+independent of the day-to-day operation of those controls to confirm 
+the control environment is adequately designed and operating 
+effectively, providing a systematic view of which controls are 
+effective in mitigating risk, which ones are not and where controls 
+are missing. The control assurance also focuses on providing 
+objective evidence that key controls are designed and operating 
+effectively. This provides management the opportunity to respond 
+where controls are not managing risks sufficiently. For the purposes 
+of this control framework, `control' is defined as `an action taken 
+(including verification action) to mitigate risk by either reducing 
+the likelihood and/or the impact of an unwanted outcome'.
+    \67\ The term `key control' is defined as a control that 
+`[p]revents a risk from materializing, detects it in a timely manner 
+or significantly mitigates the consequences. The failure of the key 
+control could have a material impact; financial, non-financial, 
+reputational, regulatory, lead to service disruption and increase 
+risk exposure for the entity'. Any key controls being assessed as 
+being absent or ineffective must be reported to the Second Line of 
+Defence with a remediation plan.
+---------------------------------------------------------------------------
+
+    <bullet> deep dives \68\ to be conducted by the First, Second and 
+Third Lines of Defence in response to concerns, themes, management 
+focus, triggers or external drivers; and
+---------------------------------------------------------------------------
+
+    \68\ Deep dives assess the controls and governance over a 
+particular process. Any changes to risk profile or actions required 
+as a result of a deep dive must be reported to Second Line of 
+Defence, with a remediation plan.
+---------------------------------------------------------------------------
+
+    <bullet> a list of extreme but plausible operational risk scenarios 
+relevant to the business or function, incorporating expert opinion \69\ 
+and data evaluating exposure to high severity events.
+---------------------------------------------------------------------------
+
+    \69\ The ORMP provides that such scenario analysis should draw 
+on the knowledge of experienced business managers and subject matter 
+experts to derive reasoned assessments of plausible severe losses 
+and impacts. As part of the RCA review, the Second Line of Defence 
+will review and challenge the scenarios selected by First Line to 
+ensure they are reflective of the key risks the business or function 
+is exposed to. Over time, the ORMP requires such assessments to be 
+validated and reassessed through comparison to actual loss 
+experience to ensure their reasonableness.
+---------------------------------------------------------------------------
+
+    The ORMP also details the process to be followed when the following 
+risk events occur triggering a re-assessment of risks and controls: (i) 
+incidents and actual losses; \70\ (ii) audit \71\ or risk and 
+compliance issues, and external reviews; \72\ (iii) key risk and 
+control indicator breaches; \73\ (iv) control weakness; (v) other 
+internal events including process changes or restructuring; \74\ and 
+(vi) external events arising outside of LCH SA and LCH
+
+[[Page 36263]]
+
+Group's control (e.g., natural disasters, pandemics, political changes, 
+etc.).
+---------------------------------------------------------------------------
+
+    \70\ A process must be in place to monitor and manage all types 
+of incidents including IT system failures, failure or delays in key 
+business processes, in order to minimize interruptions to business 
+services. The ORMP requires all incidents to be classified in 
+accordance with their materiality under Annex B and recorded in an 
+appropriate system to facilitate the immediate escalation and 
+resolution of the incident.
+    \71\ Any audit issue rated `critical' or `significant' may 
+impact the risk profile of the business/function and the risk must 
+be re-assessed accordingly.
+    \72\ External reviews can be initiated by LCH SA's regulators or 
+management where a third party is engaged to perform a specific 
+review and will include for example management recommendations 
+arising as part of the annual external audit process.
+    \73\ Key Risk Indicators (``KRI'') and Key Control Indicators 
+(``KCI'') are metrics with thresholds designed for management to use 
+in order to effectively identify, assess and monitor their current 
+and emerging risks against risk appetite. All businesses and 
+functions must implement them based on the operational risk library 
+and control guidance.
+    \74\ Changes such as process redesign or organizational 
+restructuring may impact the risk profile and require re-assessment 
+of relevant risks, as could a threat assessment triggered by senior 
+management or the LCH SA Board.
+---------------------------------------------------------------------------
+
+    Finally, the ORMP requires businesses and functions to maintain 
+complete and accurate risk registers; risk indicators and evidence that 
+supports the assessment of risk, including scenario testing, and ensure 
+regular management information is available for reporting on the status 
+of operational risk.
+e. Third Party Risk Management Policy
+    The Third Party Risk Management Policy (``TPRMP'') and the 
+associated Standard set forth in the Risk Governance Framework set out 
+LCH Group's minimum requirements for managing potential risks when 
+entering into and managing all third party relationships across the 
+following four (4) phases of the Third Party \75\ lifecycle: (i) 
+identify the need to leverage third party services and select the most 
+appropriate third party provider (``Plan and Select''); (ii) set the 
+conditions for the third party relationship (``Contract and Onboard''); 
+(iii) ensure that the service, relationship and risks are effectively 
+managed (``Manage and Monitor''); and (iv) ensure orderly exit and 
+transition at the completion of an engagement or an early termination 
+(``Terminate and Exit'').
+---------------------------------------------------------------------------
+
+    \75\ ``Third Party'' is defined in the TPRMP to mean a third 
+party entity, whether internal or external, that provides goods or 
+services to LSEG. The definition includes: (i) External service 
+providers (also known as suppliers and vendors) where LSEG negotiate 
+contractual terms and pay through invoiced arrangements; (ii) 
+External Partners including Financial Market Utilities (FMUs)/
+Financial Market Institutions (FMIs)/Banks, etc. remunerated through 
+indirect payments (e.g., settlements/deductions). These include 
+CCPs; (iii) Internal Third Party: intragroup services provided from 
+one LSEG entity to another. This definition does not include 
+affiliates, charities, brokers, or joint ventures.
+---------------------------------------------------------------------------
+
+    The Plan and Select section explain how a Risk Assessment must be 
+performed on all new Third Party engagements.\76\ Such assessment 
+evaluates the importance and criticality of the third party 
+dependencies across all dimensions and drives subsequent due diligence 
+and procurement activities. Moreover, the policy requires due diligence 
+conducted to be proportionate to the inherent risk and nature of the 
+engagement prior to determining if the Third Party is an appropriate 
+choice for LSEG and within the defined appetite, including 
+concentration. Due diligence must include, but is not limited to, 
+business facts,\77\ know your third party,\78\ due diligence \79\ and 
+conflicts of interest.\80\ The TPRMP provides a detailed list of the 
+events that trigger notification to the relevant regulators e.g., when 
+an existing arrangement turns from `non-critical' to `critical', and 
+when there are changes \81\ to the list of existing Critical 
+Outsourcing Arrangements.\82\
+---------------------------------------------------------------------------
+
+    \76\ In the event of a ``Critical Outsourcing'' arrangement, 
+appropriate risk and LCH SA Board approval, including regulated 
+entity boards, must be obtained prior to execution, including for 
+the use of any subcontractors. In addition, where a third party 
+provides details on its extended supply chain, LCH SA should 
+establish if any of those parties meet the definition of `critical'. 
+Where identified, these should be managed in line with the relevant 
+requirements in the TPRM Standards. `Extended Supply Chain' is 
+defined as `Equivalent to 4th and nth suppliers. Aligns with the 
+expectation that entities take steps to understand critical 
+dependencies in their extended supply chain as far as they extend 
+into the supply chain'. Moreover, Appendix D of the TPRMP provides 
+that where LCH SA identifies an FMI, FMU or other entity directly 
+regulated by a competent authority (regulator) as `critical', the 
+requirements of this policy and the associated TPRM standards will 
+be applied on a best endeavors basis.
+    \77\ For example, a check to ascertain that the Third Party is a 
+valid entity registered in the jurisdiction(s) in which it operates 
+and/or a check of the Third Party's capability to deliver the 
+desired goods/services.
+    \78\ For example, compliance and financial crime screening, 
+including sanctions, anti-bribery & corruption, anti-money 
+laundering, country risk and fraud, as appropriate.
+    \79\ The TPRMP provides that such due diligence is to be carried 
+out in accordance with the risk profile of the service, e.g., 
+information and cyber security, data privacy, financial crime, and 
+business continuity/resilience.
+    \80\ All conflicts of interest relating to each third party 
+arrangement must be identified, captured and managed in line with 
+the Group Conflict of Interest Policy.
+    \81\ This would include material changes, exits or replacements.
+    \82\ A ``Critical or Important Outsourcing Arrangement'' is 
+defined as a Third Party arrangement which meets both the definition 
+of `Outsourcing' and delivers services which meet the definition of 
+`Critical Service'. Outsourcing is defined as an engagement of any 
+form between LSEG and a service provider by which that service 
+provider performs a service, function or an activity that would 
+otherwise be undertaken by LSEG itself. A sub-set of Third Party 
+provided services (either internal or external) where certain 
+regulatory requirements are triggered based on the type and 
+materiality of the service. Example regulatory requirements include 
+increased governance, more frequent risk assessment and regulatory 
+notification. The policy lists the circumstances and factors to be 
+considered by LCH Group to deem a service a `Critical Service'.
+---------------------------------------------------------------------------
+
+    The Contract and Onboard section requires LCH SA to have 
+appropriate written agreements \83\ with the Third Party (including 
+Intragroup engagements) that are commensurate with the nature, scale 
+and complexity of the services and in line with the financial approval 
+policy. The TPRMP also provides that the written agreement must 
+consider the dependencies from the third party across all dimensions 
+including technology and the potential impact on the continuity and 
+availability of financial services and activities.\84\ In addition and 
+for engagements or Outsourcing contracts with Critical Third 
+Parties,\85\ the TPRMP requires LCH SA to engage with subject matter 
+experts from Legal, the Business, Risk and Compliance during the 
+contracting phase and the subsequent approval process.
+---------------------------------------------------------------------------
+
+    \83\ A Written Agreement is defined as a binding, auditable 
+commitment between LSEG, or an LSEG entity and a Third Party. It 
+includes, but is not limited to, contracts, LSEG Legal preapproved 
+standard Master Service Agreements (``MSA'') or other type of 
+framework agreement along with Purchase Orders (``PO''), Statements 
+of Work (``SoW''), Order Forms (``OF''), Access or Membership 
+Agreement.
+    \84\ The TPRMP requires written arrangements related to critical 
+outsourcing or critical services to ensure the service provider 
+grants LSEG and its competent authorities certain access (e.g., head 
+offices and operation centers) and rights of inspection and 
+auditing, to enable them to monitor such outsourcing arrangement, 
+and to ensure compliance with all applicable regulatory and 
+contractual requirements. Where the outsourcing of services is not 
+critical, LCH Group should ensure the access and audit rights are 
+appropriate taking a risk-based approach. The policy lists the 
+circumstances and factors to be considered by LCH Group to deem a 
+service a `Non-Critical Service'.
+    \85\ A Critical Third Party is defined in the TPRM as a Third 
+Party where the continuous, secure and efficient delivery of their 
+services to the regulated entity is critical to the operation of 
+that regulated entity.
+---------------------------------------------------------------------------
+
+    The Manage and Monitor \86\ section requires an updated register of 
+all current relationships with the third parties and outsourcing 
+arrangements \87\ to be regularly maintained. Moreover, Third Party 
+performance,\88\ together with that of any permitted subcontractors 
+\89\ (for example 4th and nth parties) supporting the delivery of 
+services, must be monitored \90\ on an
+
+[[Page 36264]]
+
+ongoing basis using a risk-based, proportionate approach \91\ and in 
+line with the TPRM Manage and Monitor Standard to ensure the Third 
+Party is delivering on their obligations under the written agreement. 
+The policy also requires LSEG to exercise and apply audit rights (and 
+supplier testing) in full to Critical Third Party arrangements and on a 
+risk-based basis to non-critical outsourcing arrangements where 
+required.\92\
+---------------------------------------------------------------------------
+
+    \86\ The TPRMP provides that the following key principles 
+underpin LSEG's approach to the management of Third Party 
+arrangements: (i) a risk-based approach, with the highest level of 
+oversight and due diligence on Critical Third Party services (which 
+includes third parties which meet the regulatory definitions 
+Critical Outsourcing Arrangements and Critical Third Parties); (ii) 
+overall accountability by the Accountable Executive for overall 
+resilience and any risks associated with it and for any activities 
+conducted via an outsourcing arrangement; and (iii) standard 
+processes and tools must be leveraged wherever possible to achieve 
+consistency and efficiency.
+    \87\ This includes critical 4th and nth parties where details of 
+these are provided.
+    \88\ The TPRMP sets out what the performance monitoring for 
+Critical Third Parties should include. For example, Day-to-day 
+monitoring of the Third Party's performance and delivery against the 
+measures defined in the written agreement and to ensure appropriate 
+action is taken to resolve any operational issues that may arise 
+with the Third Party.
+    \89\ A subcontractor is defined as a provisioning party to whom 
+the Third Party subsequently delegates all or part of the provision 
+of a service (e.g., 4th+ party).
+    \90\ Monitoring of Third Party arrangements must also include 
+the appropriate assessment and management of changes to, and within, 
+the arrangement in line with organizational change processes. 
+Moreover, the policy provides that it is important that Business 
+Continuity Plans and reviewed and where relevant testing in line 
+with the Business Continuity Management Policy.
+    \91\ Further detail on this approach can be found in the TPRMP 
+and Appendix D thereto.
+    \92\ For regulated areas, this may include third party 
+certifications and pool audits, where appropriate. A full table of 
+requirements is set out in the Risk Methodology document.
+---------------------------------------------------------------------------
+
+    The Termination and Exit section requires LCH SA to plan for both a 
+`stressed' (e.g., a third party becoming insolvent) and unstressed 
+(e.g., termination for convenience/end of a contract) exit from each of 
+its third party arrangements.\93\ The policy states that the 
+Accountable Executive \94\ and Relationship Owner \95\ for each Third 
+Party arrangement is responsible for ensuring records and documentation 
+are maintained in line with local regulatory records management 
+requirements, in order to demonstrate ongoing compliance with the TPRMP 
+and the associated standards.\96\
+---------------------------------------------------------------------------
+
+    \93\ Irrespective of the reason for exiting a Third Party 
+relationship, LSEG aims to do so: without undue disruption to its 
+business activities with minimal impact on the services provided to 
+customers; and without limiting its compliance with legal or 
+regulatory requirements.
+    \94\ An Accountable Executive is defined as responsible for 
+ensuring that the risks associated with the Third Party are managed 
+as per this policy: (i) retain overall responsibility for the Third 
+Party engagement; (ii) monitor Third Party engagement: (iii) manage 
+incidents and disputes and oversee change control process'.
+    \95\ A Relationship Owner is defined as a nominated individual 
+within the Business Function who assumes responsibility for the 
+ownership of goods or services from a designated Third Party. They 
+are responsible for implementing and executing oversight and 
+management activities across the Third Party lifecycle (i.e., from 
+selection, contracting and onboarding service delivery through to 
+exit activities). This role is limited to full time employees.
+    \96\ The policy sets out the relevant LCH Group policies and 
+guidelines, or equivalent entity policies and guidelines, that must 
+be read in conjunction with the TPRMP. For example, the Anti-Bribery 
+and Corruption Policy, the Business Continuity Policy, the Code of 
+Conduct and Ethics, and the Conflicts of Interest Policy.
+---------------------------------------------------------------------------
+
+    The TPRMP also sets out the roles and responsibility for 
+implementing the above standards within LCH SA.\97\ In this regard, LCH 
+Group follows a third lines of defense model. The first line of 
+defense, made up of the LCH SA Third Party Management Risk team and 
+Procurement team, is responsible and accountable for identifying, 
+assessing, monitoring, and managing third party risk. Moreover, it must 
+ensure there are appropriate controls designed, implemented and 
+assessed to ensure LCH SA can operate within the agreed risk appetite.
+---------------------------------------------------------------------------
+
+    \97\ Further detail on these roles and responsibilities can be 
+found in Appendix E of the TPRMP. Please note that Appendix A has 
+not been referred to as it is not applicable to LCH SA.
+---------------------------------------------------------------------------
+
+    The Second Line of Defence, including Second Line Risk and 
+Compliance team, is responsible for the oversight, support, and 
+challenge in addition to ensuring that the policy is aligned to the LCH 
+SA Board appetite.\98\ The Third Line of Defence, made up of the 
+Internal Audit function, is responsible for developing and delivering a 
+program of assurance aimed at validating that the control environment 
+is operating in alignment with the LCH SA Board's risk appetite and the 
+policies approved by the LCH SA Board. In doing so, Third Line of 
+Defence provides independent assurance to the LCH SA Board and other 
+key stakeholders over the effectiveness of the systems of controls and 
+the Risk Governance Framework.
+---------------------------------------------------------------------------
+
+    \98\ The Second Line of Defence, including Compliance, must 
+ensure that the First Line of Defence provides evidence of 
+compliance with the principles and requirements outlined in this 
+policy in an appropriately frequent and detailed manner, having 
+regard to the importance of the business and the services provided.
+---------------------------------------------------------------------------
+
+f. Risk Governance Framework
+    The Risk Governance Framework (the ``RGF'') identifies the Key 
+Risks (as defined below) faced by LCH SA and sets out: (i) the LCH SA 
+Board's appetite across the Key Risks; (ii) the taxonomy of the Key 
+Risks; (iii) the roles and responsibilities within LCH SA for managing 
+each identified Key Risk; (iv) the standards to be met by LCH SA when 
+managing its business activities within the determined risk appetite; 
+and (v) the indicators and tolerance thresholds by which each Key Risk 
+is meant to be measured and reported.
+    The RGF aims to ensure that the risks assumed in executing LCH SA's 
+business strategy are adequately understood and managed across all 
+levels within LCH SA. Moreover, the framework supports LCH SA's Board 
+and Executive Management in discharging their regulatory and corporate 
+responsibilities.\99\
+---------------------------------------------------------------------------
+
+    \99\ The RGF provides that this is done through robust 
+governance arrangements with (i) well-defined, transparent, and 
+consistent lines of responsibility; (ii) effective processes to 
+identify, manage, monitor and report the risks to which it is or 
+might be exposed; and (iii) adequate internal control mechanisms.
+---------------------------------------------------------------------------
+
+    The RGF establishes a hierarchical risk taxonomy comprising of 
+levels zero (0), one (1) and two (2). The key risks are set out at 
+level zero (0) and include: (i) financial and model risks associated 
+directly with clearing activities; (ii) risks relating to operational 
+resilience; (iii) strategic risks; (iv) people and culture risks; and 
+(v) regulatory compliance, legal and corporate disclosure risks 
+(together, the ``Key Risks''). Within the Key Risks, the RGF identifies 
+31 level one (1) risks, and a number of level two (2) sub-risks where 
+additional granularity is appropriate.\100\ Moreover, the framework 
+provides that LCH SA's appetite for the Key Risks is generally 
+low,\101\ and in some cases, very low, due to its core mission as a 
+regulated clearing house that plays a vital role in ensuring the 
+stability of the financial markets in which it operates.\102\
+---------------------------------------------------------------------------
+
+    \100\ Details on the taxonomy with level two (2) risk 
+definitions can be found in Appendix 3 of the RGF.
+    \101\ The framework establishes four levels of risk appetite: 
+very low, low, medium and high. Moreover, each level is defined as 
+follows: (i) `very low' means LCH SA is not willing to accept risks 
+in most circumstances. The LCH SA Board should decide if the 
+benefits outweigh the costs and the risk is worth taking; (ii) `low' 
+means LCH SA is willing to accept risk in some circumstances whereby 
+successful delivery is likely with an acceptable level of reward. 
+Such risks should be managed at business unit level (as set out in 
+the RGF), but escalated if the impact and/or probability of 
+occurrence is increasing; and (iii) `moderate' means LCH SA is eager 
+to innovate or choose options based on potential higher rewards. 
+Risks in the `moderate' category should be monitored in accordance 
+with the RGF to ensure that the cost/effort applied in managing such 
+risks is appropriate given the potential downside. In relation to 
+the `high' risk appetite, the framework provides that while LCH SA 
+does not expect to have a high-risk appetite for any risk, in 
+exceptional circumstances, it may temporarily tolerate short periods 
+of exposure to this risk level.
+    \102\ Section C of the RGF expands upon each of the risks 
+identified in the risk taxonomy, including the relevant risk 
+appetite, a definition of each risk, the high level standards 
+expected to be in place to manage such risks, as well as the 
+relevant risk indicators and associated tolerance thresholds for 
+assessing the management of each risk.
+---------------------------------------------------------------------------
+
+    The RGF also identifies a range of quantitative and qualitative 
+indicators and thresholds \103\ tailored for specific risks, which are 
+used to measure the extent to which a risk is considered within the LCH 
+SA Board's appetite.\104\ In addition to these indicators, the CRO, as 
+owner of the RGF, will utilize the risk assessment grid \105\ and 
+process to
+
+[[Page 36265]]
+
+compile LCH SA Board's appetite reports.\106\
+---------------------------------------------------------------------------
+
+    \103\ The framework provides that the thresholds should be 
+considered risk tolerances (i.e., an `outside' appetite threshold 
+indicates the maximum tolerance for a particular risk). The LCH SA 
+Board expects that such tolerance levels should be specific to each 
+risk, and capable of quantitative measurement where possible, so 
+that an accurate report can be made of the status of each risk 
+against the LCH SA Board's appetite and maximum tolerance.
+    \104\ The CRO will include these indicators and thresholds in 
+his regular risk reporting to the LCH SA Board.
+    \105\ The assessment of a risk being reported as `within' 
+(green), `near' (amber), or `outside' appetite (red) may be made by 
+using the risk indicators described above and by comparing residual 
+risk severity with the LCH SA Board's appetite, using the tables 
+detailed in Section A3 and Appendix 6 of the RGF.
+    \106\ The CRO may exercise judgement, both in the method 
+utilized and in the final assessment e.g., taking into account the 
+existence of any appetite-related actions. The CRO's assessment will 
+be validated through review at the Resilience Committee (ResCo) and 
+the ERCo.
+---------------------------------------------------------------------------
+
+    The framework highlights that risk culture is a vital element of 
+the overall culture of the LCH SA organization. LCH SA values, as 
+adopted by the LCH SA Board and Executive Management, communicated to 
+all employees, and reflected in the LSEG Code of Conduct, provide the 
+basis for measuring and assessing LCH SA's culture, and support the 
+measurement of risk against appetite. For example, the RGF requires (i) 
+senior management and employees at all levels to operate in a 
+transparent way, and be held accountable for their behavior; \107\ and 
+(ii) mandatory training to be provided to employees to reinforce LCH 
+SA's key cultural, behavioral, legal and regulatory obligations across 
+all important topics.\108\
+---------------------------------------------------------------------------
+
+    \107\ The RGF provides that the culture of transparency and 
+accountability is embedded through establishing, monitoring and 
+adhering to risk appetite, which is implemented through the 
+framework and suite of LCH SA policies.
+    \108\ The training is refreshed and rolled out throughout the 
+year, requiring an assessment to be completed by all the staff to 
+confirm that the materials have been understood. Non-completion is 
+monitored and escalated to ensure that the training has been 
+delivered to all intended recipients.
+---------------------------------------------------------------------------
+
+    The framework requires LCH SA to follow the three lines of defense 
+model (as described above). Like the ORMP,\109\ LCH SA Function Heads 
+and Business Heads (excluding the CRO, LCH SA Chief Compliance Officer 
+(``CCO'') and Head of Internal Audit) manage the risks of all LCH SA's 
+business activities and therefore constitute the First Line of Defence. 
+The CRO,\110\ as part of the Second Line of Defence, is responsible 
+for: (i) measuring, monitoring and reporting the risks identified in 
+the RGF and ORMP; and (ii) setting policies \111\ consistent with the 
+standards identified in the RGF. LCH SA Human Resources, Compliance, 
+Finance and Legal are responsible for corporate risks and for setting 
+policies consistent with the RGF and for the management, monitoring and 
+reporting of any policy noncompliance within their specific areas. 
+Internal Audit is the Third Line of Defence.
+---------------------------------------------------------------------------
+
+    \109\ The RGF details a specific Operational Risk Taxonomy in 
+Appendix 7 thereof.
+    \110\ The CRO has a dual reporting line to the LCH SA Chief 
+Executive Officer (``CEO'') and to the Chair of the LCH SA Risk 
+Committee. For compliance and regulatory risks, the CCO is 
+responsible for the second-line risk function, supported by the CRO.
+    \111\ The full list of LCH SA's Risk Policies can be found in 
+Appendix 4 of the RGF.
+---------------------------------------------------------------------------
+
+    The RGF details, in table format, each of the Key Risks, including: 
+(i) the LCH SA Board's risk appetite and standards; (ii) relevant risk 
+indicators and tolerance thresholds to assist with the assessment of 
+whether each risk should be assessed as `within', `near' or `outside' 
+appetite; \112\ (iii) the internal LCH SA stakeholders responsible for 
+each risk and associated policy; and (iv) the LCH SA policy detailing 
+how the LCH SA Board standards are applied across the business.\113\
+---------------------------------------------------------------------------
+
+    \112\ Holistically, at each level, such risk status assessment 
+will also take account of qualitative factors, tolerance thresholds, 
+policies and culture.
+    \113\ Such details can be found in Section C of the RGF.
+---------------------------------------------------------------------------
+
+    In relation to reputational risk, the framework:
+    (i) defines reputational risk as ``the risk of a failure to meet 
+stakeholders' expectations or the risk of unfavorable public 
+perceptions of the LCH SA business and brand;''
+    (ii) identifies stakeholder perceptions, brand risk and media 
+engagement as level two (2) risks;
+    (iii) describes the LCH SA Board risk appetite as `low' and 
+expresses that LCH SA will actively protect its brand by maintaining 
+the integrity of services and actively review initiatives to ensure 
+that its brand is protected;
+    (iv) defines the CEO and Business Heads as the First Line of 
+Defence, and the CRO as the Second Line of Defence;
+    (v) states that this risk is covered by brand, media and 
+communication policies;
+    (vi) identifies `negative/damaging press coverage' as a risk 
+indicator;
+    (vii) identifies `up to three (3) days of national/``trade'' press 
+coverage' as the near appetite threshold; and
+    (viii) identifies `more than three (3) days of national/``trade'' 
+press coverage as a proxy for maintaining a good reputation' as the 
+outside appetite tolerance limit.
+    Appendix 1 of the RGF details additional standards in relation to 
+the subject of recovery, resolution and wind-down \114\ (``RRW'') and 
+Important Business Services. For example and in relation to RRW, the 
+framework requires LCH SA to have a pre-arranged recovery plan which: 
+(i) has been agreed with LCH SA clearing members and regulators; (ii) 
+has been fully documented and gone through the appropriate internal 
+governance; (iii) lists the recovery tools available to be used in the 
+recovery process; and (iv) lists the decision points which trigger LCH 
+SA to go into recovery mode.
+---------------------------------------------------------------------------
+
+    \114\ Appendix 1 of the RGF defines such risk as ``The risk 
+stemming from LCH Ltd. or LCH SA not having in place a proper 
+[r]ecovery [p]lan having identified and pre-agreed recovery tools to 
+handle a loss event, remain solvent and to continue to operate 
+smoothly in performing its central clearing role. Examples of such 
+recovery tools can include member assessments, variation margin 
+haircutting, cash settlement, etc.''
+---------------------------------------------------------------------------
+
+    The RGF is reviewed and signed off by the LCH SA Board at least 
+annually, providing assurance that all risks continue to be 
+appropriately identified and mapped, that the statement of risk 
+appetite is clear and defined at the appropriate level of granularity, 
+that ownership and responsibilities are clear, and that there is an 
+appropriate process for monitoring and reporting on all risks against 
+LCH SA's appetite.
+2. Statutory Basis
+    LCH SA has determined that the Risk Policies are consistent with 
+the requirements of Section 17A of the Act \115\ and regulations 
+thereunder applicable to it, including Commission Rule 17ad-22(e).\116\ 
+In particular, Section 17A(b)(3)(F) \117\ of the Act requires, inter 
+alia, that the rules of a clearing agency ``promote the prompt and 
+accurate clearance and settlement of . . . derivatives agreements, 
+contracts, and transactions'' and ``to protect investors and the public 
+interest.''
+---------------------------------------------------------------------------
+
+    \115\ 15 U.S.C. 78q-1.
+    \116\ 17 CFR 240.17ad-22(e).
+    \117\ 15 U.S.C. 78q-1(b)(3)(F).
+---------------------------------------------------------------------------
+
+    In this regard, the CRP sets out more clearly LCH SA's standards 
+for the management of risks associated with LCH SA's collateral 
+activities, including collateral accepted to cover margin requirements 
+and to satisfy default fund contributions. The policy establishes 
+robust criteria for collateral eligibility, including concentration 
+limits, as well as a rigorous oversight and monitoring framework to 
+ensure that collateral is appropriately valued on an ongoing basis. In 
+addition, the FRAP establishes a robust framework to ensure that the 
+financial resources held by LCH SA against member exposures--including, 
+most importantly, margin requirements--is sufficient to cover any 
+potential losses of a defaulting clearing member. Insufficient 
+financial resources, including margin, would impede LCH SA's ability to 
+promptly accept trades for clearing, hence the CRP and FRAP are 
+consistent with Section 17A(b)(3)(F) of the Act.\118\
+---------------------------------------------------------------------------
+
+    \118\ 15 U.S.C. 78q-1(b)(3)(F).
+---------------------------------------------------------------------------
+
+    The CCRP is designed to identify, and manage, LCH SA's counterparty 
+credit risk, principally through the ICS framework applicable to 
+members and
+
+[[Page 36266]]
+
+the sovereign of their country of risk (as well as their parent entity, 
+if different) as well as to all other investment and other 
+counterparties. Applicants for clearing membership must meet a minimum 
+ICS; a member's ICS is monitored on an ongoing basis and the policy 
+sets out a framework for responding to deteriorating credit risk. The 
+CCRP is therefore an integral part of LCH SA's arrangements to mitigate 
+the risk of a clearing member default, which serves to protect 
+investors as well as the public interest. The CCRP is therefore 
+consistent with the requirements of Section 17A(b)(3)(F) of the 
+Act.\119\
+---------------------------------------------------------------------------
+
+    \119\ Id.
+---------------------------------------------------------------------------
+
+    To clear trades promptly and accurately, LCH SA must ensure that 
+its systems, including those operated by third parties, are resilient. 
+In this regard, the ORMP sets out LCH SA's arrangements for minimizing 
+the risks of disruption to LCH SA's services and to LCH SA's ability to 
+carry out its obligations to members, clients and other stakeholders. 
+The ORMP therefore implements a suite of risk assessment controls and 
+procedures, including a control framework, deep dive, and scenario 
+analysis, to address operational risks. These arrangements are 
+supported by a change control framework as well as a set of procedures 
+to undertake an ex-post review of risk incidents. The TPRMP is designed 
+to manage the risks of using third party service providers in relation 
+to outsourcing critical or important functions. By establishing a risk 
+control framework across the outsourcing life-cycle--from contracting/
+onboarding, to monitoring and managing performance, to exit/
+termination--the TPRM minimizes the risks that the use of third party 
+service providers will impact LCH SA's ability to accept trades for 
+clearing promptly and accurately. The ORMP and the TPRMP are therefore 
+consistent with Section 17A(b)(3)(F) of the Act.\120\
+---------------------------------------------------------------------------
+
+    \120\ Id.
+---------------------------------------------------------------------------
+
+    The RGF sits above the CRP, FRAP, CCRP, ORMP and TPRMP, and 
+identifies the key risks faced by LCH SA as well as the associated 
+indicators and tolerance thresholds by which each such risk is to be 
+measured and reported. By providing the wider risk governance framework 
+within which the CRP, FRAP, CCRP, ORMP and TPRMP have been designed and 
+adopted, the RGF supports how such risk policies facilitate the prompt 
+and accurate settlement of transactions and protect investors and the 
+public interest and is therefore consistent with Section 17A(b)(3)(F) 
+of the Act.\121\
+---------------------------------------------------------------------------
+
+    \121\ Id.
+---------------------------------------------------------------------------
+
+    Commission Rule 17ad-22(e)(2)(i) provides that each covered 
+clearing agency must establish, implement, maintain, and enforce 
+written policies and procedures reasonably designed to provide for 
+governance arrangements that are clear and transparent.\122\ As 
+discussed above, each of the Risk Policies expands on and clarifies the 
+standards by which LCH SA manages the various risks to which it is 
+exposed as a CCP. Importantly, each Risk Policy clearly describes the 
+roles and responsibilities of the various units within LCH SA or LCH 
+Group, as applicable, responsible for compliance with each policy. For 
+example, the CCRP specifies that LCH SA Credit Risk is responsible for 
+monitoring and managing counterparty credit risk, including: (i) 
+assigning and maintaining the ICS; (ii) assigning, maintaining and 
+monitoring the applicable limits under the policy; (iii) reporting to 
+the responsible risk team of any change in the ICS which triggers 
+actions under the CCRP and other LCH SA risk policies; and (iv) regular 
+and ad-hoc reporting to other risk areas and senior management. The 
+CCRP also identifies the CRO as policy owner.
+---------------------------------------------------------------------------
+
+    \122\ 17 CFR 240.17ad-22(e)(2)(i).
+---------------------------------------------------------------------------
+
+    Similarly, the three lines of defense model set out in the TPRMP 
+identifies the first line of defense as the LCH SA Third Party 
+Management Risk and Procurement team Function Heads and Business Heads, 
+which is responsible and accountable for identifying, assessing, 
+monitoring, and managing third party risk and for ensuring that LCH SA 
+can operate within the agreed risk appetite. Second Line Risk is 
+responsible for the oversight, support, and challenge in addition to 
+ensuring that the policy is aligned to the LCH SA Board risk appetite. 
+The Internal Audit function, as the third line of defense, is 
+responsible for developing and delivering a program of assurance aimed 
+at validating that the control environment is operating in alignment 
+with the LCH SA Board's risk appetite and the LCH SA Board's approved 
+policies. For its part, the RGF specifies the internal LCH SA 
+stakeholders responsible for each Key Risk and the associated policy 
+framework generated to address such Key Risk.
+    By expanding on and clarifying the standards by which LCH SA 
+manages the various risks to which it is exposed as a CCP and more 
+clearly describing the roles and responsibilities of the various units 
+within LCH SA or LCH Group responsible for compliance with each Risk 
+Policy, the Risk Policies provide for governance arrangements that are 
+clear and transparent. As such, the Risk Policies are consistent with 
+Commission Rule 17ad-22(e)(2)(i).\123\
+---------------------------------------------------------------------------
+
+    \123\ Id.
+---------------------------------------------------------------------------
+
+    Commission Rule 17ad-22(e)(2)(v) \124\ provides that each covered 
+clearing agency must establish, implement, maintain, and enforce 
+written policies and procedures reasonably designed to specify clear 
+and direct lines of responsibility. As discussed in detail immediately 
+above, each Risk Policy clearly describes the roles and 
+responsibilities of the various units within LCH SA or LCH Group 
+responsible for compliance with each policy. By more clearly describing 
+the roles and responsibilities of the various units within LCH SA or 
+LCH Group, as applicable, responsible for compliance with each Risk 
+Policy, the Risk Policies specify clear and direct lines of 
+responsibility. As such, the Risk Policies are consistent with 
+Commission Rule 17ad-22(e)(2)(v).
+    Commission Rule 17ad-22(e)(3) \125\ requires a covered clearing 
+agency to establish, implement, maintain and enforce written policies 
+and procedures reasonably designed to maintain a sound risk management 
+framework for comprehensively managing legal, credit, liquidity, 
+operational, general business, investment, custody, and other risks 
+that arise in or are borne by the covered clearing agency, which 
+includes, inter alia, (i) risk management policies, procedures, and 
+systems designed to identify, measure, monitor, and manage the range of 
+risks that arise in or are borne by the covered clearing agency, that 
+are subject to review on a specified periodic basis and approved by the 
+LCH SA Board annually; and (ii) plans for the recovery and orderly 
+wind-down of the covered clearing agency necessitated by credit losses, 
+liquidity shortfalls, losses from general business risk, or any other 
+losses.\126\
+---------------------------------------------------------------------------
+
+    \125\ 17 CFR 240.17ad-22(e)(3).
+    \126\ Id.
+---------------------------------------------------------------------------
+
+    In this regard, the RGF is a framework that: (i) identifies and 
+categorizes Key Risks faced by LCH SA; (ii) sets out the roles and 
+responsibilities within LCH SA for managing each identified Key Risk; 
+(iii) provides the standards to be met by LCH SA when managing its 
+business activities within the determined risk appetite; and (iv) 
+establishes the indicators and tolerance thresholds by which each Key 
+Risk is meant to be measured and reported. For example, and as noted 
+above, the RGF identifies the standards that are specific
+
+[[Page 36267]]
+
+to LCH SA in relation to the subject of RRW to ensure LCH SA has a 
+proper recovery plan to handle a loss event, remain solvent and 
+continue to operate smoothly in performing its central clearing role. 
+The RGF also expects that the LCH SA Board establish a wind-down plan 
+for non-critical services, to be tested annually and on a selected 
+service. The RGF is signed off by the LCH SA Board at least annually. 
+By providing (i) an overall risk management framework to 
+comprehensively manage the Key Risks, subject to the LCH SA Board's 
+annual review and sign-off; and (ii) a plan for the recovery and 
+orderly wind-down of LCH SA, the RGF is consistent with Commission Rule 
+17ad-22(e)(3).\127\
+---------------------------------------------------------------------------
+
+    \127\ Id.
+---------------------------------------------------------------------------
+
+    Commission Rule 17ad-22(e)(4)(i) requires a covered clearing agency 
+to establish, implement, maintain and enforce written policies and 
+procedures reasonably designed to effectively identify, measure, 
+monitor, and manage its credit exposures to participants and those 
+arising from its payment, clearing, and settlement processes by 
+maintaining sufficient financial resources to cover its credit exposure 
+to each participant fully with a high degree of confidence.\128\
+---------------------------------------------------------------------------
+
+    \128\ 17 CFR 240.17ad-22(e)(4)(i).
+---------------------------------------------------------------------------
+
+    The CCRP sets out the standards by which LCH SA manages and 
+assesses counterparty credit risk. Specifically, the policy requires 
+LCH SA Credit Risk to assign an ICS to: (i) all clearing members and 
+the sovereign of their country of risk (and that of their parent, if 
+different); and (ii) all counterparties, including intermediaries and 
+countries which are subject to a minimum ICS as covered in other risk 
+policies. In addition, the CCRP imposes credit exposure monitoring 
+thresholds, limits and tolerances on each clearing member. the CCRP 
+ensures LCH SA maintains sufficient financial resources (including 
+prefunded financial resources) to cover its credit exposure to each 
+participant by: (i) assigning an ICS to each counterparty based on an 
+assessment of quantitative and qualitative factors; and (ii) detailing 
+the policy on exposure monitoring thresholds, limits and tolerances 
+applicable to each clearing member. The CCRP is therefore consistent 
+with Commission Rules 17ad-22(e)(4)(i).\129\
+---------------------------------------------------------------------------
+
+    \129\ Id.
+---------------------------------------------------------------------------
+
+    Commission Rule 17ad-22(e)(4)(iii) requires a covered clearing 
+agency to establish, implement, maintain and enforce written policies 
+and procedures reasonably designed to effectively identify, measure, 
+monitor, and manage its credit exposures to participants and those 
+arising from its payment, clearing, and settlement processes, including 
+by maintaining additional financial resources at the minimum to enable 
+it to cover a wide range of foreseeable stress scenarios that include, 
+but are not limited to, the default of the participant family that 
+would potentially cause the largest aggregate credit exposure for the 
+covered clearing agency in extreme but plausible market 
+conditions.\130\ In addition, Commission Rule 17ad-22(e)(4)(v) requires 
+that such financial resources be maintained in combined or separately 
+maintained clearing or guarantee funds.\131\
+---------------------------------------------------------------------------
+
+    \130\ 17 CFR 240.17ad-22(e)(4)(iii).
+    \131\ 17 CFR 240.17ad-22(e)(4)(v).
+---------------------------------------------------------------------------
+
+    The FRAP describes the standards governing the assessment of 
+financial resources (initial margins, margin add-ons and default funds) 
+against Latent Market Risks in clearing portfolios at LCH SA. 
+Specifically, the policy requires additional margins to be held (where 
+appropriate) to cover member specific portfolio risk arising from house 
+and client activity of the following types: (i) concentration/liquidity 
+risk; (ii) sovereign risk; (iii) wrong way risk; and (iv) counterparty 
+credit risk. The FRAP details the stress regime to be used to identify 
+`extreme but plausible' tail losses in each member portfolio beyond the 
+applicable initial margin confidence level. For instance, it requires 
+liquidity stress tests, collateral stress tests, and exposure stress 
+tests to be run daily. The policy also details the maximum credit 
+tolerances to be applied per LCH SA clearing member every day. By 
+confirming: (i) the requirements for LCH SA to impose, call and collect 
+daily margins; (ii) the methodology for stress testing; and (iii) the 
+allocation of financial resources per clearing member, the FRAP is 
+consistent with Commission Rules 17ad-22(e)(4)(iii) \132\ and 17ad-
+22(e)(4)(v).\133\
+---------------------------------------------------------------------------
+
+    \132\ 17 CFR 240.17ad-22(e)(4)(iii).
+    \133\ 17 CFR 240.17ad-22(e)(4)(v).
+---------------------------------------------------------------------------
+
+    Commission Rule 17ad-22(e)(4)(vi) \134\ requires a covered clearing 
+agency to establish, implement, maintain and enforce written policies 
+and procedures reasonably designed to effectively identify, measure, 
+monitor, and manage its credit-exposures to participants and those 
+arising from its payment, clearing, and settlement processes, including 
+testing the sufficiency of its total financial resources available to 
+meet its minimum financial resource requirements by: (i) conducting 
+stress testing of its total financial resources once each day using 
+standard predetermined parameters and assumptions; (ii) conducting a 
+comprehensive analysis on at least a monthly basis of the existing 
+stress testing scenarios, models, and underlying parameters and 
+assumptions, and considering modifications to ensure they are 
+appropriate for determining the covered clearing agency's required 
+level of default protection in light of current and evolving market 
+conditions; (iii) conducting a comprehensive analysis of stress testing 
+scenarios, models, and underlying parameters and assumptions more 
+frequently than monthly when the products cleared or markets served 
+display high volatility or become less liquid, or when the size or 
+concentration of positions held by the covered clearing agency's 
+participants increases significantly; and (iv) reporting the results of 
+its analyses under items (ii) and (iii) above to appropriate decision 
+makers at the covered clearing agency, including but not limited to, 
+its Risk Management Committee or LCH SA Board, and using these results 
+to evaluate the adequacy of and adjust its margin methodology, model 
+parameters, models used to generate clearing or guaranty fund 
+requirements, and any other relevant aspects of its credit risk 
+management framework, in supporting compliance with the minimum 
+financial resources requirements set forth in paragraphs (e)(4)(i) and 
+(iii) of this section.\135\
+---------------------------------------------------------------------------
+
+    \134\ 17 CFR 240.17ad-22(e)(4)(vi).
+    \135\ Id.
+---------------------------------------------------------------------------
+
+    The FRAP (i) details the standards by which financial resources 
+should be assessed against member exposures; (ii) details the holding 
+periods to be used for each product in the assessment of margins, 
+providing justification for each; (iii) articulates the predefined 
+stress regime to be used by LCH SA to identify `extreme but plausible' 
+tail losses in each member portfolio beyond the applicable initial 
+margin confidence level; (iv) sets the standards to be used for reverse 
+stress testing the financial resources held against member positions; 
+and (v) establishes the required daily liquidity stress, collateral 
+stress and exposure stress testing. The policy also details a 
+comprehensive process for LCH SA to monitor, analyze and resize each 
+default fund on a monthly basis.
+    The FRAP also complements the Model Governance, Validation and 
+Review Policy by adding further standards to be included in the testing 
+and validation of margin models. For instance, it requires LCH SA to 
+(i) list and justify its critical model assumptions and modelling 
+methodology; and (ii) calculate and
+
+[[Page 36268]]
+
+monitor the sensitivities of model outputs to key parameter changes. 
+Moreover, the FRAP provides that the appropriateness of the policy 
+relative to the LCH SA Board's risk appetite and regulatory 
+requirements should be reviewed on an annual basis by ERCo with any 
+significant findings reported to the LCH SA Risk Committee and LCH SA 
+Board. The FRAP is therefore consistent with Commission Rule 17ad-
+22(e)(4)(vi).\136\
+---------------------------------------------------------------------------
+
+    \136\ Id.
+---------------------------------------------------------------------------
+
+    Commission Rule 17ad-22(e)(5) \137\ requires a covered clearing 
+agency to establish, implement, maintain and enforce written policies 
+and procedures reasonably designed to limit the assets it accepts as 
+collateral to those with low credit, liquidity, and market risks, and 
+set and enforce appropriately conservative haircuts and concentration 
+limits if the covered clearing agency requires collateral to manage its 
+or its participants' credit exposures.
+---------------------------------------------------------------------------
+
+    \137\ 17 CFR 240.17ad-22(e)(5).
+---------------------------------------------------------------------------
+
+    The CRP sets out the standards for the management of LCH SA's 
+collateral risks. As noted above, the policy identifies the acceptance 
+criteria for cash and non-cash collateral posted by its members to 
+cover margin requirements and default fund contributions to those with 
+low credit, liquidity and market risks. With regards to cash, as 
+explained in the CRP and noted above, LCH SA limits the primary 
+currencies accepted by LCH SA to EUR, GBP, and USD. In relation to non-
+cash collateral, the policy limits the assets to certain traded 
+securities and central bank guarantees. Moreover, the CRP requires LCH 
+SA to apply a defined haircut methodology and mandates additional 
+haircuts and concentration limits to manage its or its participants' 
+credit exposures when certain events are triggered. For instance, 
+issuers are subject to a credit risk add-on where they are assigned an 
+ICS of four or below.
+    By confirming (i) the principles and factors that will be applied 
+when considering whether an asset can be accepted by LCH SA as 
+collateral for margin cover; and (ii) the base haircuts, haircut add-
+ons, limits and/or price adjustments, the CRP is consistent with 
+Commission Rule 17ad-22(e)(5).\138\
+---------------------------------------------------------------------------
+
+    \138\ Id.
+---------------------------------------------------------------------------
+
+    Commission Rule 17ad-22(e)(6) \139\ requires a covered clearing 
+agency to establish, implement, maintain and enforce written policies 
+and procedures reasonably designed to cover, if the covered clearing 
+agency provides central counterparty services, its credit exposures to 
+its participants by establishing a risk-based margin system that, at a 
+minimum, inter alia: (i) considers, and produces margin levels 
+commensurate with, the risks and particular attributes of each relevant 
+product, portfolio, and market; (ii) marks participant positions to 
+market and collects margin, including variation margin or equivalent 
+charges if relevant, at least daily and includes the authority and 
+operational capacity to make intraday margin calls in defined 
+circumstances; (iii) uses reliable sources of timely price data and 
+uses procedures and sound valuation models for addressing circumstances 
+in which pricing data are not readily available or reliable; and (iv) 
+uses an appropriate method for measuring credit exposure that accounts 
+for relevant product risk factors and portfolio effects across 
+products.
+---------------------------------------------------------------------------
+
+    \139\ 17 CFR 240.17ad-22(e)(6).
+---------------------------------------------------------------------------
+
+    The FRAP sets out the standards governing the assessment of 
+financial resources (initial margins, margin add-ons and default funds) 
+against the Latent Market Risks in clearing member portfolios at LCH 
+SA. As noted above, the FRAP requires LCH SA to impose, call and 
+collect margins at least daily on each day when its Clearing Services 
+are open and operating to limit its credit exposures to its clearing 
+members and, where relevant, from CCPs with which it has 
+interoperability arrangements. In addition, the policy sets out the LCH 
+SA standards for initial margin, margin add-ons, intraday margins and 
+variation margin. For instance, additional margins must be held (where 
+appropriate) to cover member specific portfolio risk arising from both 
+house and client activity of the following types: (i) concentration/
+liquidity risk; (ii) sovereign risk; (iii) wrong way risk; and (iv) 
+counterparty credit risk. In addition, each Clearing Service is 
+expected to monitor margin levels intraday and to have the capacity to 
+call for margin intraday should it be necessary to address any issues 
+with member exposures. The FRAP also details the standard for the 
+calculation of margin, including the methods of price capture and 
+verification.
+    By confirming: (i) the policy requiring LCH SA to impose, call and 
+collect daily margins; (ii) the methods for calculating margins; and 
+(iii) the ability for Clearing Services to call for intraday margin, 
+where necessary, the FRAP is consistent with Commission Rule 17ad-
+22(e)(6).\140\
+---------------------------------------------------------------------------
+
+    \140\ Id.
+---------------------------------------------------------------------------
+
+    Commission Rule 17ad-22(e)(18) requires a covered clearing agency 
+to establish, implement, maintain and enforce written policies and 
+procedures reasonably designed to establish objective, risk-based, and 
+publicly disclosed criteria for participation, which, inter alia: (i) 
+require participants to have sufficient financial resources and robust 
+operational capacity to meet obligations arising from participation in 
+the clearing agency; and (ii) monitor compliance with such 
+participation requirements on an ongoing basis.\141\
+---------------------------------------------------------------------------
+
+    \141\ 17 CFR 240.17ad-22(e)(18).
+---------------------------------------------------------------------------
+
+    The CCRP describes the standards by which LCH SA manages and 
+assesses counterparty credit risk via an ICS and limit frameworks. In 
+addition to clarifying the roles and responsibilities within LCH SA for 
+compliance with the policy, noted above, the CCRP requires LCH SA 
+Credit Risk to: (i) assign and maintain the ICS for each counterparty; 
+(ii) assign, maintain and monitor the applicable limits under the 
+policy; (iii) report to the responsible risk team of any change in the 
+ICS which triggers actions under the CCRP and other LCH SA risk 
+policies; and (iv) provide regular and ad-hoc reporting to other risk 
+areas and senior management. The CCRP requires an ICS to be assigned to 
+all clearing members and the sovereign of their country of risk (and 
+that of their parent, if different); and all other counterparties, 
+including intermediaries and countries which are subject to a minimum 
+ICS as covered in other risk policies. Furthermore, the CCRP sets out 
+the factors used by LCH SA to assign an ICS and Implied ICS for each of 
+the counterparty types it deals with. The CCRP also details the 
+exposure monitoring thresholds, limits and tolerances applied to each 
+clearing member; all thresholds are monitored daily, and LCH SA Credit 
+Risk decide on any action to be taken when a breach has occurred.
+    By providing for the assignment, maintenance and monitoring of an 
+ICS applied to each counterparty that LCH SA interacts with, as well as 
+the monitoring of related counterparty credit risk thresholds, the CCRP 
+is consistent with Commission Rule 17ad-22(e)(18).\142\
+---------------------------------------------------------------------------
+
+    \142\ Id.
+---------------------------------------------------------------------------
+
+    Commission Rule 17ad-25(i) requires a covered clearing agency to 
+manage risks from relationships with its service providers for core 
+services.\143\ The TPRMP states that LCH SA consider a risk-based and 
+proportionate approach to onboarding third parties (including service 
+providers for core services). LCH SA adopts the highest level of 
+oversight and due diligence for critical third party services. Third 
+parties deemed critical in accordance with the TPRMP will
+
+[[Page 36269]]
+
+have a high or very-high inherent risk rating and require more 
+heightened due diligence (monitoring and testing) and approval by the 
+LCH SA Board for any changes to the relationship with any critical 
+third party engagements. By considering this risks borne from its 
+relationships with service providers of core services and applying a 
+more stringent due diligence process for such service providers, LCH SA 
+believes its TPRMP is consistent with Commission Rule 17ad-25(i).\144\
+---------------------------------------------------------------------------
+
+    \143\ 17 CFR 240.17ad-25(i).
+    \144\ Id.
+---------------------------------------------------------------------------
+
+    Rule 1001 of Regulation System Compliance and Integrity (``Reg 
+SCI'') \145\ requires SCI entities (which include registered clearing 
+agencies), to: (i) establish, maintain, and enforce written policies 
+and procedures reasonably designed to ensure that its SCI systems and, 
+for purposes of security standards, indirect SCI systems, have levels 
+of capacity, integrity, resiliency, availability, and security, 
+adequate to maintain the SCI entity's operational capability and 
+promote the maintenance of fair and orderly markets; and (ii) 
+establish, maintain, and enforce written policies and procedures 
+reasonably designed to ensure that its SCI systems operate in a manner 
+that complies with the Act and the rules and regulations thereunder and 
+the entity's rules and governing documents, as applicable.
+---------------------------------------------------------------------------
+
+    \145\ 17 CFR 242.1001.
+---------------------------------------------------------------------------
+
+    The ORMP sets out (i) LCH SA's appetite and expectations for the 
+management of operational risk (defined as the risk of loss arising 
+from inadequate or failed internal processes, people and systems or 
+from external events); and (ii) the key features of the operational 
+risk management framework for identifying, assessing, monitoring, 
+mitigating and managing operational risk. In addition to clarifying the 
+roles and responsibilities within LCH SA for compliance with the 
+policy, noted above, the ORMP requires LCH SA to have a defined risk 
+taxonomy for operational risks, and sets out the risk assessment tools 
+and processes to be used, including RCAs, control assurance processes, 
+and deep dives. Furthermore, the ORMP details the process to be 
+followed when the following risk events occur triggering a re-
+assessment of risks and controls: (i) incidents and actual losses; (ii) 
+audit or risk and compliance issues, and external reviews; (iii) key 
+risk and control indicator breaches; (iv) control weakness; (v) other 
+internal events including process changes or restructuring; and (vi) 
+external events arising outside of LCH SA and LCH Group's control 
+(e.g., natural disasters, pandemics, political changes, etc.).
+    By providing for the overall operational risk management framework 
+of LCH SA, including the controls detailed thereunder, the ORMP is 
+designed to ensure that LCH SA's systems and indirect systems have 
+levels of capacity, integrity, resiliency, availability, and security, 
+adequate to maintain LCH SA's operational capability and ensure that 
+its systems operate in a manner that complies with the Act and the 
+rules and regulations thereunder. The ORMP is therefore consistent with 
+Rule 1001 of Reg SCI.\146\
+---------------------------------------------------------------------------
+
+    \146\ Id.
+---------------------------------------------------------------------------
+
+B. Clearing Agency's Statement on Burden on Competition
+
+    Section 17A(b)(3)(I) of the Act requires that the rules of a 
+clearing agency not impose any burden on competition not necessary or 
+appropriate in furtherance of the purposes of the Act.\147\ LCH SA does 
+not believe the Risk Policies would have any impact or impose any 
+burden on competition. The Risk Policies do not address any competitive 
+issue or have any significant impact on the competition among central 
+counterparties. LCH SA operates an open access clearing model, and the 
+Risk Policies will have no direct effect on this access model subject 
+to the regulatory requirements, our clearing rules provisions and our 
+governance process on the clearing membership criteria and eligibility 
+including the appropriate credit risk assessment.
+---------------------------------------------------------------------------
+
+    \147\ 15 U.S.C. 78q-1(b)(3)(I).
+---------------------------------------------------------------------------
+
+C. Clearing Agency's Statement on Comments on the Proposed Rule Change 
+Received From Members, Participants or Others
+
+    Written comments relating to the Risk Policies have not been 
+solicited or received. LCH SA will notify the Commission of any written 
+comments received by LCH SA.
+
+III. Date of Effectiveness of the Proposed Rule Change
+
+    Within 45 days of the date of publication of this notice in the 
+Federal Register or within such longer period up to 90 days (i) as the 
+Commission may designate if it finds such longer period to be 
+appropriate and publishes its reasons for so finding or (ii) as to 
+which the self-regulatory organization consents, the Commission will: 
+(A) by order approve or disapprove such proposed rule change, or (B) 
+institute proceedings to determine whether the proposed rule change 
+should be disapproved.
+
+IV. Solicitation of Comments
+
+    Interested persons are invited to submit written data, views and 
+arguments concerning the foregoing, including whether the proposed rule 
+change is consistent with the Act. Comments may be submitted by any of 
+the following methods:
+
+Electronic Comments
+
+    <bullet> Use the Commission's internet comment form (<a href="http://www.sec.gov/rules/sro.shtml">http://www.sec.gov/rules/sro.shtml</a>); or
+    <bullet> Send an email to <a href="/cdn-cgi/l/email-protection#3f4d4a535a125c5052525a514b4c7f4c5a5c11585049"><span class="__cf_email__" data-cfemail="c7b5b2aba2eaa4a8aaaaa2a9b3b487b4a2a4e9a0a8b1">[email&#160;protected]</span></a>. Please include 
+file number SR-LCH SA-2025-007 on the subject line.
+
+Paper Comments
+
+    Send paper comments in triplicate to Vanessa Countryman, Secretary, 
+Securities and Exchange Commission, 100 F Street NE, Washington, DC 
+20549.
+
+All submissions should refer to file number SR-LCH SA-2025-007. This 
+file number should be included on the subject line if email is used. To 
+help the Commission process and review your comments more efficiently, 
+please use only one method. The Commission will post all comments on 
+the Commission's internet website (<a href="https://www.sec.gov/rules/sro.shtml">https://www.sec.gov/rules/sro.shtml</a>). Copies of the filing will be available for inspection and 
+copying at the principal office of LCH SA and on LCH SA's website at: 
+(<a href="https://www.lch.com/resources/rulebooks/proposed-rule-changes">https://www.lch.com/resources/rulebooks/proposed-rule-changes</a>).
+    Do not include personal identifiable information in submissions; 
+you should submit only information that you wish to make available 
+publicly. We may redact in part or withhold entirely from publication 
+submitted materials that is obscene or subject to copyright protection. 
+All submissions should refer to file number SR-LCH SA-2025-007 and 
+should be submitted on or before August 22, 2025.
+
+    For the Commission, by the Division of Trading and Markets, 
+pursuant to delegated authority.\148\
+---------------------------------------------------------------------------
+
+    \148\ 17 CFR 200.30-3(a)(12).
+---------------------------------------------------------------------------
+
+Sherry R. Haywood,
+Assistant Secretary.
+[FR Doc. 2025-14564 Filed 7-31-25; 8:45 am]
+BILLING CODE 8011-01-P
+
+
+</pre><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>
